@@ -1,0 +1,64 @@
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+export async function seed(knex) {
+  // Deletes ALL existing entries
+  await knex('sightings').del()
+  await knex('sightings').insert([
+    {
+      bird_id: 1,
+      date: '2022-03-01',
+      area: 'Northern Region',
+      location: 'Tawharanui',
+      lat: -36.38,
+      lon: 174.83,
+      notes: 'Feeding actively',
+    },
+    {
+      bird_id: 1,
+      date: '2022-04-10',
+      area: 'Northern Region',
+      location: 'Tawharanui',
+      lat: -36.38,
+      lon: 174.83,
+      notes: 'Seen with partner',
+    },
+    {
+      bird_id: 2,
+      date: '2022-03-05',
+      area: 'Northern Region',
+      location: 'Warkworth',
+      lat: -36.4,
+      lon: 174.66,
+      notes: 'Flew over main road',
+    },
+    {
+      bird_id: 3,
+      date: '2023-05-20',
+      area: 'Southern Region',
+      location: 'Nelson Lakes',
+      lat: -41.83,
+      lon: 172.58,
+      notes: 'Foraging near lake',
+    },
+    {
+      bird_id: 3,
+      date: '2023-06-01',
+      area: 'Southern Region',
+      location: 'Nelson Lakes',
+      lat: -41.83,
+      lon: 172.58,
+      notes: 'Healthy and active',
+    },
+    {
+      bird_id: 4,
+      date: '2023-07-15',
+      area: 'Southern Region',
+      location: 'Kahurangi',
+      lat: -40.94,
+      lon: 172.33,
+      notes: 'Solo flight',
+    },
+  ])
+}

@@ -7,9 +7,9 @@ export async function up(knex) {
     table.increments('id')
     table.number('bird_id')
     table.number('year')
-    table.number('location')
-    table.number('notes')
-    table.number('last_seen')
+    table.string('location')
+    table.string('notes')
+    table.string('last_seen')
   })
 }
 
