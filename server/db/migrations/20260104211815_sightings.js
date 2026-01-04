@@ -5,12 +5,12 @@
 export function up(knex) {
   return knex.schema.createTable('sightings', (table) => {
     table.increments('id')
-    table.number('bird_id')
+    table.integer('bird_id')
     table.date('date')
     table.string('area')
     table.string('location')
-    table.number('lat')
-    table.number('lon')
+    table.integer('lat')
+    table.integer('lon')
     table.text('notes')
   })
 }

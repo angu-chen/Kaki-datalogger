@@ -5,8 +5,8 @@
 export async function up(knex) {
   return knex.schema.createTable('releases', (table) => {
     table.increments('id')
-    table.number('bird_id')
-    table.number('year')
+    table.integer('bird_id')
+    table.integer('year')
     table.string('location')
     table.string('notes')
     table.string('last_seen')

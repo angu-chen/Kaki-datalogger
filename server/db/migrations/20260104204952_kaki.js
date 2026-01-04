@@ -8,8 +8,8 @@ export async function up(knex) {
     table.string('band_left')
     table.string('band_right')
     table.string('status')
-    table.number('hatch_yr')
-    table.number('parents_id')
+    table.integer('hatch_yr')
+    table.integer('parents_id')
   })
 }
 
