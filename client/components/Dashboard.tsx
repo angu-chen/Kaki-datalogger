@@ -1,5 +1,5 @@
 import { useKakiDash, useKakis } from '../hooks/useKaki'
-import BandBox from './BandBox'
+
 import KakiTable from './KakiTable'
 
 export default function DashBoard() {
