@@ -2,11 +2,10 @@ import db from './connection.ts'
 import { Kaki } from '../../models/kaki.ts'
 
 const kakiSelect = [
-  'id',
-  'band',
-  'status',
-  'hatch_yr as hatchYr',
-  'parents_pairing_id as parentsPairingId',
+  'id as ID',
+  'band as Band',
+  'status as Status',
+  'hatch_yr as Htch Yr',
 ]
 
 export async function getAllKaki(): Promise<Kaki[]> {
@@ -28,9 +27,9 @@ export async function getKakiDash() {
       'latest_sightings.bird_id',
     )
     .select(
-      'kaki.*',
-      'latest_sightings.observer',
-      'latest_sightings.latest_sighting',
+      ...kakiSelect,
+      'latest_sightings.observer as Obs.',
+      'latest_sightings.latest_sighting as Sighting',
       'latest_sightings.notes',
     )
     .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last
