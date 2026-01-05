@@ -8,35 +8,54 @@ export async function seed(knex) {
   await knex('kaki').insert([
     {
       id: 1,
-      band_left: 'RBY',
-      band_right: 'RR',
-      status: 'Wild',
+      band: 'RBY/RR',
+      status: 'Long-term missing',
       hatch_yr: 2020,
-      parents_id: null,
+      parents_pairing_id: null,
     },
     {
       id: 2,
-      band_left: 'YRB',
-      band_right: 'YY',
-      status: 'Wild',
+      band: 'YRB/YY',
+      status: 'Alive',
       hatch_yr: 2020,
-      parents_id: null,
+      parents_pairing_id: null,
     },
     {
       id: 3,
-      band_left: 'BRY',
-      band_right: 'BB',
+      band: 'BRY/BB',
+
       status: 'Captive',
       hatch_yr: 2021,
-      parents_id: null,
+      parents_pairing_id: null,
     },
     {
       id: 4,
-      band_left: 'YYB',
-      band_right: 'YY',
+      band: 'YYB/YY',
+
       status: 'Captive',
       hatch_yr: 2021,
-      parents_id: null,
+      parents_pairing_id: null,
+    },
+    {
+      id: 5,
+      band: 'WBKG/YBK',
+      status: 'Alive',
+      hatch_yr: 2022,
+      parents_pairing_id: 1,
+    },
+    {
+      id: 6,
+      band: 'WBKG/YBR',
+      status: 'Alive',
+      hatch_yr: 2022,
+      parents_pairing_id: 1,
+    },
+    {
+      id: 7,
+      band: 'WBKG/GBK',
+      status: 'Alive',
+      hatch_yr: 2022,
+      parents_pairing_id: 2,
     },
   ])
 }

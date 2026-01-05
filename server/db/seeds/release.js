@@ -34,5 +34,26 @@ export async function seed(knex) {
       notes: 'Released into a new safe zone',
       last_seen: '2023-04-05',
     },
+    {
+      bird_id: 5,
+      year: 2022,
+      location: 'Moon',
+      notes: 'Launched into space',
+      last_seen: '2024-01-13',
+    },
+    {
+      bird_id: 6,
+      year: 2022,
+      location: 'Moon',
+      notes: 'Launched into space',
+      last_seen: '2024-02-25',
+    },
+    {
+      bird_id: 7,
+      year: 2022,
+      location: 'Moon',
+      notes: 'Launched into space',
+      last_seen: '2024-02-05',
+    },
   ])
 }

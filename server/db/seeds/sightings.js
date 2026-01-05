@@ -13,6 +13,7 @@ export async function seed(knex) {
       location: 'Tawharanui',
       lat: -36.38,
       lon: 174.83,
+      observer: 'Joe',
       notes: 'Feeding actively',
     },
     {
@@ -22,6 +23,7 @@ export async function seed(knex) {
       location: 'Tawharanui',
       lat: -36.38,
       lon: 174.83,
+      observer: 'Kat',
       notes: 'Seen with partner',
     },
     {
@@ -31,6 +33,7 @@ export async function seed(knex) {
       location: 'Warkworth',
       lat: -36.4,
       lon: 174.66,
+      observer: 'Joe',
       notes: 'Flew over main road',
     },
     {
@@ -40,6 +43,7 @@ export async function seed(knex) {
       location: 'Nelson Lakes',
       lat: -41.83,
       lon: 172.58,
+      observer: 'Angu',
       notes: 'Foraging near lake',
     },
     {
@@ -49,6 +53,7 @@ export async function seed(knex) {
       location: 'Nelson Lakes',
       lat: -41.83,
       lon: 172.58,
+      observer: 'Angu',
       notes: 'Healthy and active',
     },
     {
@@ -58,6 +63,7 @@ export async function seed(knex) {
       location: 'Kahurangi',
       lat: -40.94,
       lon: 172.33,
+      observer: 'Kat',
       notes: 'Solo flight',
     },
   ])

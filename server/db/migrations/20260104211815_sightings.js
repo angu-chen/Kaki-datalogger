@@ -11,6 +11,7 @@ export function up(knex) {
     table.string('location')
     table.integer('lat')
     table.integer('lon')
+    table.string('observer')
     table.text('notes')
   })
 }
@@ -20,5 +21,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  knex.schema.dropTable('sighitings')
+  return knex.schema.dropTable('sightings')
 }
