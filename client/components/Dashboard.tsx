@@ -11,6 +11,7 @@ export default function DashBoard() {
 
   return (
     <div className="">
+      <h1>Latest Sightings</h1>
       <KakiTable kaki={kakiQuery.data} />
     </div>
   )

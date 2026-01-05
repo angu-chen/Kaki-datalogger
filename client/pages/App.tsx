@@ -2,9 +2,11 @@ import DashBoard from '../components/Dashboard.tsx'
 
 function App() {
   return (
-    <>
-      <DashBoard />
-    </>
+    <div className="flex justify-center">
+      <div className="w-4/5 my-2 overflow-scroll h-1/2">
+        <DashBoard />
+      </div>
+    </div>
   )
 }
 
