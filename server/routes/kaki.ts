@@ -15,4 +15,18 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/dash', async (req, res) => {
+  try {
+    const kakiDash = await db.getKakiDash()
+    res.json(kakiDash)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'Error getting kaki Dash data',
+    )
+    res
+      .status(500)
+      .json({ message: 'something went wrong fetching kaki Dash data' })
+  }
+})
+
 export default router
