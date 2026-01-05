@@ -8,7 +8,7 @@ export async function seed(knex) {
   await knex('sightings').insert([
     {
       bird_id: 1,
-      date: '2022-03-01',
+      date: '2019-03-01',
       area: 'Northern Region',
       location: 'Tawharanui',
       lat: -36.38,
@@ -18,7 +18,7 @@ export async function seed(knex) {
     },
     {
       bird_id: 1,
-      date: '2022-04-10',
+      date: '2019-04-10',
       area: 'Northern Region',
       location: 'Tawharanui',
       lat: -36.38,
@@ -37,7 +37,7 @@ export async function seed(knex) {
       notes: 'Flew over main road',
     },
     {
-      bird_id: 3,
+      bird_id: 5,
       date: '2023-05-20',
       area: 'Southern Region',
       location: 'Nelson Lakes',
@@ -47,7 +47,7 @@ export async function seed(knex) {
       notes: 'Foraging near lake',
     },
     {
-      bird_id: 3,
+      bird_id: 7,
       date: '2023-06-01',
       area: 'Southern Region',
       location: 'Nelson Lakes',
@@ -57,7 +57,7 @@ export async function seed(knex) {
       notes: 'Healthy and active',
     },
     {
-      bird_id: 4,
+      bird_id: 6,
       date: '2023-07-15',
       area: 'Southern Region',
       location: 'Kahurangi',

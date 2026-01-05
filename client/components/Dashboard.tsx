@@ -1,9 +1,9 @@
-import { useKakis } from '../hooks/useKaki'
+import { useKakiDash, useKakis } from '../hooks/useKaki'
 import BandBox from './BandBox'
 import KakiTable from './KakiTable'
 
 export default function DashBoard() {
-  const kakiQuery = useKakis()
+  const kakiQuery = useKakiDash()
 
   if (kakiQuery.isError) return <h1> an error occurred while loading</h1>
 

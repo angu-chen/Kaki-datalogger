@@ -19,11 +19,9 @@ export default function KakiTable({ kaki }: Props) {
 
         {kaki.map((bird) => (
           <tr key={bird.id}>
-            <th>{bird.id}</th>
-            <th>{bird.band}</th>
-            <th>{bird.status}</th>
-            <th>{bird.hatchYr}</th>
-            <th>{bird.parentPairingId}</th>
+            {kakiKeys.map((key) => (
+              <th key={`${bird.id}${key}`}>{bird[key]}</th>
+            ))}
           </tr>
         ))}
       </tbody>

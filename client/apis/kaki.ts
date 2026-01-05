@@ -7,3 +7,8 @@ export async function getAllKaki() {
   const res = await request.get(`${rootURL}/kaki`)
   return res.body as Kaki[]
 }
+
+export async function getKakiDash() {
+  const res = await request.get(`${rootURL}/kaki/dash`)
+  return res.body
+}
