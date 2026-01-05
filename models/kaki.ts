@@ -1,9 +1,8 @@
 export interface KakiData {
-  bandL: string
-  bandR: string
+  band: string
   status: string
   hatchYr: number
-  parentId: number | null
+  parentPairingId: number | null
 }
 
 export interface Kaki extends KakiData {

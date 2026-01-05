@@ -3,11 +3,10 @@ import { Kaki } from '../../models/kaki.ts'
 
 const kakiSelect = [
   'id',
-  'band_left as bandL',
-  'band_right as bandR',
+  'band',
   'status',
   'hatch_yr as hatchYr',
-  'parents_id as parentsId',
+  'parents_pairing_id as parentsPairingId',
 ]
 
 export async function getAllKaki(): Promise<Kaki[]> {
