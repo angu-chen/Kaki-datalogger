@@ -29,4 +29,16 @@ router.get('/dash', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req, res) => {
+  const birdId = Number(req.params.id)
+  try {
+    const kakiDetail = await db.getKakiDetail(birdId)
+    res.json(kakiDetail)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'Error retriving kaki detail',
+    )
+    res.status(500).json({ message: `kaki does not exist` })
+  }
+})
 export default router

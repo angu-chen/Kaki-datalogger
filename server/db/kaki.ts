@@ -35,3 +35,21 @@ export async function getKakiDash() {
     .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last
   return query
 }
+
+export async function getKakiDetail(id: number) {
+  const kakidetail = await db('kaki')
+    .where('kaki.id', id)
+    .leftJoin('pairings as parents', 'kaki.parents_pairing_id', 'parents.id')
+    .select(
+      'kaki.id as ID',
+      'kaki.band as Band',
+      'kaki.status as Status',
+      'kaki.hatch_yr as Hatch Year',
+      'parents.bird1_id as parent1',
+      'parents.bird2_id as parent2',
+      'parents.year',
+    )
+    .first()
+
+  return kakidetail
+}
