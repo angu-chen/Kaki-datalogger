@@ -12,3 +12,8 @@ export async function getKakiDash() {
   const res = await request.get(`${rootURL}/kaki/dash`)
   return res.body
 }
+
+export async function getKakiDetail(id: number) {
+  const res = await request.get(`${rootURL}/kaki/${id}`)
+  return res.body
+}
