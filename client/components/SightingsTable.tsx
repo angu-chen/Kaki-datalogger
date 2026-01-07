@@ -28,7 +28,11 @@ export default function KakiSightings({ birdId }: Props) {
         </tr>
 
         {kakiSightings.map((sighting) => (
-          <tr key={sighting.id}>
+          <tr
+            key={sighting.id}
+            className="hover:bg-amber-200 cursor-pointer"
+            onClick={() => navigate(`/sightings/${sighting.id}`)}
+          >
             {headers.map((key) => (
               <th key={`${key}${sighting.id}`}>{sighting[key]}</th>
             ))}

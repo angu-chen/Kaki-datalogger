@@ -86,6 +86,7 @@ export async function getKakiPairings(id: number) {
       'pairings.lon',
       'pairings.lat',
     )
+    .orderBy('pairings.year', 'desc')
 
   return kakiPairings
 }

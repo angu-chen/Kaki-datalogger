@@ -13,6 +13,7 @@ export async function getKakiDash() {
   return res.body
 }
 
+//Note could probably condense this into one function
 export async function getKakiDetail(id: number) {
   const res = await request.get(`${rootURL}/kaki/${id}`)
   return res.body
@@ -22,3 +23,10 @@ export async function getKakiSightings(id: number) {
   const res = await request.get(`${rootURL}/kaki/${id}/sightings`)
   return res.body
 }
+
+export async function getKakiPairings(id: number) {
+  const res = await request.get(`${rootURL}/kaki/${id}/pairings`)
+  return res.body
+}
+
+///

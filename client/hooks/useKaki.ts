@@ -8,6 +8,7 @@ import {
   getAllKaki,
   getKakiDash,
   getKakiDetail,
+  getKakiPairings,
   getKakiSightings,
 } from '../apis/kaki'
 
@@ -27,6 +28,16 @@ export function useSightings(id: number) {
   const query = useQuery({
     queryKey: ['sightings'],
     queryFn: () => getKakiSightings(id),
+  })
+  return {
+    ...query,
+  }
+}
+
+export function usePairings(id: number) {
+  const query = useQuery({
+    queryKey: ['pairings'],
+    queryFn: () => getKakiPairings(id),
   })
   return {
     ...query,
