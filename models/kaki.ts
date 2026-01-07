@@ -17,4 +17,5 @@ export interface KakiDash {
   'Obs.': string
   Sighting: string
   notes: string
+  sightingId: string
 }

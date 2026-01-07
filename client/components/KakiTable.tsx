@@ -21,7 +21,6 @@ export default function KakiTable({ kaki }: Props) {
           <tr key={bird.ID}>
             {kakiKeys.map((key) => {
               if (key === 'Band') {
-                console.log(bird.ID)
                 return (
                   <th
                     className="cursor-pointer hover:text-B"
@@ -31,7 +30,21 @@ export default function KakiTable({ kaki }: Props) {
                     {bird[key]}
                   </th>
                 )
-              } else {
+              }
+              if (key === 'Sighting') {
+                return (
+                  <th
+                    className="cursor-pointer hover:text-amber-300"
+                    key={`${bird}${key}`}
+                    onClick={() => navigate(`/sightings/${bird.sightingId}`)}
+                  >
+                    {' '}
+                    {bird[key]}
+                  </th>
+                )
+              }
+              if (key === 'sightingId') return
+              else {
                 return <th key={`${bird.ID}${key}`}>{bird[key]}</th>
               }
             })}

@@ -29,7 +29,7 @@ export async function getKakiDash() {
     .leftJoin(
       db('sightings')
         // selecting the latest sightings only and displaying notes
-        .select('bird_id', 'observer', 'notes')
+        .select('bird_id', 'observer', 'notes', 'sightings.id as sighting_id')
         .max('date as latest_sighting')
         .groupBy('bird_id')
         .as('latest_sightings'),
@@ -41,6 +41,7 @@ export async function getKakiDash() {
       'latest_sightings.observer as Obs.',
       'latest_sightings.latest_sighting as Sighting',
       'latest_sightings.notes',
+      'latest_sightings.sighting_id as sightingId',
     )
     .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last
   return query
