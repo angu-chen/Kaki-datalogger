@@ -105,6 +105,7 @@ export async function getSighting(id: number) {
     .where('sightings.id', id)
     .leftJoin('kaki', 'sightings.bird_id', 'kaki.id')
     .select(
+      'kaki.id as birdId',
       'kaki.band as Band',
       'sightings.id',
       'sightings.date as Date',

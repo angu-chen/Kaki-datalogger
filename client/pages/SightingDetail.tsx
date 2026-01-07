@@ -1,8 +1,9 @@
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useSightingbyId } from '../hooks/useKaki'
 
 export default function SightingsDetail() {
   const params = useParams()
+  const navigate = useNavigate()
   const id = params.id
   const {
     data: sighitingData,
@@ -13,18 +14,22 @@ export default function SightingsDetail() {
   if (isError) return <h1> An error occurred loading Kakī</h1>
 
   if (isLoading) return <h1> Looking for Kakī</h1>
+  console.log(sighitingData)
 
   return (
-    <div>
-      <div>
+    <div className="">
+      <div className="flex gap-10 flex-wrap m-5">
         <div>
           <h3 className="font-semibold text-sm">Date</h3>
           <p>{sighitingData.Date}</p>
         </div>
-        <div>
-          <h3 className="font-semibold text-sm">Kaki Band</h3>
+        <button
+          className="cursor-pointer hover:text-B"
+          onClick={() => navigate(`/${sighitingData.birdId}`)}
+        >
+          <h3 className="font-semibold text-sm ">Kaki Band</h3>
           <p>{sighitingData.Band}</p>
-        </div>
+        </button>
         <div>
           <h3 className="font-semibold text-sm">Area</h3>
           <p>{sighitingData.Area}</p>
