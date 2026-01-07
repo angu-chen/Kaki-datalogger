@@ -10,6 +10,7 @@ import {
   getKakiDetail,
   getKakiPairings,
   getKakiSightings,
+  getSighting,
 } from '../apis/kaki'
 
 export function useKaki(id: number) {
@@ -24,7 +25,7 @@ export function useKaki(id: number) {
   }
 }
 
-export function useSightings(id: number) {
+export function useSightings(id: string) {
   const query = useQuery({
     queryKey: ['sightings'],
     queryFn: () => getKakiSightings(id),
@@ -34,6 +35,15 @@ export function useSightings(id: number) {
   }
 }
 
+export function useSightingbyId(id: string) {
+  const query = useQuery({
+    queryKey: [`sighting${id}`],
+    queryFn: () => getSighting(id),
+  })
+  return {
+    ...query,
+  }
+}
 export function usePairings(id: number) {
   const query = useQuery({
     queryKey: ['pairings'],

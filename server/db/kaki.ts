@@ -111,7 +111,7 @@ export async function getSighting(id: number) {
       'sightings.location as Location',
       'sightings.lat',
       'sightings.lon',
-      'sightings.observer as Obs.',
+      'sightings.observer as Obs',
       'sightings.notes',
     )
     .first()
