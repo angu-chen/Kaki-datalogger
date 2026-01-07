@@ -8,6 +8,7 @@ export async function seed(knex) {
   await knex('pairings').insert([
     {
       id: 1,
+      pair_no: '11/02A',
       year: 2022,
       bird1_id: 1,
       bird2_id: 2,
@@ -18,6 +19,7 @@ export async function seed(knex) {
     },
     {
       id: 3,
+      pair_no: '11/03A',
       year: 2024,
       bird1_id: 3,
       bird2_id: 1,
@@ -28,6 +30,7 @@ export async function seed(knex) {
     },
     {
       id: 2,
+      pair_no: '02/12B',
       year: 2023,
       bird1_id: 3,
       bird2_id: 4,

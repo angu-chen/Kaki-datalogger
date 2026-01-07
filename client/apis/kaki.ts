@@ -35,3 +35,8 @@ export async function getSighting(id: string) {
   const res = await request.get(`${rootURL}/kaki/sightings/${id}`)
   return res.body
 }
+
+export async function getPairing(id: string) {
+  const res = await request.get(`${rootURL}/kaki/pairings/${id}`)
+  return res.body
+}

@@ -85,3 +85,16 @@ router.get('/sightings/:id', async (req, res) => {
     res.status(500).json({ message: 'error sighting does not exist' })
   }
 })
+
+router.get('/pairings/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    const pairing = await db.getPairing(Number(id))
+    res.json(pairing)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'Error retrieving pairing',
+    )
+    res.status(500).json({ message: 'error pairing does not exist' })
+  }
+})

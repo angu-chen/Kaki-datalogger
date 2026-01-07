@@ -119,3 +119,25 @@ export async function getSighting(id: number) {
     .first()
   return sighting
 }
+
+export async function getPairing(id: number) {
+  const pairing = await db('pairings')
+    .where('pairings.id', id)
+    .leftJoin('kaki as bird1', 'pairings.bird1_id', 'bird1.id')
+    .leftJoin('kaki as bird2', 'pairings.bird2_id', 'bird2.id')
+
+    .select(
+      'bird1.id as bird1Id',
+      'bird1.band as bird1Band',
+      'bird2.id as bird2Id',
+      'bird2.band as bird2Band',
+      'pairings.pair_no as pairNo',
+      'pairings.year',
+      'pairings.location',
+      'pairings.treatment',
+      'pairings.lat',
+      'pairings.lon',
+    )
+    .first()
+  return pairing
+}
