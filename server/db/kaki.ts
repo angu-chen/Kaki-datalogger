@@ -8,6 +8,15 @@ const kakiSelect = [
   'hatch_yr as Htch Yr',
 ]
 
+const sightingsSelect = [
+  'date as Date',
+  'area as Area',
+  'location as Location',
+  'lat',
+  'lon',
+  'observer as Obs.',
+  'notes',
+]
 export async function getAllKaki(): Promise<Kaki[]> {
   const kakiList = await db('kaki').select(...kakiSelect)
   // console.log(kakiList)
@@ -56,4 +65,12 @@ export async function getKakiDetail(id: number) {
     .first()
 
   return kakidetail
+}
+
+export async function getKakiSighting(id: number) {
+  const sightings = await db('sightings')
+    .where('sightings.bird_id', id)
+    .select(...sightingsSelect)
+    .orderBy('sightings.date', 'desc')
+  return sightings
 }
