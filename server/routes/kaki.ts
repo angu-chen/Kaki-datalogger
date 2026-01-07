@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import * as db from '../db/kaki.ts'
+import { SightingData } from '../../models/kaki.ts'
 
 const router = Router()
 
@@ -96,5 +97,23 @@ router.get('/pairings/:id', async (req, res) => {
       error instanceof Error ? error.message : 'Error retrieving pairing',
     )
     res.status(500).json({ message: 'error pairing does not exist' })
+  }
+})
+
+router.post('/sightings', async (req, res) => {
+  try {
+    const sightingData = req.body as SightingData
+    if (!sightingData) {
+      console.error('No data given')
+      return res.status(400).send('Bad Request')
+    }
+    const newSightingId = await db.addSighting(sightingData)
+    console.log(sightingData)
+    res.json(newSightingId)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'error adding new sighting',
+    )
+    res.status(500).json({ message: 'error no sighiting to post' })
   }
 })

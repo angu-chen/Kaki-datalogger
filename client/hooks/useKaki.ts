@@ -5,6 +5,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query'
 import {
+  createSighting,
   getAllKaki,
   getKakiDash,
   getKakiDetail,
@@ -16,16 +17,28 @@ import {
 
 export function useKaki(id: number) {
   const query = useQuery({
-    queryKey: ['kakis'],
+    queryKey: ['kakis', 'sightings'],
     queryFn: () => getKakiDetail(id),
   })
   return {
     ...query,
-
+    addSighting: useAddPostMutation(createSighting),
     // Extra queries go here e.g. addKaki
   }
 }
 
+export function useAddPostMutation<TData = unknown, TVariables = unknown>(
+  mutationFn: MutationFunction<TData, TVariables>,
+) {
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['sightings'] })
+    },
+  })
+  return mutation
+}
 export function useSightings(id: string) {
   const query = useQuery({
     queryKey: ['sightings'],

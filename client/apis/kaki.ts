@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { Kaki } from '../../models/kaki'
+import { Kaki, SightingData } from '../../models/kaki'
 
 const rootURL = new URL(`/api/v1`, document.baseURI)
 
@@ -38,5 +38,10 @@ export async function getSighting(id: string) {
 
 export async function getPairing(id: string) {
   const res = await request.get(`${rootURL}/kaki/pairings/${id}`)
+  return res.body
+}
+
+export async function createSighting(data: SightingData) {
+  const res = await request.post(`${rootURL}/kaki/pairings/`).send(data)
   return res.body
 }
