@@ -98,3 +98,22 @@ export async function getKakiSighting(id: number) {
     .orderBy('sightings.date', 'desc')
   return sightings
 }
+
+export async function getSighting(id: number) {
+  const sighting = await db('sightings')
+    .where('sightings.id', id)
+    .leftJoin('kaki', 'sightings.bird_id', 'kaki.id')
+    .select(
+      'kaki.band as Band',
+      'sightings.id',
+      'sightings.date as Date',
+      'sightings.area as Area',
+      'sightings.location as Location',
+      'sightings.lat',
+      'sightings.lon',
+      'sightings.observer as Obs.',
+      'sightings.notes',
+    )
+    .first()
+  return sighting
+}

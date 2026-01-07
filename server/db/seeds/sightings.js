@@ -7,6 +7,7 @@ export async function seed(knex) {
   await knex('sightings').del()
   await knex('sightings').insert([
     {
+      id: 1,
       bird_id: 1,
       date: '2019-03-01',
       area: 'Northern Region',
@@ -17,6 +18,7 @@ export async function seed(knex) {
       notes: 'Feeding actively',
     },
     {
+      id: 2,
       bird_id: 1,
       date: '2019-04-10',
       area: 'Northern Region',
@@ -27,6 +29,7 @@ export async function seed(knex) {
       notes: 'Seen with partner',
     },
     {
+      id: 3,
       bird_id: 2,
       date: '2022-03-05',
       area: 'Northern Region',
@@ -37,6 +40,7 @@ export async function seed(knex) {
       notes: 'Flew over main road',
     },
     {
+      id: 4,
       bird_id: 5,
       date: '2023-05-20',
       area: 'Southern Region',
@@ -47,6 +51,7 @@ export async function seed(knex) {
       notes: 'Foraging near lake',
     },
     {
+      id: 5,
       bird_id: 7,
       date: '2023-06-01',
       area: 'Southern Region',
@@ -57,6 +62,7 @@ export async function seed(knex) {
       notes: 'Healthy and active',
     },
     {
+      id: 6,
       bird_id: 6,
       date: '2023-07-15',
       area: 'Southern Region',
