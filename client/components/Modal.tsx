@@ -1,3 +1,4 @@
+import { Close } from '@mui/icons-material'
 // interface Props{
 //   onClose :
 // }
@@ -9,10 +10,17 @@ export default function Modal({ isOpen, onClose, children }) {
     <div className="inset-0 fixed z-50">
       <div className="bg-gray-500 opacity-50 absolute inset-0 "></div>
       <div className="relative z-10 min-h-full flex items-center justify-center">
-        <div className="bg-gray-100 rounded-2xl p-6">
-          <button onClick={() => onClose()}>x</button>
-          <h1> I am a modal</h1>
-          {children}
+        <div className="bg-gray-100">
+          <div className="flex justify-end w-full bg-gray-200 shadow p-1">
+            <Close
+              className="border bg-gray-300 hover:bg-gray-500 shadow cursor-pointer"
+              onClick={() => onClose()}
+            />
+          </div>
+          <div className="mx-5 my-2">
+            <h1> I am a modal</h1>
+            {children}
+          </div>
         </div>
       </div>
     </div>
