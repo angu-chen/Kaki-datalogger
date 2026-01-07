@@ -1,5 +1,5 @@
 import db from './connection.ts'
-import { Kaki } from '../../models/kaki.ts'
+import { Kaki, SightingData } from '../../models/kaki.ts'
 
 const kakiSelect = [
   'id as ID',
@@ -140,4 +140,20 @@ export async function getPairing(id: number) {
     )
     .first()
   return pairing
+}
+
+export async function addSighting(newSighting: SightingData) {
+  const sighiting = await db('sightings')
+    .insert({
+      bird_id: newSighting.birdId,
+      date: newSighting.date,
+      area: newSighting.area,
+      location: newSighting.location,
+      lat: newSighting.lat,
+      lon: newSighting.lon,
+      observer: newSighting.observer,
+      notes: newSighting.notes,
+    })
+    .returning('sightings.id')
+  return sighiting[0]
 }

@@ -19,3 +19,18 @@ export interface KakiDash {
   notes: string
   sightingId: string
 }
+
+export interface SightingData {
+  birdId: number
+  date: string
+  area: string
+  location: string
+  lat: number
+  lon: number
+  observer: string
+  notes: string
+}
+
+export interface Sighting extends SightingData {
+  id: number
+}
