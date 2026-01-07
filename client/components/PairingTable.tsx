@@ -11,7 +11,10 @@ export default function KakiPairings({ birdId }: Props) {
 
   if (isError) return <h1> An error occurred loading pairings</h1>
   if (isLoading) return <h1> Gathering pairings</h1>
-
+  if (kakiPairings.length < 1) {
+    return <h1>No pairing data</h1>
+  }
+  console.log(kakiPairings)
   const headers = Object.keys(kakiPairings[0])
 
   return (

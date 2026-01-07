@@ -7,14 +7,13 @@ interface Props {
 
 export default function KakiSightings({ birdId }: Props) {
   const navigate = useNavigate()
-  const {
-    data: kakiSightings,
-    isError,
-    isLoading,
-  } = useSightings(Number(birdId))
+  const { data: kakiSightings, isError, isLoading } = useSightings(birdId)
 
   if (isError) return <h1> An error occurred loading sightings</h1>
   if (isLoading) return <h1> Gathering Sightings</h1>
+  if (kakiSightings.length < 1) {
+    return <h1> No Sightings</h1>
+  }
 
   const headers = Object.keys(kakiSightings[0])
 
