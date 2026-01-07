@@ -12,9 +12,10 @@ export default function KakiTable({ kaki }: Props) {
     <table>
       <tbody>
         <tr>
-          {kakiKeys.map((key) => (
-            <th key={key}>{key} </th>
-          ))}
+          {kakiKeys.map((key) => {
+            if (key === 'sightingId') return
+            else return <th key={key}>{key} </th>
+          })}
         </tr>
 
         {kaki.map((bird) => (
