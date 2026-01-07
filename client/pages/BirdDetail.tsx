@@ -1,14 +1,15 @@
 import { useParams } from 'react-router'
 import { useKaki } from '../hooks/useKaki'
+import KakiSightings from '../components/SightingsTable'
 
 function BirdDetail() {
   const params = useParams()
   const { data: kakiData, isError, isLoading } = useKaki(Number(params.id))
 
   if (isError) return <h1> An error occurred loading Kakī</h1>
+
   if (isLoading) return <h1> Looking for Kakī</h1>
 
-  console.log(kakiData)
   return (
     <div className="flex flex-col items-center ">
       <div className="my-5">
@@ -33,6 +34,8 @@ function BirdDetail() {
           <p>{kakiData.parent2}</p>
         </div>
       </div>
+
+      <KakiSightings birdId={params.id as string} />
     </div>
   )
 }

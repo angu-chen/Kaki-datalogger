@@ -4,7 +4,12 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query'
-import { getAllKaki, getKakiDash, getKakiDetail } from '../apis/kaki'
+import {
+  getAllKaki,
+  getKakiDash,
+  getKakiDetail,
+  getKakiSightings,
+} from '../apis/kaki'
 
 export function useKaki(id: number) {
   const query = useQuery({
@@ -15,6 +20,16 @@ export function useKaki(id: number) {
     ...query,
 
     // Extra queries go here e.g. addKaki
+  }
+}
+
+export function useSightings(id: number) {
+  const query = useQuery({
+    queryKey: ['sightings'],
+    queryFn: () => getKakiSightings(id),
+  })
+  return {
+    ...query,
   }
 }
 

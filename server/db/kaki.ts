@@ -9,6 +9,7 @@ const kakiSelect = [
 ]
 
 const sightingsSelect = [
+  'id',
   'date as Date',
   'area as Area',
   'location as Location',
@@ -65,6 +66,28 @@ export async function getKakiDetail(id: number) {
     .first()
 
   return kakidetail
+}
+
+export async function getKakiPairings(id: number) {
+  const kakiPairings = await db('pairings')
+    .where('pairings.bird1_id', id)
+    .orWhere('pairings.bird2_id', id)
+
+    .leftJoin('kaki as bird1', 'pairings.bird1_id', 'bird1.id')
+    .leftJoin('kaki as bird2', 'pairings.bird2_id', 'bird2.id')
+
+    .select(
+      'pairings.id',
+      'pairings.year',
+      'bird1.band as bird1',
+      'bird2.band as bird2',
+      'pairings.location',
+      'pairings.treatment',
+      'pairings.lon',
+      'pairings.lat',
+    )
+
+  return kakiPairings
 }
 
 export async function getKakiSighting(id: number) {

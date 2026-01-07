@@ -57,3 +57,18 @@ router.get('/:id/sightings', async (req, res) => {
     res.status(500).json({ message: 'error kaki does not exist' })
   }
 })
+
+router.get('/:id/pairings', async (req, res) => {
+  const birdId = Number(req.params.id)
+  try {
+    const pairings = await db.getKakiPairings(birdId)
+    res.json(pairings)
+  } catch (error) {
+    console.error(
+      error instanceof Error
+        ? error.message
+        : 'Error retrieving pairings of Kaki',
+    )
+    res.status(500).json({ message: 'error kaki does not exist' })
+  }
+})

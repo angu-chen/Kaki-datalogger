@@ -17,3 +17,8 @@ export async function getKakiDetail(id: number) {
   const res = await request.get(`${rootURL}/kaki/${id}`)
   return res.body
 }
+
+export async function getKakiSightings(id: number) {
+  const res = await request.get(`${rootURL}/kaki/${id}/sightings`)
+  return res.body
+}

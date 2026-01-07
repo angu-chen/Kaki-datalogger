@@ -17,6 +17,16 @@ export async function seed(knex) {
       lat: -36.6,
     },
     {
+      id: 3,
+      year: 2024,
+      bird1_id: 3,
+      bird2_id: 1,
+      location: 'PaknSav',
+      treatment: 'Standard',
+      lon: 174.89,
+      lat: -36.6,
+    },
+    {
       id: 2,
       year: 2023,
       bird1_id: 3,
