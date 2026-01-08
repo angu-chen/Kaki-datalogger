@@ -17,10 +17,7 @@ export default function Modal({ isOpen, onClose, children }) {
               onClick={() => onClose()}
             />
           </div>
-          <div className="mx-5 my-2">
-            <h1> I am a modal</h1>
-            {children}
-          </div>
+          <div className="mx-5 my-2">{children}</div>
         </div>
       </div>
     </div>

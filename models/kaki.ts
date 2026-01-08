@@ -21,12 +21,12 @@ export interface KakiDash {
 }
 
 export interface SightingData {
-  birdId: number
+  birdId: number | null
   date: string
   area: string
   location: string
-  lat: number
-  lon: number
+  lat: number | null
+  lon: number | null
   observer: string
   notes: string
 }
@@ -34,3 +34,15 @@ export interface SightingData {
 export interface Sighting extends SightingData {
   id: number
 }
+
+// {
+//     "birdId" : 2,
+//     "date" : "2025-12-25",
+//     "area" : "North Pole",
+//     "location": "Santas workshop",
+//     "lat": 0,
+//     "lon":0,
+//     "observer": "Angu",
+//     "notes": "I want a kaki for christmas"
+
+// }
