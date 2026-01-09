@@ -29,6 +29,8 @@ export default function SightingForm({ onClose }) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log(formData)
+    const newBand = formData.band.toUpperCase()
+    setFormData({ ...formData, ['band']: newBand })
     addSighting.mutate(formData, { onSuccess: () => onClose() })
   }
 
