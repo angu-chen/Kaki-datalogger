@@ -21,12 +21,12 @@ export interface KakiDash {
 }
 
 export interface SightingData {
-  birdId: number | null
+  birdId: number | undefined
   date: string
   area: string
   location: string
-  lat: number | null
-  lon: number | null
+  lat: number | undefined
+  lon: number | undefined
   observer: string
   notes: string
 }
