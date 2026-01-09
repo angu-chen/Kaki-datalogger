@@ -1,9 +1,11 @@
-import { useState } from 'react'
-import { SightingData } from '../../models/kaki'
+import React, { useState } from 'react'
+import { NewSighting, SightingData } from '../../models/kaki'
+import { useAddSightingMutation } from '../hooks/useKaki'
+import { createSighting } from '../apis/kaki'
 
-export default function SightingForm() {
-  const [formData, setFormData] = useState<SightingData>({
-    birdId: undefined,
+export default function SightingForm({ onClose }) {
+  const [formData, setFormData] = useState<NewSighting>({
+    band: '',
     date: '',
     area: '',
     location: '',
@@ -12,18 +14,22 @@ export default function SightingForm() {
     observer: '',
     notes: '',
   })
-  const [band, setBand] = useState('')
+  const addSighting = useAddSightingMutation()
 
   const handleChange = (
     key: string,
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const newData = e.target.value.trim()
-    if (key === 'band') setBand(newData)
-    else {
-      const newformData = { ...formData, [key]: newData }
-      setFormData(newformData)
-    }
+    const newData = e.target.value
+
+    const newformData = { ...formData, [key]: newData }
+    setFormData(newformData)
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log(formData)
+    addSighting.mutate(formData, { onSuccess: () => onClose() })
   }
 
   return (
@@ -32,12 +38,7 @@ export default function SightingForm() {
         {' '}
         New Sighting Form
       </h1>
-      <form
-        className="flex flex-col gap-4 my-5"
-        onSubmit={() => {
-          console.log('submitted')
-        }}
-      >
+      <form className="flex flex-col gap-4 my-5" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label className="font-semibold" htmlFor="band">
             {' '}
@@ -49,7 +50,7 @@ export default function SightingForm() {
             type="text"
             id="band"
             name="band"
-            value={band}
+            value={formData.band}
             required
           />
         </div>

@@ -20,6 +20,17 @@ export interface KakiDash {
   sightingId: string
 }
 
+export interface NewSighting{
+  band: string
+  date: string
+  area: string
+  location: string
+  lat: number | undefined
+  lon: number | undefined
+  observer: string
+  notes: string
+}
+
 export interface SightingData {
   birdId: number | undefined
   date: string

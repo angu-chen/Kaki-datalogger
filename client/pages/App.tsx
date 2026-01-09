@@ -19,7 +19,7 @@ function App() {
         </p>
       </button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <SightingForm />
+        <SightingForm onClose={() => setIsOpen(false)} />
       </Modal>
     </div>
   )

@@ -22,17 +22,14 @@ export function useKaki(id: number) {
   })
   return {
     ...query,
-    addSighting: useAddPostMutation(createSighting),
     // Extra queries go here e.g. addKaki
   }
 }
 
-export function useAddPostMutation<TData = unknown, TVariables = unknown>(
-  mutationFn: MutationFunction<TData, TVariables>,
-) {
+export function useAddSightingMutation() {
   const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn,
+    mutationFn: createSighting,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['sightings'] })
     },
