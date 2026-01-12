@@ -34,6 +34,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "express": "^4.17.2",
     "knex": "^2.5.1",
+    "slim-select": "^3.3.0",
     "sqlite3": "^5.1.6",
     "superagent": "^10.2.1",
     "tailwindcss": "^4.1.18"

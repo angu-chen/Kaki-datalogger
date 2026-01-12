@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { NewSighting, SightingData } from '../../models/kaki'
-import { useAddSightingMutation } from '../hooks/useKaki'
-import { createSighting } from '../apis/kaki'
+import { NewSighting } from '../../models/kaki'
+import { useAddSightingMutation, useGetAllKaki } from '../hooks/useKaki'
 
 export default function SightingForm({ onClose }) {
   const [formData, setFormData] = useState<NewSighting>({
@@ -14,11 +13,26 @@ export default function SightingForm({ onClose }) {
     observer: '',
     notes: '',
   })
+
+  const [bandError, setBandError] = useState({
+    set: false,
+    msg: 'Band does not exist. Please choose from the list',
+  })
+
+  const { data: allKakiData, isError, isLoading } = useGetAllKaki()
   const addSighting = useAddSightingMutation()
+
+  if (isError) return <h1> An error occurred loading Kakis</h1>
+  if (isLoading) return <h1> Gathering kakis</h1>
+  // console.log(allKakiData)
+
+  const bandlist = allKakiData?.map((kaki) => kaki.band)
 
   const handleChange = (
     key: string,
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const newData = e.target.value
 
@@ -28,7 +42,10 @@ export default function SightingForm({ onClose }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(formData)
+    if (!bandlist?.includes(formData.band.trim())) {
+      setBandError({ ...bandError, set: true })
+      return
+    }
     const newBand = formData.band.toUpperCase()
     setFormData({ ...formData, ['band']: newBand })
     addSighting.mutate(formData, { onSuccess: () => onClose() })
@@ -47,14 +64,27 @@ export default function SightingForm({ onClose }) {
             Kaki Band Code *{' '}
           </label>
           <input
-            className="border p-1 border-gray-400"
+            className={`${bandError.set ? 'border-R border-2' : 'border-gray-400'} border`}
             onChange={(e) => handleChange('band', e)}
+            autoComplete="off"
             type="text"
-            id="band"
-            name="band"
+            list="band-list"
             value={formData.band}
+            name="band"
+            id="band"
             required
           />
+
+          <datalist id="band-list">
+            <option value={''}>Please choose a kaki band</option>
+            {allKakiData?.map((kaki) => {
+              return (
+                <option key={kaki.band} value={kaki.band}>
+                  {kaki.band}
+                </option>
+              )
+            })}
+          </datalist>
         </div>
         <div className="flex flex-col">
           <label className="font-semibold" htmlFor="observer">
@@ -158,6 +188,11 @@ export default function SightingForm({ onClose }) {
           />
         </div>
         <p>*required</p>
+        <p
+          className={`text-R font-bold text-sm ${bandError.set ? 'block' : 'hidden'} `}
+        >
+          {bandError.msg}
+        </p>
         <button
           className="border self-center w-fit px-3 font-semibold rounded hover:bg-gray-300 cursor-pointer"
           type="submit"

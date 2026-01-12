@@ -1,4 +1,5 @@
 export interface KakiData {
+  id: number
   band: string
   status: string
   hatchYr: number
@@ -20,7 +21,7 @@ export interface KakiDash {
   sightingId: string
 }
 
-export interface NewSighting{
+export interface NewSighting {
   band: string
   date: string
   area: string

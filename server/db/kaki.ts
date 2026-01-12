@@ -19,8 +19,13 @@ const sightingsSelect = [
   'notes',
 ]
 export async function getAllKaki(): Promise<Kaki[]> {
-  const kakiList = await db('kaki').select(...kakiSelect)
-  // console.log(kakiList)
+  const kakiList = await db('kaki').select(
+    'id',
+    'band',
+    'status',
+    'hatch_yr as hatchYr',
+    'parents_pairing_id as parentPairingId',
+  )
   return kakiList as Kaki[]
 }
 

@@ -26,6 +26,10 @@ export function useKaki(id: number) {
   }
 }
 
+export function useGetAllKaki() {
+  const query = useQuery({ queryKey: ['kakis'], queryFn: () => getAllKaki() })
+  return { ...query }
+}
 export function useAddSightingMutation() {
   const queryClient = useQueryClient()
   const mutation = useMutation({
