@@ -148,6 +148,10 @@ export async function addSighting(newSighting: NewSighting) {
     .select('id')
     .first()
 
+  if (!kaki) {
+    throw new Error(`Kaki band ${newSighting.band} does not exist`)
+  }
+
   const sighting = await db('sightings')
     .insert({
       bird_id: kaki.id,
