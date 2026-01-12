@@ -14,10 +14,11 @@ import {
   getPairing,
   getSighting,
 } from '../apis/kaki'
+import { queryKeys } from './queryKeys'
 
 export function useKaki(id: number) {
   const query = useQuery({
-    queryKey: ['kakis', 'sightings'],
+    queryKey: queryKeys.kakis.dash(),
     queryFn: () => getKakiDetail(id),
   })
   return {
@@ -27,7 +28,10 @@ export function useKaki(id: number) {
 }
 
 export function useGetAllKaki() {
-  const query = useQuery({ queryKey: ['kakis'], queryFn: () => getAllKaki() })
+  const query = useQuery({
+    queryKey: queryKeys.kakis.all,
+    queryFn: () => getAllKaki(),
+  })
   return { ...query }
 }
 export function useAddSightingMutation() {
@@ -35,14 +39,15 @@ export function useAddSightingMutation() {
   const mutation = useMutation({
     mutationFn: createSighting,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['sightings'] })
+      queryClient.invalidateQueries({ queryKey: queryKeys.kakis.sightings() })
+      queryClient.invalidateQueries({ queryKey: queryKeys.sightings.all })
     },
   })
   return mutation
 }
 export function useSightings(id: string) {
   const query = useQuery({
-    queryKey: ['sightings'],
+    queryKey: queryKeys.sightings.all,
     queryFn: () => getKakiSightings(Number(id)),
   })
   return {
@@ -52,7 +57,7 @@ export function useSightings(id: string) {
 
 export function useSightingbyId(id: string) {
   const query = useQuery({
-    queryKey: [`sighting${id}`],
+    queryKey: queryKeys.sightings.detail(id),
     queryFn: () => getSighting(id),
   })
   return {
@@ -61,7 +66,7 @@ export function useSightingbyId(id: string) {
 }
 export function usePairingbyId(id: string) {
   const query = useQuery({
-    queryKey: [`pairing${id}`],
+    queryKey: queryKeys.pairings.detail(id),
     queryFn: () => getPairing(id),
   })
   return {
@@ -70,7 +75,7 @@ export function usePairingbyId(id: string) {
 }
 export function usePairings(id: number) {
   const query = useQuery({
-    queryKey: ['pairings'],
+    queryKey: queryKeys.pairings.all,
     queryFn: () => getKakiPairings(id),
   })
   return {
@@ -92,7 +97,10 @@ export function useKakiMutation<TData = unknown, TVariables = unknown>(
 }
 
 export function useKakiDash() {
-  const query = useQuery({ queryKey: ['kakiDash'], queryFn: getKakiDash })
+  const query = useQuery({
+    queryKey: queryKeys.kakis.dash(),
+    queryFn: getKakiDash,
+  })
   return {
     ...query,
   }
