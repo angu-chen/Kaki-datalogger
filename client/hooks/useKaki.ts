@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-query'
 import {
   createSighting,
+  delSighting,
   getAllKaki,
   getKakiDash,
   getKakiDetail,
@@ -45,6 +46,19 @@ export function useAddSightingMutation() {
   })
   return mutation
 }
+
+export function useDelSightingMutation() {
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: delSighting,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.kakis.sightings() })
+      queryClient.invalidateQueries({ queryKey: queryKeys.sightings.all })
+    },
+  })
+  return mutation
+}
+
 export function useSightings(id: string) {
   const query = useQuery({
     queryKey: queryKeys.sightings.all,

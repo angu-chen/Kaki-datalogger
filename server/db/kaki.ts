@@ -171,3 +171,8 @@ export async function addSighting(newSighting: NewSighting) {
     .returning('sightings.id')
   return sighting[0]
 }
+
+export async function delSighting(id: number) {
+  const res = await db('sightings').where('sightings.id', id).del()
+  return res
+}

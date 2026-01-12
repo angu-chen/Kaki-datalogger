@@ -45,3 +45,8 @@ export async function createSighting(data: NewSighting) {
   const res = await request.post(`${rootURL}/kaki/sightings/`).send(data)
   return res.body
 }
+
+export async function delSighting(id: number) {
+  await request.del(`${rootURL}/kaki/sightings/${id}`)
+  return
+}
