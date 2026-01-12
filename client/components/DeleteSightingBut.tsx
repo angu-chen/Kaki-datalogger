@@ -25,16 +25,16 @@ export default function DelSightingBut({ sightingId, mutationFn }: Props) {
         <p>Delete Sighting</p>
       </button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <p>Are you sure?</p>
+        <p className="text-center my-5 font-semibold">Are you sure?</p>
         <button
           onClick={handleConfirmation}
-          className="border rounded-sm px-3 shadow-lg cursor-pointer hover:bg-gray-300"
+          className="border rounded-sm px-3 mx-5 shadow-lg cursor-pointer hover:bg-gray-300"
         >
           <p>Yes</p>
         </button>
         <button
           onClick={() => setIsOpen(false)}
-          className="border rounded-sm px-3 shadow-lg cursor-pointer hover:bg-gray-300"
+          className="border rounded-sm px-3 mx-5 shadow-lg cursor-pointer hover:bg-gray-300"
         >
           <p>Cancel</p>
         </button>
