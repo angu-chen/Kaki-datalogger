@@ -1,19 +1,10 @@
-# Boilerplate: Fullstack with Sass
+# Kakī Tracker
+A web application to log, track and visualise kakī data.
+
+## Description
+This is a simple application that allows the users to track information about Kakī sightings, pairing and releases. The application will also provide ability to visualise the data on a map. The data in this repo is completely fake due to the sensitivity of the species. The aim of this project is to provide a cheap and alternative method to spreadsheets to tracking and potentially visualise bird data.  
 
 ## Setup
-
-### What's included
-
-This repo includes:
-
-* a single, simple API endpoint (`/api/v1/fruits`)
-* a single React component (`<App />`)
-* basic routing setup (`routes.tsx`)
-* an example database module (`server/db/fruits.js`)
-* an API client module (`client/apis/fruits.js`)
-* configuration for Vitest and testing library
-* configuration for server-side debugging in VS Code
-* configuration for preprocessing Sass
 
 ### Installation
 
@@ -25,10 +16,10 @@ See the instructions [here](https://docs.github.com/en/free-pro-team@latest/gith
 git clone [your-project-ssh-address]
 cd [your-project-name]
 npm install # to install dependencies
+npm run knex migrate:latest
+npm run knex seed:run
 npm run dev # to start the dev server
 ```
 
 You can find the server running on [http://localhost:3000](http://localhost:3000) and the client running on [http://localhost:5173](http://localhost:5173).
 
----
-[Provide feedback on this repo](https://docs.google.com/forms/d/e/1FAIpQLSfw4FGdWkLwMLlUaNQ8FtP2CTJdGDUv6Xoxrh19zIrJSkvT4Q/viewform?usp=pp_url&entry.1958421517=boilerplate-fullstack)
