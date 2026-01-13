@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import * as db from '../db/kaki.ts'
-import { SightingData } from '../../models/kaki.ts'
+import { PairingData, SightingData } from '../../models/kaki.ts'
 
 const router = Router()
 
@@ -146,5 +146,22 @@ router.put('/sightings', async (req, res) => {
       error instanceof Error ? error.message : `error updating sighting `,
     )
     res.status(500).json({ message: 'error no updating to delete' })
+  }
+})
+
+router.post('/pairings', async (req, res) => {
+  try {
+    const pairingData = req.body as PairingData
+    if (!pairingData) {
+      console.error('No data given')
+      return res.status(400).send('Bad Request')
+    }
+    const newPairingId = await db.addPairing(pairingData)
+    res.json(newPairingId)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'error adding new pairing',
+    )
+    res.status(500).json({ message: 'error no pairing to post' })
   }
 })

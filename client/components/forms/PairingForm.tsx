@@ -59,6 +59,21 @@ export default function PairingForm({ onClose }: Props) {
       <h1 className="mb-5 font-semibold text-lg text-center"> New Pairing</h1>
       <form className="flex flex-col gap-4 my-5" onSubmit={handleSubmit}>
         <div className="flex flex-col">
+          <label className="font-semibold" htmlFor="pairNo">
+            Pair Number
+          </label>
+          <input
+            className={` border-gray-400 border p-1`}
+            onChange={(e) => handleChange('pairNo', e)}
+            autoComplete="off"
+            type="text"
+            value={formData.pairNo}
+            name="pairNo"
+            id="pairNo"
+            required
+          />
+        </div>
+        <div className="flex flex-col">
           <label className="font-semibold" htmlFor="bird1">
             Bird 1 Band*
           </label>
