@@ -1,9 +1,12 @@
 import { Close } from '@mui/icons-material'
-// interface Props{
-//   onClose :
-// }
+import { ReactNode } from 'react'
+interface Props {
+  onClose: () => void
+  isOpen: boolean
+  children: ReactNode
+}
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({ isOpen, onClose, children }: Props) {
   if (!isOpen) return null
 
   return (

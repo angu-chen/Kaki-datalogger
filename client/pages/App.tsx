@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import DashBoard from '../components/Dashboard.tsx'
 import Modal from '../components/Modal.tsx'
-import SightingForm from '../components/SightingForm.tsx'
+import SightingForm from '../components/forms/SightingForm.tsx'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)

@@ -51,6 +51,17 @@ export interface Sighting extends SightingData {
   id: number
 }
 
+export interface PairingData {
+  pairNo: string
+  year: number | undefined
+  bird1Band: string
+  bird2Band: string
+  location: string
+  treatment: string
+  lon: number | undefined
+  lat: number | undefined
+}
+
 // {
 //     "birdId" : 2,
 //     "date" : "2025-12-25",

@@ -1,7 +1,7 @@
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import Modal from '../Modal'
 
-import EditSightingForm from '../EditSightingForm'
+import EditSightingForm from '../forms/EditSightingForm'
 import { UpdateSighting } from '../../../models/kaki'
 
 interface Props {

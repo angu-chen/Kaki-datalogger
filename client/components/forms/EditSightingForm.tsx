@@ -1,26 +1,32 @@
 import React, { useState } from 'react'
-import { NewSighting } from '../../models/kaki'
-import { useAddSightingMutation, useGetAllKaki } from '../hooks/useKaki'
+import { UpdateSighting } from '../../../models/kaki'
+import { useGetAllKaki, useUpdateSightingMutation } from '../../hooks/useKaki'
 
-export default function SightingForm({ onClose }) {
-  const [formData, setFormData] = useState<NewSighting>({
-    band: '',
-    date: '',
-    area: '',
-    location: '',
-    lat: undefined,
-    lon: undefined,
-    observer: '',
-    notes: '',
+interface Props {
+  sightingData: UpdateSighting
+  onClose: () => void
+}
+
+export default function EditSightingForm({ sightingData, onClose }: Props) {
+  const [formData, setFormData] = useState<UpdateSighting>({
+    id: sightingData.id,
+    band: sightingData.band,
+    date: sightingData.date,
+    area: sightingData.area,
+    location: sightingData.location,
+    lat: sightingData.lat,
+    lon: sightingData.lon,
+    observer: sightingData.observer,
+    notes: sightingData.notes,
   })
-
   const [bandError, setBandError] = useState({
     set: false,
     msg: 'Band does not exist. Please choose from the list',
   })
 
   const { data: allKakiData, isError, isLoading } = useGetAllKaki()
-  const addSighting = useAddSightingMutation()
+  // const addSighting = useAddSightingMutation()
+  const updateSighting = useUpdateSightingMutation()
 
   if (isError) return <h1> An error occurred loading Kakis</h1>
   if (isLoading) return <h1> Gathering kakis</h1>
@@ -46,9 +52,8 @@ export default function SightingForm({ onClose }) {
       setBandError({ ...bandError, set: true })
       return
     }
-    const newBand = formData.band.toUpperCase()
-    setFormData({ ...formData, ['band']: newBand })
-    addSighting.mutate(formData, { onSuccess: () => onClose() })
+    updateSighting.mutate(formData)
+    onClose()
   }
 
   return (
@@ -197,7 +202,7 @@ export default function SightingForm({ onClose }) {
           className="border self-center w-fit px-3 font-semibold rounded hover:bg-gray-300 cursor-pointer"
           type="submit"
         >
-          Submit
+          Save
         </button>
       </form>
     </div>
