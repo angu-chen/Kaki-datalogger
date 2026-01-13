@@ -32,6 +32,10 @@ export interface NewSighting {
   notes: string
 }
 
+export interface UpdateSighting extends NewSighting {
+  id: number
+}
+
 export interface SightingData {
   birdId: number | undefined
   date: string

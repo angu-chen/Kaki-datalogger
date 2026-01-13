@@ -14,6 +14,7 @@ import {
   getKakiSightings,
   getPairing,
   getSighting,
+  updateSighting,
 } from '../apis/kaki'
 import { queryKeys } from './queryKeys'
 
@@ -51,6 +52,18 @@ export function useDelSightingMutation() {
   const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: delSighting,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.kakis.sightings() })
+      queryClient.invalidateQueries({ queryKey: queryKeys.sightings.all })
+    },
+  })
+  return mutation
+}
+
+export function useUpdateSightingMutation() {
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: updateSighting,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.kakis.sightings() })
       queryClient.invalidateQueries({ queryKey: queryKeys.sightings.all })

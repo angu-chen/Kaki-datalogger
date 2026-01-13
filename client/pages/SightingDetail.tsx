@@ -2,15 +2,15 @@ import { useNavigate, useParams } from 'react-router'
 import { useDelSightingMutation, useSightingbyId } from '../hooks/useKaki'
 import DelSightingBut from '../components/DeleteSightingBut'
 import EditBut from '../components/EditBut'
-import EditSightingForm from '../components/EditSightingForm'
 
 export default function SightingsDetail() {
   const params = useParams()
   const navigate = useNavigate()
+
   const id = params.id
   const delSighting = useDelSightingMutation()
   const {
-    data: sighitingData,
+    data: sightingData,
     isError,
     isLoading,
   } = useSightingbyId(id as string)
@@ -18,54 +18,49 @@ export default function SightingsDetail() {
   if (isError) return <h1> An error occurred loading Kakī</h1>
 
   if (isLoading) return <h1> Looking for Kakī</h1>
-  console.log(sighitingData)
+  console.log(sightingData)
 
   return (
     <div className="">
       <div className="flex gap-10 flex-wrap m-5">
         <div>
           <h3 className="font-semibold text-sm">Date</h3>
-          <p>{sighitingData.Date}</p>
+          <p>{sightingData.date}</p>
         </div>
         <button
           className="cursor-pointer hover:text-B"
-          onClick={() => navigate(`/${sighitingData.birdId}`)}
+          onClick={() => navigate(`/${sightingData.birdId}`)}
         >
           <h3 className="font-semibold text-sm ">Kaki Band</h3>
-          <p>{sighitingData.Band}</p>
+          <p>{sightingData.band}</p>
         </button>
         <div>
           <h3 className="font-semibold text-sm">Area</h3>
-          <p>{sighitingData.Area}</p>
+          <p>{sightingData.area}</p>
         </div>
         <div>
           <h3 className="font-semibold text-sm">Location</h3>
-          <p>{sighitingData.Location}</p>
+          <p>{sightingData.location}</p>
         </div>
         <div>
           <h3 className="font-semibold text-sm">Latitude</h3>
-          <p>{sighitingData.lat}</p>
+          <p>{sightingData.lat}</p>
         </div>
         <div>
           <h3 className="font-semibold text-sm">Longitude</h3>
-          <p>{sighitingData.lon}</p>
+          <p>{sightingData.lon}</p>
         </div>
         <div>
           <h3 className="font-semibold text-sm">Observer</h3>
-          <p>{sighitingData.Obs}</p>
+          <p>{sightingData.observer}</p>
         </div>
         <div>
           <h3 className="font-semibold text-sm">Notes</h3>
-          <p>{sighitingData.notes}</p>
+          <p>{sightingData.notes}</p>
         </div>
       </div>
       <DelSightingBut sightingId={Number(id)} mutationFn={delSighting} />
-      <EditBut>
-        <EditSightingForm
-          onClose={() => console.log('close')}
-          sightingData={sighitingData}
-        />
-      </EditBut>
+      <EditBut sightingData={sightingData} />
     </div>
   )
 }

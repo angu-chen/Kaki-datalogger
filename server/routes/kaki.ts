@@ -120,7 +120,6 @@ router.post('/sightings', async (req, res) => {
 router.delete('/sightings/:id', async (req, res) => {
   const sightingID = req.params.id
   try {
-    console.log(sightingID)
     const delRows = await db.delSighting(Number(sightingID))
     res.json(delRows)
   } catch (error) {
@@ -130,5 +129,22 @@ router.delete('/sightings/:id', async (req, res) => {
         : `error deleting sighting ${sightingID}`,
     )
     res.status(500).json({ message: 'error no sighiting to delete' })
+  }
+})
+
+router.put('/sightings', async (req, res) => {
+  try {
+    const sightingData = req.body as SightingData
+    if (!sightingData) {
+      console.error('No data given')
+      return res.status(400).send('Bad Request')
+    }
+    const updatedRows = await db.updateSighting(sightingData)
+    res.json(updatedRows)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : `error updating sighting `,
+    )
+    res.status(500).json({ message: 'error no updating to delete' })
   }
 })

@@ -50,3 +50,8 @@ export async function delSighting(id: number) {
   await request.del(`${rootURL}/kaki/sightings/${id}`)
   return
 }
+
+export async function updateSighting(data: NewSighting) {
+  await request.put(`${rootURL}/kaki/sightings/`).send(data)
+  return
+}

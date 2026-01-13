@@ -1,13 +1,14 @@
-import { UseMutationResult } from '@tanstack/react-query'
 import { ReactNode, useState } from 'react'
 import Modal from './Modal'
 
+import EditSightingForm from './EditSightingForm'
+import { UpdateSighting } from '../../models/kaki'
+
 interface Props {
-  children: ReactNode
-  // mutationFn: UseMutationResult<void, Error, number, unknown>
+  sightingData: UpdateSighting
 }
 
-export default function EditBut({ children }: Props) {
+export default function EditBut({ sightingData }: Props) {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {
@@ -24,7 +25,10 @@ export default function EditBut({ children }: Props) {
       </button>
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        {children}
+        <EditSightingForm
+          sightingData={sightingData}
+          onClose={() => setIsOpen(false)}
+        />
       </Modal>
     </div>
   )

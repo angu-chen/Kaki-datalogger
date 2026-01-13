@@ -111,14 +111,14 @@ export async function getSighting(id: number) {
     .leftJoin('kaki', 'sightings.bird_id', 'kaki.id')
     .select(
       'kaki.id as birdId',
-      'kaki.band as Band',
+      'kaki.band as band',
       'sightings.id',
-      'sightings.date as Date',
-      'sightings.area as Area',
-      'sightings.location as Location',
+      'sightings.date',
+      'sightings.area',
+      'sightings.location',
       'sightings.lat',
       'sightings.lon',
-      'sightings.observer as Obs',
+      'sightings.observer',
       'sightings.notes',
     )
     .first()
@@ -174,5 +174,27 @@ export async function addSighting(newSighting: NewSighting) {
 
 export async function delSighting(id: number) {
   const res = await db('sightings').where('sightings.id', id).del()
+  return res
+}
+
+export async function updateSighting(sighting) {
+  const kaki = await db('kaki')
+    .where('kaki.band', sighting.band)
+    .select('id')
+    .first()
+
+  if (!kaki) {
+    throw new Error(`Kaki band ${sighting.band} does not exist`)
+  }
+  const res = await db('sightings').where('sightings.id', sighting.id).update({
+    bird_id: kaki.id,
+    date: sighting.date,
+    area: sighting.area,
+    location: sighting.location,
+    lat: sighting.lat,
+    lon: sighting.lon,
+    observer: sighting.observer,
+    notes: sighting.notes,
+  })
   return res
 }
