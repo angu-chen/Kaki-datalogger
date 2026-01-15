@@ -46,6 +46,10 @@ export async function getPairing(id: string) {
   const res = await request.get(`${rootURL}/kaki/pairings/${id}`)
   return res.body
 }
+export async function getAllPairings() {
+  const res = await request.get(`${rootURL}/kaki/pairings`)
+  return res.body
+}
 
 export async function createSighting(data: NewSighting) {
   const res = await request.post(`${rootURL}/kaki/sightings/`).send(data)

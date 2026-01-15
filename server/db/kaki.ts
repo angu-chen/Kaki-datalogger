@@ -15,16 +15,16 @@ const kakiSelect = [
   'hatch_yr as Htch Yr',
 ]
 
-const sightingsSelect = [
+const allPairingsSelect = [
   'id',
-  'date as Date',
-  'area as Area',
-  'location as Location',
-  'lat',
+  'pair_no as pairNo',
+  'year',
+  'location',
+  'treatment',
   'lon',
-  'observer as Obs.',
-  'notes',
+  'lat',
 ]
+
 export async function getAllKaki(): Promise<Kaki[]> {
   const kakiList = await db('kaki').select(
     'id',
@@ -140,6 +140,28 @@ export async function getSighting(id: number) {
     )
     .first()
   return sighting
+}
+
+export async function getAllPairings() {
+  const kakiPairings = await db('pairings')
+    .leftJoin('kaki as bird1', 'pairings.bird1_id', 'bird1.id')
+    .leftJoin('kaki as bird2', 'pairings.bird2_id', 'bird2.id')
+
+    .select(
+      'pairings.id',
+      'pairings.pair_no as pairNo.',
+      'pairings.year',
+      'pairings.bird1_id as bird1Id',
+      'pairings.bird2_id as bird2Id',
+      'bird1.band as bird1Band',
+      'bird2.band as bird2Band',
+      'pairings.location',
+      'pairings.treatment',
+      'pairings.lon',
+      'pairings.lat',
+    )
+
+  return kakiPairings
 }
 
 export async function getPairing(id: number) {

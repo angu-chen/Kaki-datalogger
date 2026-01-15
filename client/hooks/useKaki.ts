@@ -10,6 +10,7 @@ import {
   delPairing,
   delSighting,
   getAllKaki,
+  getAllPairings,
   getKakiDash,
   getKakiDetail,
   getKakiPairings,
@@ -28,8 +29,15 @@ export function useKaki(id: number) {
   })
   return {
     ...query,
-    // Extra queries go here e.g. addKaki
   }
+}
+
+export function useGetAllPairings() {
+  const query = useQuery({
+    queryKey: queryKeys.pairings.all,
+    queryFn: () => getAllPairings(),
+  })
+  return { ...query }
 }
 
 export function useGetAllKaki() {

@@ -5,6 +5,7 @@ import { Pairing, PairingData, SightingData } from '../../models/kaki.ts'
 const router = Router()
 
 router.get('/', async (req, res) => {
+  console.log('getting all kakis')
   try {
     const kaki = await db.getAllKaki()
     res.json(kaki)
@@ -13,6 +14,20 @@ router.get('/', async (req, res) => {
       error instanceof Error ? error.message : 'Error getting all Kaki',
     )
     res.status(500).json({ message: 'something went wrong fetching all Kaki' })
+  }
+})
+
+router.get('/pairings', async (req, res) => {
+  console.log('getting pairings')
+  try {
+    const allPairings = await db.getAllPairings()
+    console.log(allPairings)
+    res.json(allPairings)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'Error retrieving pairings',
+    )
+    res.status(500).json({ message: 'error something went terribly wrong' })
   }
 })
 

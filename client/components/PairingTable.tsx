@@ -14,7 +14,7 @@ export default function KakiPairings({ birdId }: Props) {
   if (kakiPairings.length < 1) {
     return <h1>No pairing data</h1>
   }
-  console.log(kakiPairings)
+
   const headers = Object.keys(kakiPairings[0])
 
   return (

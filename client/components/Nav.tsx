@@ -6,7 +6,7 @@ export default function Nav() {
           <a href="/">Home</a>
         </li>
         <li>
-          <a href="/">Pairings</a>
+          <a href="/pairings">Pairings</a>
         </li>
       </ul>
     </nav>

@@ -62,7 +62,7 @@ export default function PairingsDetail() {
       </div>
 
       <EditBut editData={pairingData} Form={PairingForm}>
-        {/* <p>Edit</p> */}
+        <p>Edit</p>
       </EditBut>
       <DelBut id={pairingData.id} mutationFn={delPairing} />
     </div>
