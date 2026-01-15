@@ -8,7 +8,7 @@ interface Props {
   sightingData: UpdateSighting
 }
 
-export default function EditBut({ sightingData }: Props) {
+export default function EditSightingBut({ sightingData }: Props) {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {

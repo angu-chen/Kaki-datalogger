@@ -1,5 +1,12 @@
 import db from './connection.ts'
-import { Kaki, NewSighting, PairingData } from '../../models/kaki.ts'
+import {
+  Kaki,
+  NewSighting,
+  Pairing,
+  PairingData,
+  SightingData,
+  UpdateSighting,
+} from '../../models/kaki.ts'
 
 const kakiSelect = [
   'id as ID',
@@ -133,6 +140,7 @@ export async function getPairing(id: number) {
     .leftJoin('kaki as bird2', 'pairings.bird2_id', 'bird2.id')
 
     .select(
+      'pairings.id as id',
       'bird1.id as bird1Id',
       'bird1.band as bird1Band',
       'bird2.id as bird2Id',
@@ -178,7 +186,7 @@ export async function delSighting(id: number) {
   return res
 }
 
-export async function updateSighting(sighting) {
+export async function updateSighting(sighting: UpdateSighting) {
   const kaki = await db('kaki')
     .where('kaki.band', sighting.band)
     .select('id')
@@ -200,6 +208,36 @@ export async function updateSighting(sighting) {
   return res
 }
 
+export async function updatePairing(pairing: Pairing) {
+  const kaki1 = await db('kaki')
+    .where('kaki.band', pairing.bird1Band)
+    .select('id')
+    .first()
+
+  if (!kaki1) {
+    throw new Error(`Kaki band ${pairing.bird1Band} does not exist`)
+  }
+  const kaki2 = await db('kaki')
+    .where('kaki.band', pairing.bird2Band)
+    .select('id')
+    .first()
+
+  if (!kaki2) {
+    throw new Error(`Kaki band ${pairing.bird2Band} does not exist`)
+  }
+
+  const res = await db('pairings').where('pairings.id', pairing.id).update({
+    pair_no: pairing.pairNo,
+    year: pairing.year,
+    bird1_id: kaki1.id,
+    bird2_id: kaki2.id,
+    location: pairing.location,
+    treatment: pairing.treatment,
+    lon: pairing.lon,
+    lat: pairing.lat,
+  })
+  return res
+}
 export async function addPairing(pairing: PairingData) {
   const bird1 = await db('kaki')
     .where('kaki.band', pairing.bird1Band)

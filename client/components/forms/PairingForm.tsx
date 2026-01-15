@@ -1,15 +1,21 @@
-import { useState } from 'react'
-import { PairingData } from '../../../models/kaki'
+import { useEffect, useState } from 'react'
+import { Pairing, PairingData } from '../../../models/kaki'
 import {
   useAddPairingMutation,
-  useAddSightingMutation,
   useGetAllKaki,
+  useUpdatePairingMutation,
 } from '../../hooks/useKaki'
 
 interface Props {
   onClose: () => void
+  edit?: boolean
+  editData?: Pairing
 }
-export default function PairingForm({ onClose }: Props) {
+export default function PairingForm({
+  onClose,
+  edit = false,
+  editData,
+}: Props) {
   const [formData, setFormData] = useState<PairingData>({
     pairNo: '',
     year: undefined,
@@ -20,12 +26,28 @@ export default function PairingForm({ onClose }: Props) {
     lon: undefined,
     lat: undefined,
   })
-
+  useEffect(() => {
+    if (edit) {
+      if (editData) {
+        setFormData({
+          pairNo: editData.pairNo,
+          year: editData.year,
+          bird1Band: editData.bird1Band,
+          bird2Band: editData.bird2Band,
+          location: editData.location,
+          treatment: editData.treatment,
+          lon: editData.lon,
+          lat: editData.lat,
+        })
+      }
+    }
+  }, [edit, editData])
   const [bandError, setBandError] = useState({
     set: false,
     msg: 'Band does not exist. Please choose from the list',
   })
   const addPairing = useAddPairingMutation()
+  const editPairing = useUpdatePairingMutation()
 
   const { data: allKakiData, isError, isLoading } = useGetAllKaki()
 
@@ -54,6 +76,12 @@ export default function PairingForm({ onClose }: Props) {
     ) {
       setBandError({ ...bandError, set: true })
       return
+    }
+    if (edit && editData) {
+      editPairing.mutate(
+        { ...formData, ['id']: editData.id },
+        { onSuccess: () => onClose() },
+      )
     }
     addPairing.mutate(formData, { onSuccess: () => onClose() })
   }

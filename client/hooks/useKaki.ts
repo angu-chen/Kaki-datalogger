@@ -15,6 +15,7 @@ import {
   getKakiSightings,
   getPairing,
   getSighting,
+  updatePairing,
   updateSighting,
 } from '../apis/kaki'
 import { queryKeys } from './queryKeys'
@@ -80,6 +81,18 @@ export function useUpdateSightingMutation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.kakis.sightings() })
       queryClient.invalidateQueries({ queryKey: queryKeys.sightings.all })
+    },
+  })
+  return mutation
+}
+
+export function useUpdatePairingMutation() {
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: updatePairing,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.kakis.pairings() })
+      queryClient.invalidateQueries({ queryKey: queryKeys.pairings.all })
     },
   })
   return mutation

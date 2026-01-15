@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router'
 import { usePairingbyId } from '../hooks/useKaki'
+import EditPairingBut from '../components/buttons/EditPairingBut'
 
 export default function PairingsDetail() {
   const params = useParams()
@@ -56,6 +57,18 @@ export default function PairingsDetail() {
           <p>{pairingData.lon}</p>
         </div>
       </div>
+      <EditPairingBut pairingData={pairingData} />
     </div>
   )
 }
+//  pairingData={{
+//         id: 3,
+//         pairNo: 'test',
+//         year: 1,
+//         bird1Band: 'test',
+//         bird2Band: 'test',
+//         location: 'test',
+//         treatment: 'test',
+//         lon: 1,
+//         lat: 1,
+//       }}

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router'
 import { useDelSightingMutation, useSightingbyId } from '../hooks/useKaki'
 import DelSightingBut from '../components/buttons/DeleteSightingBut'
-import EditBut from '../components/buttons/EditBut'
+import EditSightingBut from '../components/buttons/EditSightingBut'
 
 export default function SightingsDetail() {
   const params = useParams()
@@ -60,7 +60,7 @@ export default function SightingsDetail() {
         </div>
       </div>
       <DelSightingBut sightingId={Number(id)} mutationFn={delSighting} />
-      <EditBut sightingData={sightingData} />
+      <EditSightingBut sightingData={sightingData} />
     </div>
   )
 }

@@ -62,6 +62,9 @@ export interface PairingData {
   lat: number | undefined
 }
 
+export interface Pairing extends PairingData {
+  id: number
+}
 // {
 //     "birdId" : 2,
 //     "date" : "2025-12-25",
