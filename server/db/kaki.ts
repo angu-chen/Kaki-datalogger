@@ -185,6 +185,10 @@ export async function delSighting(id: number) {
   const res = await db('sightings').where('sightings.id', id).del()
   return res
 }
+export async function delPairing(id: number) {
+  const res = await db('pairings').where('pairings.id', id).del()
+  return res
+}
 
 export async function updateSighting(sighting: UpdateSighting) {
   const kaki = await db('kaki')

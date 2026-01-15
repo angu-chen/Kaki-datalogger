@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router'
-import { usePairingbyId } from '../hooks/useKaki'
+import { useDelPairingMutation, usePairingbyId } from '../hooks/useKaki'
 import EditPairingBut from '../components/buttons/EditPairingBut'
+import DelBut from '../components/buttons/DelBut'
 
 export default function PairingsDetail() {
   const params = useParams()
@@ -8,6 +9,7 @@ export default function PairingsDetail() {
   const id = params.id
   const { data: pairingData, isError, isLoading } = usePairingbyId(id as string)
 
+  const delPairing = useDelPairingMutation()
   if (isError) return <h1> An error occurred loading pairing</h1>
 
   if (isLoading) return <h1> Looking for pairing</h1>
@@ -58,6 +60,7 @@ export default function PairingsDetail() {
         </div>
       </div>
       <EditPairingBut pairingData={pairingData} />
+      <DelBut id={pairingData.id} mutationFn={delPairing} />
     </div>
   )
 }

@@ -53,7 +53,12 @@ export async function createSighting(data: NewSighting) {
 }
 
 export async function delSighting(id: number) {
-  await request.del(`${rootURL}/kaki/sightings/${id}`)
+  const res = await request.del(`${rootURL}/kaki/sightings/${id}`)
+  console.log(`rows deleted ${res.body} from id ${id}`)
+  return
+}
+export async function delPairing(id: number) {
+  await request.del(`${rootURL}/kaki/pairings/${id}`)
   return
 }
 

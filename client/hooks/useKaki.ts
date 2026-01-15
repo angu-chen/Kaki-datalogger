@@ -7,6 +7,7 @@ import {
 import {
   createPairing,
   createSighting,
+  delPairing,
   delSighting,
   getAllKaki,
   getKakiDash,
@@ -69,6 +70,17 @@ export function useDelSightingMutation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.kakis.sightings() })
       queryClient.invalidateQueries({ queryKey: queryKeys.sightings.all })
+    },
+  })
+  return mutation
+}
+export function useDelPairingMutation() {
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: delPairing,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.kakis.pairings() })
+      queryClient.invalidateQueries({ queryKey: queryKeys.pairings.all })
     },
   })
   return mutation

@@ -3,18 +3,18 @@ import Modal from '../Modal'
 import { UseMutationResult } from '@tanstack/react-query'
 
 interface Props {
-  sightingId: number
+  id: number
   mutationFn: UseMutationResult<void, Error, number, unknown>
 }
 
-export default function DelSightingBut({ sightingId, mutationFn }: Props) {
+export default function DelBut({ id, mutationFn }: Props) {
   const [isOpen, setIsOpen] = useState(false)
-
+  console.log(`del button id is ${id}`)
   const handleClick = () => {
     setIsOpen(true)
   }
   const handleConfirmation = () => {
-    mutationFn.mutate(sightingId, { onSuccess: () => window.history.back() })
+    mutationFn.mutate(id, { onSuccess: () => window.history.back() })
   }
   return (
     <div>
@@ -22,7 +22,7 @@ export default function DelSightingBut({ sightingId, mutationFn }: Props) {
         onClick={handleClick}
         className="border bg-red-300 rounded-sm px-3 hover:bg-red-500 shadow-lg cursor-pointer"
       >
-        <p>Delete Sighting</p>
+        <p>Delete</p>
       </button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <p className="text-center my-5 font-semibold">Are you sure?</p>

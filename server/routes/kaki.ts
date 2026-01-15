@@ -120,6 +120,7 @@ router.post('/sightings', async (req, res) => {
 router.delete('/sightings/:id', async (req, res) => {
   const sightingID = req.params.id
   try {
+    console.log(sightingID)
     const delRows = await db.delSighting(Number(sightingID))
     res.json(delRows)
   } catch (error) {
@@ -131,7 +132,18 @@ router.delete('/sightings/:id', async (req, res) => {
     res.status(500).json({ message: 'error no sighiting to delete' })
   }
 })
-
+router.delete('/pairings/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    const delRows = await db.delPairing(Number(id))
+    res.json(delRows)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : `error deleting pairing ${id}`,
+    )
+    res.status(500).json({ message: 'error no pairing to delete' })
+  }
+})
 router.put('/sightings', async (req, res) => {
   try {
     const sightingData = req.body as SightingData
