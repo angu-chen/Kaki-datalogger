@@ -5,8 +5,9 @@ interface Props {
   kaki: KakiDash[]
 }
 export default function KakiTable({ kaki }: Props) {
-  const kakiKeys = Object.keys(kaki[0])
   const navigate = useNavigate()
+  console.log('kaki is', kaki)
+  const kakiKeys = Object.keys(kaki[0])
 
   return (
     <table>

@@ -23,7 +23,7 @@ import { queryKeys } from './queryKeys'
 
 export function useKaki(id: number) {
   const query = useQuery({
-    queryKey: queryKeys.kakis.dash(),
+    queryKey: queryKeys.kakis.detail(id),
     queryFn: () => getKakiDetail(id),
   })
   return {
