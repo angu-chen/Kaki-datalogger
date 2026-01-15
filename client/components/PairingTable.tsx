@@ -21,9 +21,10 @@ export default function KakiPairings({ birdId }: Props) {
     <table>
       <tbody>
         <tr>
-          {headers.map((key) => (
-            <th key={key}>{key}</th>
-          ))}
+          {headers.map((key) => {
+            if (key == 'id') return
+            return <th key={key}>{key}</th>
+          })}
         </tr>
 
         {kakiPairings.map((pairings) => (
@@ -32,9 +33,10 @@ export default function KakiPairings({ birdId }: Props) {
             className="hover:bg-green-300 cursor-pointer"
             onClick={() => navigate(`/pairings/${pairings.id}`)}
           >
-            {headers.map((key) => (
-              <th key={`${key}${pairings.id}`}>{pairings[key]}</th>
-            ))}
+            {headers.map((key) => {
+              if (key == 'id') return
+              return <th key={`${key}${pairings.id}`}>{pairings[key]}</th>
+            })}
           </tr>
         ))}
       </tbody>

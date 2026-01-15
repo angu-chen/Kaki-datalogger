@@ -5,6 +5,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query'
 import {
+  createPairing,
   createSighting,
   delSighting,
   getAllKaki,
@@ -43,6 +44,18 @@ export function useAddSightingMutation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.kakis.sightings() })
       queryClient.invalidateQueries({ queryKey: queryKeys.sightings.all })
+    },
+  })
+  return mutation
+}
+
+export function useAddPairingMutation() {
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: createPairing,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.kakis.pairings() })
+      queryClient.invalidateQueries({ queryKey: queryKeys.pairings.all })
     },
   })
   return mutation

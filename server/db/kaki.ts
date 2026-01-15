@@ -84,6 +84,7 @@ export async function getKakiPairings(id: number) {
 
     .select(
       'pairings.id',
+      'pairings.pair_no as pair no.',
       'pairings.year',
       'bird1.band as bird1',
       'bird2.band as bird2',

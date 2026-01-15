@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { PairingData } from '../../../models/kaki'
-import { useAddSightingMutation, useGetAllKaki } from '../../hooks/useKaki'
+import {
+  useAddPairingMutation,
+  useAddSightingMutation,
+  useGetAllKaki,
+} from '../../hooks/useKaki'
 
 interface Props {
   onClose: () => void
@@ -21,6 +25,7 @@ export default function PairingForm({ onClose }: Props) {
     set: false,
     msg: 'Band does not exist. Please choose from the list',
   })
+  const addPairing = useAddPairingMutation()
 
   const { data: allKakiData, isError, isLoading } = useGetAllKaki()
 
@@ -50,8 +55,7 @@ export default function PairingForm({ onClose }: Props) {
       setBandError({ ...bandError, set: true })
       return
     }
-    console.log(formData)
-    // addSighting.mutate(formData, { onSuccess: () => onClose() })
+    addPairing.mutate(formData, { onSuccess: () => onClose() })
   }
 
   return (
@@ -70,6 +74,21 @@ export default function PairingForm({ onClose }: Props) {
             value={formData.pairNo}
             name="pairNo"
             id="pairNo"
+            required
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold" htmlFor="year">
+            Year*
+          </label>
+          <input
+            className={` border-gray-400 border p-1`}
+            onChange={(e) => handleChange('year', e)}
+            autoComplete="off"
+            type="number"
+            value={formData.year}
+            name="year"
+            id="year"
             required
           />
         </div>
@@ -147,7 +166,7 @@ export default function PairingForm({ onClose }: Props) {
         </div>
         <div className="flex flex-col">
           <label className="font-semibold" htmlFor="lat">
-            Latitude
+            Latitude*
           </label>
           <input
             className={` border-gray-400 border p-1`}
@@ -162,7 +181,7 @@ export default function PairingForm({ onClose }: Props) {
         </div>
         <div className="flex flex-col">
           <label className="font-semibold" htmlFor="lon">
-            Longitude
+            Longitude*
           </label>
           <input
             className={` border-gray-400 border p-1`}
