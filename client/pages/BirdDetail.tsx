@@ -2,7 +2,8 @@ import { useParams } from 'react-router'
 import { useKaki } from '../hooks/useKaki'
 import KakiSightings from '../components/SightingsTable'
 import KakiPairings from '../components/PairingTable'
-import AddPairingBut from '../components/buttons/addPairingBut'
+import AddBut from '../components/buttons/AddBut'
+import PairingForm from '../components/forms/PairingForm'
 
 function BirdDetail() {
   const params = useParams()
@@ -43,7 +44,9 @@ function BirdDetail() {
       </div>
       <div className="w-4/5 p-5 border shadow-2xl rounded-2xl">
         <h1 className="text-4xl font-semibold  mb-5">Pairings</h1>
-        <AddPairingBut />
+        <AddBut Form={PairingForm}>
+          <p>Add Pairing</p>
+        </AddBut>
         <KakiPairings birdId={params.id as string} />
       </div>
     </div>

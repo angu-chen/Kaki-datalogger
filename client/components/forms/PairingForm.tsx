@@ -5,26 +5,22 @@ import {
   useGetAllKaki,
   useUpdatePairingMutation,
 } from '../../hooks/useKaki'
+import { FormsProps } from '../buttons/AddBut'
 
-interface Props {
-  onClose: () => void
-  edit?: boolean
-  editData?: Pairing
-}
 export default function PairingForm({
   onClose,
   edit = false,
   editData,
-}: Props) {
+}: FormsProps) {
   const [formData, setFormData] = useState<PairingData>({
     pairNo: '',
-    year: undefined,
+    year: new Date().getFullYear(),
     bird1Band: '',
     bird2Band: '',
     location: '',
     treatment: '',
-    lon: undefined,
-    lat: undefined,
+    lon: null,
+    lat: null,
   })
   useEffect(() => {
     if (edit) {
@@ -83,6 +79,7 @@ export default function PairingForm({
         { onSuccess: () => onClose() },
       )
     }
+
     addPairing.mutate(formData, { onSuccess: () => onClose() })
   }
 
@@ -201,7 +198,7 @@ export default function PairingForm({
             onChange={(e) => handleChange('lat', e)}
             autoComplete="off"
             type="text"
-            value={formData.lat}
+            value={formData.lat ?? ''}
             name="lat"
             id="lat"
             required
@@ -216,7 +213,7 @@ export default function PairingForm({
             onChange={(e) => handleChange('lon', e)}
             autoComplete="off"
             type="text"
-            value={formData.lon}
+            value={formData.lon ?? ''}
             name="lon"
             id="lon"
             required

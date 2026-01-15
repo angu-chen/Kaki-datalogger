@@ -1,4 +1,4 @@
-import { useKakiDash, useKakis } from '../hooks/useKaki'
+import { useKakiDash } from '../hooks/useKaki'
 
 import KakiTable from './KakiTable'
 

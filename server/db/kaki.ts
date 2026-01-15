@@ -229,7 +229,7 @@ export async function updatePairing(pairing: Pairing) {
   if (!kaki2) {
     throw new Error(`Kaki band ${pairing.bird2Band} does not exist`)
   }
-
+  console.log(pairing)
   const res = await db('pairings').where('pairings.id', pairing.id).update({
     pair_no: pairing.pairNo,
     year: pairing.year,

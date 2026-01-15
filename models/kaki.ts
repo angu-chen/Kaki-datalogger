@@ -53,13 +53,13 @@ export interface Sighting extends SightingData {
 
 export interface PairingData {
   pairNo: string
-  year: number | undefined
+  year: number
   bird1Band: string
   bird2Band: string
   location: string
   treatment: string
-  lon: number | undefined
-  lat: number | undefined
+  lon: number | null
+  lat: number | null
 }
 
 export interface Pairing extends PairingData {
