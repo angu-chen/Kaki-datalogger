@@ -2,6 +2,8 @@ import { useNavigate, useParams } from 'react-router'
 import { useDelPairingMutation, usePairingbyId } from '../hooks/useKaki'
 import EditPairingBut from '../components/buttons/EditPairingBut'
 import DelBut from '../components/buttons/DelBut'
+import EditBut from '../components/buttons/EditBut'
+import PairingForm from '../components/forms/PairingForm'
 
 export default function PairingsDetail() {
   const params = useParams()
@@ -59,7 +61,10 @@ export default function PairingsDetail() {
           <p>{pairingData.lon}</p>
         </div>
       </div>
-      <EditPairingBut pairingData={pairingData} />
+
+      <EditBut editData={pairingData} Form={PairingForm}>
+        <p>Edit</p>
+      </EditBut>
       <DelBut id={pairingData.id} mutationFn={delPairing} />
     </div>
   )

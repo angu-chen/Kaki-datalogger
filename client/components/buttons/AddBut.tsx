@@ -1,16 +1,11 @@
 import { ReactNode, useState } from 'react'
 import Modal from '../Modal'
-import { Pairing } from '../../../models/kaki'
+
+import { FormsProps } from '../../../models/forms'
 
 interface Props {
   children: ReactNode
   Form: React.ComponentType<FormsProps>
-}
-
-export interface FormsProps {
-  onClose: () => void
-  edit?: boolean
-  editData?: Pairing
 }
 
 export default function AddBut({ children, Form }: Props) {

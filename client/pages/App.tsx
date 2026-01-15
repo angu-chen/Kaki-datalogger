@@ -1,8 +1,7 @@
-import { useState } from 'react'
 import DashBoard from '../components/Dashboard.tsx'
-import Modal from '../components/Modal.tsx'
+
 import SightingForm from '../components/forms/SightingForm.tsx'
-import AddPairingBut from '../components/buttons/AddPairingBut.tsx'
+
 import AddBut from '../components/buttons/AddBut.tsx'
 
 function App() {
