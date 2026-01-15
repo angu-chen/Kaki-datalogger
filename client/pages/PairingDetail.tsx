@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router'
 import { useDelPairingMutation, usePairingbyId } from '../hooks/useKaki'
-import EditPairingBut from '../components/buttons/EditPairingBut'
+
 import DelBut from '../components/buttons/DelBut'
 import EditBut from '../components/buttons/EditBut'
 import PairingForm from '../components/forms/PairingForm'
@@ -15,7 +15,6 @@ export default function PairingsDetail() {
   if (isError) return <h1> An error occurred loading pairing</h1>
 
   if (isLoading) return <h1> Looking for pairing</h1>
-  console.log(pairingData)
 
   return (
     <div className="flex flex-col items-center">
@@ -63,20 +62,9 @@ export default function PairingsDetail() {
       </div>
 
       <EditBut editData={pairingData} Form={PairingForm}>
-        <p>Edit</p>
+        {/* <p>Edit</p> */}
       </EditBut>
       <DelBut id={pairingData.id} mutationFn={delPairing} />
     </div>
   )
 }
-//  pairingData={{
-//         id: 3,
-//         pairNo: 'test',
-//         year: 1,
-//         bird1Band: 'test',
-//         bird2Band: 'test',
-//         location: 'test',
-//         treatment: 'test',
-//         lon: 1,
-//         lat: 1,
-//       }}

@@ -26,8 +26,8 @@ export interface NewSighting {
   date: string
   area: string
   location: string
-  lat: number | undefined
-  lon: number | undefined
+  lat: number | null
+  lon: number | null
   observer: string
   notes: string
 }

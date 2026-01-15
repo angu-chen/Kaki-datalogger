@@ -1,15 +1,15 @@
 import React, { ReactNode, useState } from 'react'
-import { Pairing, UpdateSighting } from '../../../models/kaki'
 import { FormsProps } from '../../../models/forms'
 import Modal from '../Modal'
+import EditIcon from '@mui/icons-material/Edit'
 
-interface Props {
-  editData: Pairing | UpdateSighting
-  children: ReactNode
-  Form: React.ComponentType<FormsProps>
+interface Props<T> {
+  editData: T
+  children?: ReactNode
+  Form: React.ComponentType<FormsProps & { editData?: T }>
 }
 
-export default function EditBut({ editData, children, Form }: Props) {
+export default function EditBut<T>({ editData, children, Form }: Props<T>) {
   const [isOpen, setIsOpen] = useState(false)
   const onClose = () => setIsOpen(false)
 
@@ -21,9 +21,17 @@ export default function EditBut({ editData, children, Form }: Props) {
     <div>
       <button
         onClick={handleClick}
-        className="border bg-yellow-200 rounded-sm px-3 hover:bg-yellow-500 shadow-lg cursor-pointer"
+        className={
+          children
+            ? `border bg-amber-400 rounded-sm px-3 py-1 hover:bg-amber-700 shadow-lg cursor-pointer`
+            : ''
+        }
       >
-        {children}
+        {children ? (
+          children
+        ) : (
+          <EditIcon className="text-amber-400 hover:text-amber-700 cursor-pointer hover:border" />
+        )}
       </button>
 
       <Modal isOpen={isOpen} onClose={onClose}>

@@ -4,6 +4,7 @@ import KakiSightings from '../components/SightingsTable'
 import KakiPairings from '../components/PairingTable'
 import AddBut from '../components/buttons/AddBut'
 import PairingForm from '../components/forms/PairingForm'
+import SightingForm from '../components/forms/SightingForm'
 
 function BirdDetail() {
   const params = useParams()
@@ -40,6 +41,9 @@ function BirdDetail() {
 
       <div className="w-4/5 p-5 border shadow-2xl rounded-2xl">
         <h1 className="text-4xl font-semibold  mb-5">Sightings</h1>
+        <AddBut Form={SightingForm}>
+          <p>Add Sighting</p>
+        </AddBut>
         <KakiSightings birdId={params.id as string} />
       </div>
       <div className="w-4/5 p-5 border shadow-2xl rounded-2xl">

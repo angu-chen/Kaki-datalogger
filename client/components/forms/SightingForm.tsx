@@ -1,20 +1,44 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NewSighting } from '../../../models/kaki'
-import { useAddSightingMutation, useGetAllKaki } from '../../hooks/useKaki'
-interface Props {
-  onClose: () => void
-}
-export default function SightingForm({ onClose }: Props) {
+import {
+  useAddSightingMutation,
+  useGetAllKaki,
+  useUpdateSightingMutation,
+} from '../../hooks/useKaki'
+import { SightingFormsProp } from '../../../models/forms'
+
+export default function SightingForm({
+  onClose,
+  edit = false,
+  editData,
+}: SightingFormsProp) {
   const [formData, setFormData] = useState<NewSighting>({
     band: '',
     date: '',
     area: '',
     location: '',
-    lat: undefined,
-    lon: undefined,
+    lat: null,
+    lon: null,
     observer: '',
     notes: '',
   })
+
+  useEffect(() => {
+    if (edit) {
+      if (editData) {
+        setFormData({
+          band: editData.band,
+          date: editData.date,
+          area: editData.area,
+          location: editData.location,
+          lat: editData.lat,
+          lon: editData.lon,
+          observer: editData.observer,
+          notes: editData.notes,
+        })
+      }
+    }
+  }, [edit, editData])
 
   const [bandError, setBandError] = useState({
     set: false,
@@ -23,6 +47,7 @@ export default function SightingForm({ onClose }: Props) {
 
   const { data: allKakiData, isError, isLoading } = useGetAllKaki()
   const addSighting = useAddSightingMutation()
+  const editSighting = useUpdateSightingMutation()
 
   if (isError) return <h1> An error occurred loading Kakis</h1>
   if (isLoading) return <h1> Gathering kakis</h1>
@@ -48,8 +73,13 @@ export default function SightingForm({ onClose }: Props) {
       setBandError({ ...bandError, set: true })
       return
     }
-    const newBand = formData.band.toUpperCase()
-    setFormData({ ...formData, ['band']: newBand })
+    if (edit && editData) {
+      editSighting.mutate(
+        { ...formData, ['band']: editData.band },
+        { onSuccess: () => onClose() },
+      )
+    }
+
     addSighting.mutate(formData, { onSuccess: () => onClose() })
   }
 
@@ -159,7 +189,7 @@ export default function SightingForm({ onClose }: Props) {
             type="number"
             id="lat"
             name="lat"
-            value={formData.lat}
+            value={formData.lat ?? ''}
           />
         </div>
         <div className="flex flex-col">
@@ -173,7 +203,7 @@ export default function SightingForm({ onClose }: Props) {
             type="number"
             id="lon"
             name="lon"
-            value={formData.lon}
+            value={formData.lon ?? ''}
           />
         </div>
         <div className="flex flex-col">

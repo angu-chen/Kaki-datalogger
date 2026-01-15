@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 import Modal from '../Modal'
-
+import AddBoxIcon from '@mui/icons-material/AddBox'
 import { FormsProps } from '../../../models/forms'
 
 interface Props {
@@ -19,9 +19,17 @@ export default function AddBut({ children, Form }: Props) {
     <div>
       <button
         onClick={handleClick}
-        className="border bg-green-200 rounded-sm px-3 hover:bg-green-500 shadow-lg cursor-pointer"
+        className={
+          children
+            ? `border bg-green-600 rounded-sm px-3 py-1 hover:bg-green-800 shadow-lg cursor-pointer`
+            : ''
+        }
       >
-        {children}
+        {children ? (
+          children
+        ) : (
+          <AddBoxIcon className="text-green-600 hover:text-green-800 hover:boreder cursor-pointer" />
+        )}
       </button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <Form onClose={() => setIsOpen(false)} />

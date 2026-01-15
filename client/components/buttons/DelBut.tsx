@@ -1,15 +1,18 @@
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import Modal from '../Modal'
 import { UseMutationResult } from '@tanstack/react-query'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import { red } from '@mui/material/colors'
 
 interface Props {
   id: number
   mutationFn: UseMutationResult<void, Error, number, unknown>
+  children?: ReactNode
 }
 
-export default function DelBut({ id, mutationFn }: Props) {
+export default function DelBut({ id, mutationFn, children }: Props) {
   const [isOpen, setIsOpen] = useState(false)
-  console.log(`del button id is ${id}`)
+
   const handleClick = () => {
     setIsOpen(true)
   }
@@ -20,9 +23,17 @@ export default function DelBut({ id, mutationFn }: Props) {
     <div>
       <button
         onClick={handleClick}
-        className="border bg-red-300 rounded-sm px-3 hover:bg-red-500 shadow-lg cursor-pointer"
+        className={
+          children
+            ? `border bg-red-500 rounded-sm px-3 py-1 hover:bg-red-800 shadow-lg cursor-pointer`
+            : ''
+        }
       >
-        <p>Delete</p>
+        {children ? (
+          children
+        ) : (
+          <DeleteForeverIcon className="text-red-500 hover:text-red-800 cursor-pointer hover:border" />
+        )}
       </button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <p className="text-center my-5 font-semibold">Are you sure?</p>

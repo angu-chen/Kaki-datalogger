@@ -5,13 +5,13 @@ import {
   useGetAllKaki,
   useUpdatePairingMutation,
 } from '../../hooks/useKaki'
-import { FormsProps } from '../buttons/AddBut'
+import { PairingFormsProp } from '../../../models/forms'
 
 export default function PairingForm({
   onClose,
   edit = false,
   editData,
-}: FormsProps) {
+}: PairingFormsProp) {
   const [formData, setFormData] = useState<PairingData>({
     pairNo: '',
     year: new Date().getFullYear(),
