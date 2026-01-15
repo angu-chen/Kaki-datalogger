@@ -19,6 +19,8 @@ export interface KakiDash {
   Sighting: string
   notes: string
   sightingId: string
+  location: string
+  area: string
 }
 
 export interface NewSighting {
