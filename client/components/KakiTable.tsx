@@ -7,16 +7,24 @@ interface Props {
 export default function KakiTable({ kaki }: Props) {
   const navigate = useNavigate()
   console.log('kaki is', kaki)
-  const kakiKeys = Object.keys(kaki[0])
+  const kakiKeys = [
+    'Band',
+    'Htch Yr',
+    'Obs.',
+    'Sighting',
+    'Status',
+    'area',
+    'location',
+    'notes',
+  ]
 
   return (
     <table>
       <tbody>
         <tr>
-          {kakiKeys.map((key) => {
-            if (key === 'sightingId') return
-            else return <th key={key}>{key} </th>
-          })}
+          {kakiKeys.map((key) => (
+            <th key={key}>{key} </th>
+          ))}
         </tr>
 
         {kaki.map((bird) => (
@@ -34,6 +42,7 @@ export default function KakiTable({ kaki }: Props) {
                 )
               }
               if (key === 'Sighting') {
+                if (!bird[key]) return <th key={`${bird.ID}${key}`}>N/A</th>
                 return (
                   <th
                     className="cursor-pointer hover:text-amber-300"
@@ -44,9 +53,8 @@ export default function KakiTable({ kaki }: Props) {
                     {bird[key]}
                   </th>
                 )
-              }
-              if (key === 'sightingId') return
-              else {
+              } else {
+                if (!bird[key]) return <th key={`${bird.ID}${key}`}>N/A</th>
                 return <th key={`${bird.ID}${key}`}>{bird[key]}</th>
               }
             })}
