@@ -66,6 +66,8 @@ export interface PairingData {
 
 export interface Pairing extends PairingData {
   id: number
+  bird1Id: number
+  bird2Id: number
 }
 // {
 //     "birdId" : 2,

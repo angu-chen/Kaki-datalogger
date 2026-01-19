@@ -48,7 +48,7 @@ export async function getPairing(id: string) {
 }
 export async function getAllPairings() {
   const res = await request.get(`${rootURL}/kaki/pairings`)
-  return res.body
+  return res.body as Pairing[]
 }
 
 export async function createSighting(data: NewSighting) {

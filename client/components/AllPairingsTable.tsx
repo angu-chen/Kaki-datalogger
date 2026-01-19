@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router'
 import { useGetAllPairings } from '../hooks/useKaki'
+import EditBut from './buttons/EditBut'
+import PairingForm from './forms/PairingForm'
 
 export default function AllPairingsTable() {
   const navigate = useNavigate()
@@ -7,13 +9,13 @@ export default function AllPairingsTable() {
 
   if (isError) return <h1> An error occurred loading pairings</h1>
   if (isLoading) return <h1> Gathering pairings</h1>
-  if (allPairings.length < 1) {
+  if (allPairings == undefined) {
     return <h1>No pairing data</h1>
   }
   console.log(allPairings)
 
   const keys = [
-    'pairNo.',
+    'pairNo',
     'year',
     'bird1Band',
     'bird2Band',
@@ -26,6 +28,7 @@ export default function AllPairingsTable() {
     <table>
       <thead>
         <tr>
+          <th className="top-0 sticky bg-gray-100"> Edit </th>
           {keys.map((key) => (
             <th className="top-0 sticky bg-gray-100" key={key}>
               {key}
@@ -36,8 +39,12 @@ export default function AllPairingsTable() {
       <tbody>
         {allPairings.map((pairings) => (
           <tr key={pairings.id} className="">
+            <th>
+              {' '}
+              <EditBut Form={PairingForm} editData={pairings} />
+            </th>
             {keys.map((key) => {
-              if (key === 'pairNo.') {
+              if (key === 'pairNo') {
                 return (
                   <th
                     key={`${key}${pairings.id}`}

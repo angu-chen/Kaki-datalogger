@@ -85,7 +85,10 @@ export default function PairingForm({
 
   return (
     <div>
-      <h1 className="mb-5 font-semibold text-lg text-center"> New Pairing</h1>
+      <h1 className="mb-5 font-semibold text-lg text-center">
+        {' '}
+        {edit ? 'Edit Pairing' : 'New Pairing'}
+      </h1>
       <form className="flex flex-col gap-4 my-5" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label className="font-semibold" htmlFor="pairNo">

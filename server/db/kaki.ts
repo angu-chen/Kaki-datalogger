@@ -149,7 +149,7 @@ export async function getAllPairings() {
 
     .select(
       'pairings.id',
-      'pairings.pair_no as pairNo.',
+      'pairings.pair_no as pairNo',
       'pairings.year',
       'pairings.bird1_id as bird1Id',
       'pairings.bird2_id as bird2Id',
