@@ -17,7 +17,6 @@ export async function getAllKaki() {
 
 export async function getKakiDash() {
   const res = await request.get(`${rootURL}/kaki/dash`)
-  console.log(`in api for kaki dash, body is`, res.body)
   return res.body
 }
 
@@ -75,8 +74,7 @@ export async function createSighting(data: SightingData) {
 }
 
 export async function delSighting(id: number) {
-  const res = await request.del(`${rootURL}/kaki/sightings/${id}`)
-  console.log(`rows deleted ${res.body} from id ${id}`)
+  await request.del(`${rootURL}/kaki/sightings/${id}`)
   return
 }
 

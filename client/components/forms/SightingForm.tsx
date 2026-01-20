@@ -51,7 +51,6 @@ export default function SightingForm({
 
   if (isError) return <h1> An error occurred loading Kakis</h1>
   if (isLoading) return <h1> Gathering kakis</h1>
-  // console.log(allKakiData)
 
   const bandlist = allKakiData?.map((kaki) => kaki.band)
 
@@ -74,7 +73,6 @@ export default function SightingForm({
       return
     }
     if (edit && editData) {
-      console.log('edit data is ', editData)
       editSighting.mutate(
         { ...formData, ['band']: editData.band, id: editData.id },
         { onSuccess: () => onClose() },

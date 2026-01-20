@@ -6,7 +6,6 @@ interface Props {
 }
 export default function KakiTable({ kaki }: Props) {
   const navigate = useNavigate()
-  console.log('kaki is', kaki)
   const kakiKeys = [
     'Band',
     'Htch Yr',

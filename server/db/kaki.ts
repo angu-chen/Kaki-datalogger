@@ -80,7 +80,6 @@ export async function getKakiDash() {
       'latest_sightings.sighting_id as sightingId',
     )
     .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last
-  console.log('in kaki dash db')
   return query
 }
 
@@ -165,7 +164,6 @@ export async function updatePairing(pairing: Pairing) {
   if (!kaki2) {
     throw new Error(`Kaki band ${pairing.bird2Band} does not exist`)
   }
-  console.log(pairing)
   const res = await db('pairings').where('pairings.id', pairing.id).update({
     pair_no: pairing.pairNo,
     year: pairing.year,
@@ -245,7 +243,6 @@ export async function updateSighting(sighting: Sighting) {
   if (!kaki) {
     throw new Error(`Kaki band ${sighting.band} does not exist`)
   }
-  console.log(sighting)
   const res = await db('sightings').where('sightings.id', sighting.id).update({
     bird_id: kaki.id,
     date: sighting.date,

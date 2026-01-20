@@ -10,7 +10,6 @@ import {
 const router = Router()
 
 router.get('/', async (req, res) => {
-  console.log('getting all kakis')
   try {
     const kaki = await db.getAllKaki()
     res.json(kaki)
@@ -24,7 +23,6 @@ router.get('/', async (req, res) => {
 
 router.get('/dash', async (req, res) => {
   try {
-    console.log('trying to get kaki dash')
     const kakiDash = await db.getKakiDash()
     res.json(kakiDash)
   } catch (error) {
@@ -41,7 +39,7 @@ router.get('/dash', async (req, res) => {
 router.get('/pairings', async (req, res) => {
   try {
     const allPairings = await db.getAllPairings()
-    console.log(allPairings)
+
     res.json(allPairings)
   } catch (error) {
     console.error(
@@ -113,7 +111,7 @@ router.get('/pairings/:id', async (req, res) => {
 router.get('/sightings', async (req, res) => {
   try {
     const allSightings = await db.getAllSightings()
-    console.log(allSightings)
+
     res.json(allSightings)
   } catch (error) {
     console.error(
@@ -159,7 +157,6 @@ router.post('/sightings', async (req, res) => {
 router.delete('/sightings/:id', async (req, res) => {
   const sightingID = req.params.id
   try {
-    console.log(sightingID)
     const delRows = await db.delSighting(Number(sightingID))
     res.json(delRows)
   } catch (error) {

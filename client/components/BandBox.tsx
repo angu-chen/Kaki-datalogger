@@ -4,7 +4,7 @@ interface Props {
 
 export default function BandBox({ color }: Props) {
   const colorList = color.split('')
-  console.log(colorList)
+
   return (
     <div className="flex">
       {colorList.map((c, i) => (

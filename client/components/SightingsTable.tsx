@@ -27,7 +27,6 @@ export default function KakiSightings({ birdId }: Props) {
     'observer',
     'notes',
   ]
-  console.log('sightings are', kakiSightings)
 
   return (
     <table>

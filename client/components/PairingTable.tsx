@@ -16,7 +16,6 @@ export default function KakiPairings({ birdId }: Props) {
   if (kakiPairings === undefined) {
     return <h1>No pairing data</h1>
   }
-  console.log(`pairing info is `, kakiPairings)
 
   const keys = [
     'pairNo',

@@ -19,7 +19,7 @@ export default function SightingsDetail() {
   if (isError) return <h1> An error occurred loading Kakī</h1>
 
   if (isLoading) return <h1> Looking for Kakī</h1>
-  console.log('sighting data is', sightingData)
+  if (!sightingData) return <p> No Data</p>
 
   return (
     <div className="">
@@ -63,7 +63,7 @@ export default function SightingsDetail() {
       <EditBut editData={sightingData} Form={SightingForm}>
         Edit
       </EditBut>
-      <DelBut id={sightingData.id} mutationFn={delSighting} />
+      <DelBut id={Number(sightingData.id)} mutationFn={delSighting} />
     </div>
   )
 }

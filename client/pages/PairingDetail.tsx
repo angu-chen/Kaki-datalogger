@@ -15,6 +15,7 @@ export default function PairingsDetail() {
   if (isError) return <h1> An error occurred loading pairing</h1>
 
   if (isLoading) return <h1> Looking for pairing</h1>
+  if (!pairingData) return <p> No Data</p>
 
   return (
     <div className="flex flex-col items-center">

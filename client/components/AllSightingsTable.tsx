@@ -13,7 +13,6 @@ export default function AllSightingsTable() {
   if (allSightings == undefined) {
     return <h1>No Sighting data</h1>
   }
-  console.log(allSightings[0].birdId)
 
   const keys = [
     'id',
