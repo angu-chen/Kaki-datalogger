@@ -1,4 +1,4 @@
-import { Pairing, UpdateSighting } from './kaki'
+import { Pairing, Sighting } from './kaki'
 
 export interface FormsProps {
   onClose: () => void
@@ -9,5 +9,5 @@ export interface PairingFormsProp extends FormsProps {
   editData?: Pairing
 }
 export interface SightingFormsProp extends FormsProps {
-  editData?: UpdateSighting
+  editData?: Sighting
 }

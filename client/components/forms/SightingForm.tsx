@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NewSighting } from '../../../models/kaki'
+import { SightingData } from '../../../models/kaki'
 import {
   useAddSightingMutation,
   useGetAllKaki,
@@ -12,7 +12,7 @@ export default function SightingForm({
   edit = false,
   editData,
 }: SightingFormsProp) {
-  const [formData, setFormData] = useState<NewSighting>({
+  const [formData, setFormData] = useState<SightingData>({
     band: '',
     date: '',
     area: '',
@@ -74,10 +74,12 @@ export default function SightingForm({
       return
     }
     if (edit && editData) {
+      console.log('edit data is ', editData)
       editSighting.mutate(
-        { ...formData, ['band']: editData.band },
+        { ...formData, ['band']: editData.band, id: editData.id },
         { onSuccess: () => onClose() },
       )
+      return
     }
 
     addSighting.mutate(formData, { onSuccess: () => onClose() })

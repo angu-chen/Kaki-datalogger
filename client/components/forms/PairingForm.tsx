@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Pairing, PairingData } from '../../../models/kaki'
+import { PairingData } from '../../../models/kaki'
 import {
   useAddPairingMutation,
   useGetAllKaki,
@@ -49,7 +49,6 @@ export default function PairingForm({
 
   if (isError) return <h1> An error occurred loading Kakis</h1>
   if (isLoading) return <h1> Gathering kakis</h1>
-  // console.log(allKakiData)
 
   const bandlist = allKakiData?.map((kaki) => kaki.band)
 
@@ -78,6 +77,7 @@ export default function PairingForm({
         { ...formData, ['id']: editData.id },
         { onSuccess: () => onClose() },
       )
+      return
     }
 
     addPairing.mutate(formData, { onSuccess: () => onClose() })

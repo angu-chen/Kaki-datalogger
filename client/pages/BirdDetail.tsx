@@ -14,6 +14,8 @@ function BirdDetail() {
 
   if (isLoading) return <h1> Looking for Kakī</h1>
 
+  console.log('kaki data is', kakiData)
+
   return (
     <div className="flex flex-col items-center gap-5">
       <div className="my-5">

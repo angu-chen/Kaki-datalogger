@@ -12,7 +12,6 @@ export default function AllPairingsTable() {
   if (allPairings == undefined) {
     return <h1>No pairing data</h1>
   }
-  console.log(allPairings)
 
   const keys = [
     'pairNo',
@@ -49,7 +48,7 @@ export default function AllPairingsTable() {
                   <th
                     key={`${key}${pairings.id}`}
                     className="hover:bg-green-300 cursor-pointer"
-                    onClick={() => navigate(`/pairings/${pairings.ID}`)}
+                    onClick={() => navigate(`/pairings/${pairings.id}`)}
                   >
                     {pairings[key]}
                   </th>

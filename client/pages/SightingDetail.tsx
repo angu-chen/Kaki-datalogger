@@ -19,7 +19,7 @@ export default function SightingsDetail() {
   if (isError) return <h1> An error occurred loading Kakī</h1>
 
   if (isLoading) return <h1> Looking for Kakī</h1>
-  console.log(sightingData)
+  console.log('sighting data is', sightingData)
 
   return (
     <div className="">

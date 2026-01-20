@@ -8,6 +8,9 @@ export default function DashBoard() {
   if (kakiQuery.isError) return <h1> an error occurred while loading</h1>
 
   if (kakiQuery.isLoading) return <h1> loading</h1>
+  if (!kakiQuery.data) {
+    return <p> No data</p>
+  }
 
   return (
     <div className="">

@@ -23,7 +23,7 @@ export interface KakiDash {
   area: string
 }
 
-export interface NewSighting {
+export interface SightingData {
   band: string
   date: string
   area: string
@@ -34,23 +34,9 @@ export interface NewSighting {
   notes: string
 }
 
-export interface UpdateSighting extends NewSighting {
-  id: number
-}
-
-export interface SightingData {
-  birdId: number | undefined
-  date: string
-  area: string
-  location: string
-  lat: number | undefined
-  lon: number | undefined
-  observer: string
-  notes: string
-}
-
 export interface Sighting extends SightingData {
-  id: number
+  id?: number
+  birdId?: number
 }
 
 export interface PairingData {
@@ -66,17 +52,6 @@ export interface PairingData {
 
 export interface Pairing extends PairingData {
   id: number
-  bird1Id: number
-  bird2Id: number
+  bird1Id?: number
+  bird2Id?: number
 }
-// {
-//     "birdId" : 2,
-//     "date" : "2025-12-25",
-//     "area" : "North Pole",
-//     "location": "Santas workshop",
-//     "lat": 0,
-//     "lon":0,
-//     "observer": "Angu",
-//     "notes": "I want a kaki for christmas"
-
-// }

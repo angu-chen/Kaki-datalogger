@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router'
 import { useGetAllSightings } from '../hooks/useKaki'
 import EditBut from './buttons/EditBut'
-import PairingForm from './forms/PairingForm'
+
 import SightingForm from './forms/SightingForm'
 
 export default function AllSightingsTable() {
@@ -13,7 +13,7 @@ export default function AllSightingsTable() {
   if (allSightings == undefined) {
     return <h1>No Sighting data</h1>
   }
-  console.log(allSightings)
+  console.log(allSightings[0].birdId)
 
   const keys = [
     'id',
@@ -62,7 +62,7 @@ export default function AllSightingsTable() {
                   <th
                     key={`${key}${sighting.id}`}
                     className="hover:bg-blue-300 cursor-pointer"
-                    onClick={() => navigate(`/${sighting.bird1Id}`)}
+                    onClick={() => navigate(`/${sighting.birdId}`)}
                   >
                     {sighting[key]}
                   </th>
