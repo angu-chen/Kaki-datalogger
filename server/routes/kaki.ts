@@ -18,7 +18,6 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/pairings', async (req, res) => {
-  console.log('getting pairings')
   try {
     const allPairings = await db.getAllPairings()
     console.log(allPairings)
@@ -26,6 +25,18 @@ router.get('/pairings', async (req, res) => {
   } catch (error) {
     console.error(
       error instanceof Error ? error.message : 'Error retrieving pairings',
+    )
+    res.status(500).json({ message: 'error something went terribly wrong' })
+  }
+})
+router.get('/sightings', async (req, res) => {
+  try {
+    const allSightings = await db.getAllSightings()
+    console.log(allSightings)
+    res.json(allSightings)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'Error retrieving sightings',
     )
     res.status(500).json({ message: 'error something went terribly wrong' })
   }

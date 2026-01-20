@@ -11,6 +11,7 @@ import {
   delSighting,
   getAllKaki,
   getAllPairings,
+  getAllSightings,
   getKakiDash,
   getKakiDetail,
   getKakiPairings,
@@ -36,6 +37,14 @@ export function useGetAllPairings() {
   const query = useQuery({
     queryKey: queryKeys.pairings.all,
     queryFn: () => getAllPairings(),
+  })
+  return { ...query }
+}
+
+export function useGetAllSightings() {
+  const query = useQuery({
+    queryKey: queryKeys.sightings.all,
+    queryFn: () => getAllSightings(),
   })
   return { ...query }
 }

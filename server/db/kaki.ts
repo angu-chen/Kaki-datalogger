@@ -164,6 +164,23 @@ export async function getAllPairings() {
   return kakiPairings
 }
 
+export async function getAllSightings() {
+  const kakiSightings = await db('sightings')
+    .leftJoin('kaki', 'sightings.bird_id', 'kaki.id')
+    .select(
+      'sightings.id as id',
+      'sightings.bird_id as birdId',
+      'kaki.band as band',
+      'sightings.date',
+      'sightings.area as area',
+      'sightings.location as location',
+      'sightings.lat as lat',
+      'sightings.lon as lon',
+      'sightings.observer as observer',
+      'sightings.notes as notes',
+    )
+  return kakiSightings
+}
 export async function getPairing(id: number) {
   const pairing = await db('pairings')
     .where('pairings.id', id)

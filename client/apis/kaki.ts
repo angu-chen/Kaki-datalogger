@@ -1,11 +1,5 @@
 import request from 'superagent'
-import {
-  Kaki,
-  NewSighting,
-  Pairing,
-  PairingData,
-  SightingData,
-} from '../../models/kaki'
+import { Kaki, NewSighting, Pairing, PairingData } from '../../models/kaki'
 
 const rootURL = new URL(`/api/v1`, document.baseURI)
 
@@ -39,6 +33,11 @@ export async function getKakiPairings(id: number) {
 
 export async function getSighting(id: string) {
   const res = await request.get(`${rootURL}/kaki/sightings/${id}`)
+  return res.body
+}
+
+export async function getAllSightings() {
+  const res = await request.get(`${rootURL}/kaki/sightings/`)
   return res.body
 }
 

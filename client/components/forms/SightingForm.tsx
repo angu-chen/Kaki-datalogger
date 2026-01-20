@@ -86,8 +86,7 @@ export default function SightingForm({
   return (
     <div className="">
       <h1 className="mb-5 font-semibold text-lg text-center">
-        {' '}
-        New Sighting Form
+        {edit ? 'Edit Sighting' : 'New Sighting'}
       </h1>
       <form className="flex flex-col gap-4 my-5" onSubmit={handleSubmit}>
         <div className="flex flex-col">

@@ -8,6 +8,9 @@ export default function Nav() {
         <li>
           <a href="/pairings">Pairings</a>
         </li>
+        <li>
+          <a href="/sightings">Sightings</a>
+        </li>
       </ul>
     </nav>
   )
