@@ -11,16 +11,18 @@ export interface Kaki extends KakiData {
 }
 
 export interface KakiDash {
-  ID: number
-  Band: string
-  Status: string
-  'Htch Yr': number
-  'Obs.': string
-  Sighting: string
+  id: number
+  band: string
+  status: string
+  hatchYr: number
+  observer: string
+  date: Date
   notes: string
   sightingId: string
   location: string
   area: string
+  lat: number
+  lon: number
 }
 
 export interface SightingData {

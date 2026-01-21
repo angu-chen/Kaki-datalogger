@@ -8,10 +8,10 @@ import {
 } from '../../models/kaki.ts'
 
 const kakiSelect = [
-  'id as ID',
-  'band as Band',
-  'status as Status',
-  'hatch_yr as Htch Yr',
+  'id as id',
+  'band as band',
+  'status as status',
+  'hatch_yr as hatchYr',
 ]
 
 const SightingsSelect = [
@@ -63,6 +63,8 @@ export async function getKakiDash() {
           'sightings.id as sighting_id',
           'location',
           'area',
+          'lat',
+          'lon',
         )
         .max('date as latest_sighting')
         .groupBy('bird_id')
@@ -74,9 +76,11 @@ export async function getKakiDash() {
       ...kakiSelect,
       'latest_sightings.area',
       'latest_sightings.location',
-      'latest_sightings.observer as Obs.',
-      'latest_sightings.latest_sighting as Sighting',
+      'latest_sightings.observer as observer',
+      'latest_sightings.latest_sighting as date',
       'latest_sightings.notes',
+      'latest_sightings.lat',
+      'latest_sightings.lon',
       'latest_sightings.sighting_id as sightingId',
     )
     .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last

@@ -1,6 +1,7 @@
 import { useKakiDash } from '../hooks/useKaki'
 
 import KakiTable from './KakiTable'
+import { Map } from './Map'
 
 export default function DashBoard() {
   const kakiQuery = useKakiDash()
@@ -14,6 +15,7 @@ export default function DashBoard() {
 
   return (
     <div className="">
+      <Map dashSightings={kakiQuery.data} />
       <h1 className="text-4xl my-5 font-semibold">Latest Sightings</h1>
       <KakiTable kaki={kakiQuery.data} />
     </div>

@@ -7,13 +7,13 @@ interface Props {
 export default function KakiTable({ kaki }: Props) {
   const navigate = useNavigate()
   const kakiKeys = [
-    'Band',
-    'Htch Yr',
-    'Obs.',
-    'Sighting',
-    'Status',
-    'area',
+    'band',
+    'status',
+    'hatchYr',
+    'observer',
+    'date',
     'location',
+    'area',
     'notes',
   ]
 
@@ -27,34 +27,33 @@ export default function KakiTable({ kaki }: Props) {
         </tr>
 
         {kaki.map((bird) => (
-          <tr key={bird.ID}>
+          <tr key={bird.id}>
             {kakiKeys.map((key) => {
-              if (key === 'Band') {
+              if (key === 'band') {
                 return (
                   <th
                     className="cursor-pointer hover:text-B"
-                    onClick={() => navigate(`/${bird.ID}`)}
-                    key={`${bird.ID}${key}`}
+                    onClick={() => navigate(`/${bird.id}`)}
+                    key={`${bird.id}${key}`}
                   >
                     {bird[key]}
                   </th>
                 )
               }
-              if (key === 'Sighting') {
-                if (!bird[key]) return <th key={`${bird.ID}${key}`}>N/A</th>
+              if (key === 'date') {
+                if (!bird[key]) return <th key={`${bird.id}${key}`}>N/A</th>
                 return (
                   <th
                     className="cursor-pointer hover:text-amber-300"
                     key={`${bird}${key}`}
                     onClick={() => navigate(`/sightings/${bird.sightingId}`)}
                   >
-                    {' '}
-                    {bird[key]}
+                    {`${bird[key]}`}
                   </th>
                 )
               } else {
-                if (!bird[key]) return <th key={`${bird.ID}${key}`}>N/A</th>
-                return <th key={`${bird.ID}${key}`}>{bird[key]}</th>
+                if (!bird[key]) return <th key={`${bird.id}${key}`}>N/A</th>
+                return <th key={`${bird.id}${key}`}>{`${bird[key]}`}</th>
               }
             })}
           </tr>
