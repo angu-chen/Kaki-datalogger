@@ -24,7 +24,9 @@ export default function KakiTable({ kaki, setSel, sel }: Props) {
       <tbody>
         <tr>
           {kakiKeys.map((key) => (
-            <th key={key}>{key} </th>
+            <th className="top-0 sticky bg-gray-300" key={key}>
+              {key.toUpperCase()}
+            </th>
           ))}
         </tr>
 
@@ -38,7 +40,7 @@ export default function KakiTable({ kaki, setSel, sel }: Props) {
               if (key === 'band') {
                 return (
                   <th
-                    className="cursor-pointer hover:text-B"
+                    className="cursor-pointer right-0 sticky hover:text-B"
                     onClick={() => navigate(`/${bird.id}`)}
                     key={`${bird.id}${key}`}
                   >
