@@ -8,7 +8,9 @@ import { Map } from '../components/Map.tsx'
 function App() {
   return (
     <div className="flex flex-col items-center">
-      <Map />
+      <div className="w-1/2">
+        <Map />
+      </div>
 
       <div className="w-4/5 my-2 overflow-scroll h-1/2">
         <DashBoard />
