@@ -3,8 +3,10 @@ import { KakiDash } from '../../models/kaki'
 
 interface Props {
   kaki: KakiDash[]
+  setSel: React.Dispatch<React.SetStateAction<number>>
+  sel: number
 }
-export default function KakiTable({ kaki }: Props) {
+export default function KakiTable({ kaki, setSel, sel }: Props) {
   const navigate = useNavigate()
   const kakiKeys = [
     'band',
@@ -18,7 +20,7 @@ export default function KakiTable({ kaki }: Props) {
   ]
 
   return (
-    <table>
+    <table className="text-sm">
       <tbody>
         <tr>
           {kakiKeys.map((key) => (
@@ -27,7 +29,11 @@ export default function KakiTable({ kaki }: Props) {
         </tr>
 
         {kaki.map((bird) => (
-          <tr key={bird.id}>
+          <tr
+            key={bird.id}
+            onClick={() => setSel(bird.id)}
+            className={`${sel === bird.id ? 'bg-green-500' : 'bg-gray-50'}`}
+          >
             {kakiKeys.map((key) => {
               if (key === 'band') {
                 return (
