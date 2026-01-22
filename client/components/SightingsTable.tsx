@@ -2,17 +2,16 @@ import { useNavigate } from 'react-router'
 import { useSightings } from '../hooks/useKaki'
 import SightingForm from './forms/SightingForm'
 import EditBut from './buttons/EditBut'
-import { Sighting } from '../../models/kaki'
 import { Map } from './maps/Map'
 import { useState } from 'react'
 
 interface Props {
   birdId: string
   showMap: boolean
-  setShowMap: React.Dispatch<React.SetStateAction<boolean>>
+  // setShowMap?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function KakiSightings({ birdId, showMap, setShowMap }: Props) {
+export default function KakiSightings({ birdId, showMap }: Props) {
   const navigate = useNavigate()
   const [sel, setSel] = useState(0)
   const { data: kakiSightings, isError, isLoading } = useSightings(birdId)
@@ -35,10 +34,11 @@ export default function KakiSightings({ birdId, showMap, setShowMap }: Props) {
   return (
     <div className="flex gap-3">
       <div className={`${showMap ? 'w-1/2 ' : ' w-0 h-0 overflow-hidden'}`}>
-        <p>{sel}</p>
         <Map data={mapData} setSel={setSel} sel={sel} />{' '}
       </div>
-      <div className={`${showMap ? 'w-1/2' : 'w-full'}`}>
+      <div
+        className={`${showMap ? 'w-1/2' : 'w-full'} overflow-scroll text-sm`}
+      >
         <table>
           <thead>
             <tr>
@@ -55,7 +55,7 @@ export default function KakiSightings({ birdId, showMap, setShowMap }: Props) {
               <tr
                 key={sighting.id}
                 onClick={() => setSel(sighting.id)}
-                className=""
+                className={`${sel === sighting.id ? 'bg-green-500' : ''}`}
               >
                 <th>
                   {' '}

@@ -11,6 +11,7 @@ import { useState } from 'react'
 function BirdDetail() {
   const params = useParams()
   const [sightingMap, setSightingMap] = useState(false)
+  const [pairingMap, setPairingMap] = useState(false)
   const { data: kakiData, isError, isLoading } = useKaki(Number(params.id))
 
   if (isError) return <h1> An error occurred loading Kakī</h1>
@@ -56,19 +57,23 @@ function BirdDetail() {
           </button>
         </div>
         <div>
-          <KakiSightings
-            birdId={params.id as string}
-            showMap={sightingMap}
-            setShowMap={setSightingMap}
-          />
+          <KakiSightings birdId={params.id as string} showMap={sightingMap} />
         </div>
       </div>
       <div className="w-4/5 p-5 border shadow-2xl rounded-2xl">
         <h1 className="text-4xl font-semibold  mb-5">Pairings</h1>
-        <AddBut Form={PairingForm}>
-          <p>Add Pairing</p>
-        </AddBut>
-        <KakiPairings birdId={params.id as string} />
+        <div className="flex gap-3 m-3">
+          <AddBut Form={PairingForm}>
+            <p>Add Pairing</p>
+          </AddBut>
+          <button
+            className="  hover:border px-1 py-1 cursor-pointer shadlow-lg font-semibold"
+            onClick={() => setPairingMap(!pairingMap)}
+          >
+            <MapIcon />
+          </button>
+        </div>
+        <KakiPairings birdId={params.id as string} showMap={pairingMap} />
       </div>
     </div>
   )
