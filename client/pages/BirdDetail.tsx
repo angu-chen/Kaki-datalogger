@@ -5,9 +5,11 @@ import KakiPairings from '../components/PairingTable'
 import AddBut from '../components/buttons/AddBut'
 import PairingForm from '../components/forms/PairingForm'
 import SightingForm from '../components/forms/SightingForm'
+import { useState } from 'react'
 
 function BirdDetail() {
   const params = useParams()
+  const [sightingMap, setSightingMap] = useState(false)
   const { data: kakiData, isError, isLoading } = useKaki(Number(params.id))
 
   if (isError) return <h1> An error occurred loading Kakī</h1>
@@ -44,7 +46,14 @@ function BirdDetail() {
         <AddBut Form={SightingForm}>
           <p>Add Sighting</p>
         </AddBut>
-        <KakiSightings birdId={params.id as string} />
+        <button onClick={() => setSightingMap(!sightingMap)}>Map</button>
+        <div>
+          <KakiSightings
+            birdId={params.id as string}
+            showMap={sightingMap}
+            setShowMap={setSightingMap}
+          />
+        </div>
       </div>
       <div className="w-4/5 p-5 border shadow-2xl rounded-2xl">
         <h1 className="text-4xl font-semibold  mb-5">Pairings</h1>

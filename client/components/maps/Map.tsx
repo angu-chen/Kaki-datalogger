@@ -1,7 +1,14 @@
-import { CircleMarker, MapContainer, Popup, TileLayer } from 'react-leaflet'
+import {
+  CircleMarker,
+  MapContainer,
+  Popup,
+  TileLayer,
+  useMap,
+} from 'react-leaflet'
 
 import { nztmToLatLng } from './nztm'
 import { Rowing } from '@mui/icons-material'
+import { useEffect } from 'react'
 
 const linzAPIKey = import.meta.env.VITE_LINZ_API as string
 
@@ -9,12 +16,26 @@ interface MapProps {
   data: { id: number; x: number; y: number; msg: string }[]
   sel: number
   setSel: React.Dispatch<React.SetStateAction<number>>
+  showMap?: boolean
 }
 
-export function Map({ data, sel, setSel }: MapProps) {
+export function Map({ data, sel, setSel, showMap = true }: MapProps) {
   if (!data.length) {
     return <div className="h-96 w-full">No map data available</div>
   }
+
+  function ResizeFix({ showMap }: { showMap: boolean }) {
+    const map = useMap()
+
+    useEffect(() => {
+      if (showMap) {
+        map.invalidateSize()
+      }
+    }, [showMap, map])
+
+    return null
+  }
+
   const firstData = data[0]
 
   return (
@@ -25,6 +46,8 @@ export function Map({ data, sel, setSel }: MapProps) {
         zoom={9}
         scrollWheelZoom={true}
       >
+        <ResizeFix showMap={showMap} />
+
         <TileLayer
           attribution='&copy; <a href="https://www.linz.govt.nz/">Images sourced from LINZ</a>'
           url={`https://basemaps.linz.govt.nz/v1/tiles/topo-raster/WebMercatorQuad/{z}/{x}/{y}.webp?api=${linzAPIKey}`}
