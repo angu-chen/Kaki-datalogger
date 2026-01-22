@@ -4,6 +4,8 @@ node_modules
 # Logs
 *.log
 
+#todo list
+Todo.md
 # SQLite DBs
 *.sqlite3
 

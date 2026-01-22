@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useKakiDash } from '../hooks/useKaki'
 
 import KakiTable from './KakiTable'
-import { DashMap } from './maps/DashMap'
+
 import AddBut from './buttons/AddBut'
 import SightingForm from './forms/SightingForm'
 import { Map } from './maps/Map'
