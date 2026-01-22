@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { useKakiDash } from '../hooks/useKaki'
 
 import KakiTable from './KakiTable'
-import { Map } from './Map'
+import { DashMap } from './maps/DashMap'
 import AddBut from './buttons/AddBut'
 import SightingForm from './forms/SightingForm'
+import { Map } from './maps/Map'
 
 export default function DashBoard() {
   const [sel, setSel] = useState(0)
@@ -17,6 +18,15 @@ export default function DashBoard() {
     return <p> No data</p>
   }
 
+  const mapData = kakiQuery.data.map((kaki) => {
+    return {
+      id: kaki.id,
+      x: kaki.x,
+      y: kaki.y,
+      msg: `Kakī ${kaki.band} was seen at ${kaki.location} by ${kaki.observer}. Notes: ${kaki.notes}`,
+    }
+  })
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-4xl my-5 font-semibold">Latest Sightings</h1>
@@ -27,7 +37,8 @@ export default function DashBoard() {
               <p>Add Sighting</p>
             </AddBut>
           </div>
-          <Map sel={sel} dashSightings={kakiQuery.data} />
+          {/* <DashMap sel={sel} dashSightings={kakiQuery.data} /> */}
+          <Map sel={sel} data={mapData} />
         </div>
         <div className="w-1/2 overflow-scroll">
           <KakiTable sel={sel} setSel={setSel} kaki={kakiQuery.data} />

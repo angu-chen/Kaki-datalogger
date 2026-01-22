@@ -131,6 +131,7 @@ export async function getAllPairings() {
     .leftJoin('kaki as bird2', 'pairings.bird2_id', 'bird2.id')
 
     .select(...PairingsSelect)
+    .orderBy('pairings.year', 'desc')
 
   return kakiPairings as Pairing[]
 }

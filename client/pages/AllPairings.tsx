@@ -9,7 +9,7 @@ export function AllPairings() {
       <AddBut Form={PairingForm}>
         <p>New Pairing</p>
       </AddBut>
-      <div className="w-4/5 my-2 overflow-scroll h-2/3">
+      <div className="w-5/6 my-2 h-2/3">
         <AllPairingsTable />
       </div>
     </div>

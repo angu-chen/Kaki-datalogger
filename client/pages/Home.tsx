@@ -3,7 +3,7 @@ import DashBoard from '../components/Dashboard.tsx'
 import SightingForm from '../components/forms/SightingForm.tsx'
 
 import AddBut from '../components/buttons/AddBut.tsx'
-import { Map } from '../components/Map.tsx'
+import { Map } from '../components/maps/DashMap.tsx'
 
 function App() {
   return (

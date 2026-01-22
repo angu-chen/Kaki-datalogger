@@ -1,43 +1,39 @@
 import { CircleMarker, MapContainer, Popup, TileLayer } from 'react-leaflet'
-import { KakiDash } from '../../models/kaki'
-import { nztmToLatLng } from './maps/nztm'
+
+import { nztmToLatLng } from './nztm'
 
 const linzAPIKey = import.meta.env.VITE_LINZ_API as string
 
 interface MapProps {
-  dashSightings: KakiDash[]
+  data: { id: number; x: number; y: number; msg: string }[]
   sel: number
 }
 
-export function Map({ dashSightings, sel }: MapProps) {
-  if (!dashSightings.length) {
-    return <div className="h-96 w-full">No sightings available</div>
+export function Map({ data, sel }: MapProps) {
+  if (!data.length) {
+    return <div className="h-96 w-full">No map data available</div>
   }
-
-  const wellington = [1570636.6812821033, 5180040.614730678] //NZTM
-  const latestSighting = dashSightings[0]
+  const firstData = data[0]
   return (
     <div>
       <MapContainer
         className="h-96 w-full"
-        center={nztmToLatLng(latestSighting.x, latestSighting.y)}
-        // center={nztmToLatLng(wellington[0], wellington[1])}
+        center={nztmToLatLng(firstData.x, firstData.y)}
         zoom={9}
         scrollWheelZoom={true}
       >
         <TileLayer
-          // Note that the API key might need changing once it is no longer valid. This is currently a standard key
           attribution='&copy; <a href="https://www.linz.govt.nz/">Images sourced from LINZ</a>'
           url={`https://basemaps.linz.govt.nz/v1/tiles/topo-raster/WebMercatorQuad/{z}/{x}/{y}.webp?api=${linzAPIKey}`}
         />
 
-        {dashSightings.map((sighting) => {
-          if (sighting.x === null || sighting.y === null) {
+        {data.map((point) => {
+          if (point.x === null || point.y === null) {
             return null
           }
 
-          const isSelected = sighting.id === sel
-          const isLatest = sighting.id === latestSighting.id
+          const isSelected = point.id === sel
+          const isLatest = point.id === firstData.id
 
           const color = isSelected ? 'green' : isLatest ? 'red' : 'blue'
           const radius = isSelected ? 12 : isLatest ? 10 : 8
@@ -45,13 +41,11 @@ export function Map({ dashSightings, sel }: MapProps) {
           return (
             <CircleMarker
               pathOptions={{ color }}
-              key={sighting.id}
+              key={point.id}
               radius={radius}
-              center={nztmToLatLng(sighting.x, sighting.y)}
+              center={nztmToLatLng(point.x, point.y)}
             >
-              <Popup>
-                {`${sighting.band}, Kakī was seen here by ${sighting.observer} on ${sighting.date}`}
-              </Popup>
+              <Popup>{point.msg}</Popup>
             </CircleMarker>
           )
         })}

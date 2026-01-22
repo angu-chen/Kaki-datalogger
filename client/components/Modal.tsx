@@ -10,7 +10,7 @@ export default function Modal({ isOpen, onClose, children }: Props) {
   if (!isOpen) return null
 
   return (
-    <div className="inset-0 fixed z-50 ">
+    <div className="inset-0 fixed z-2000 ">
       <div className="bg-gray-500 opacity-50 absolute inset-0 "></div>
       <div className="relative z-10 flex items-center justify-center h-full ">
         <div className="flex flex-col bg-gray-100 max-h-[90vh] rounded-2xl">
