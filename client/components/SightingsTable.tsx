@@ -17,16 +17,7 @@ export default function KakiSightings({ birdId }: Props) {
     return <h1> No Sightings</h1>
   }
 
-  const keys = [
-    'id',
-    'date',
-    'area',
-    'location',
-    'lat',
-    'lon',
-    'observer',
-    'notes',
-  ]
+  const keys = ['id', 'date', 'area', 'location', 'x', 'y', 'observer', 'notes']
 
   return (
     <table>

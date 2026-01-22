@@ -20,8 +20,8 @@ export default function AllPairingsTable() {
     'bird2Band',
     'treatment',
     'location',
-    'lat',
-    'lon',
+    'x',
+    'y',
   ]
   return (
     <table>

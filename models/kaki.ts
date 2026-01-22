@@ -21,8 +21,8 @@ export interface KakiDash {
   sightingId: string
   location: string
   area: string
-  lat: number
-  lon: number
+  x: number
+  y: number
 }
 
 export interface SightingData {
@@ -30,8 +30,8 @@ export interface SightingData {
   date: string
   area: string
   location: string
-  lat: number | null
-  lon: number | null
+  x: number | null
+  y: number | null
   observer: string
   notes: string
 }
@@ -48,8 +48,8 @@ export interface PairingData {
   bird2Band: string
   location: string
   treatment: string
-  lon: number | null
-  lat: number | null
+  y: number | null
+  x: number | null
 }
 
 export interface Pairing extends PairingData {

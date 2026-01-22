@@ -19,8 +19,8 @@ const SightingsSelect = [
   'kaki.band as band',
   'bird_id as birdId',
   'observer',
-  'lat',
-  'lon',
+  'x',
+  'y',
   'notes',
   'sightings.id as id',
   'location',
@@ -36,8 +36,8 @@ const PairingsSelect = [
   'bird2.band as bird2Band',
   'pairings.location',
   'pairings.treatment',
-  'pairings.lon',
-  'pairings.lat',
+  'pairings.y',
+  'pairings.x',
 ]
 
 export async function getAllKaki(): Promise<Kaki[]> {
@@ -63,8 +63,8 @@ export async function getKakiDash() {
           'sightings.id as sighting_id',
           'location',
           'area',
-          'lat',
-          'lon',
+          'x',
+          'y',
         )
         .max('date as latest_sighting')
         .groupBy('bird_id')
@@ -79,8 +79,8 @@ export async function getKakiDash() {
       'latest_sightings.observer as observer',
       'latest_sightings.latest_sighting as date',
       'latest_sightings.notes',
-      'latest_sightings.lat',
-      'latest_sightings.lon',
+      'latest_sightings.x',
+      'latest_sightings.y',
       'latest_sightings.sighting_id as sightingId',
     )
     .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last
@@ -175,8 +175,8 @@ export async function updatePairing(pairing: Pairing) {
     bird2_id: kaki2.id,
     location: pairing.location,
     treatment: pairing.treatment,
-    lon: pairing.lon,
-    lat: pairing.lat,
+    y: pairing.y,
+    x: pairing.x,
   })
   return res
 }
@@ -206,8 +206,8 @@ export async function addPairing(pairing: PairingData) {
       bird2_id: bird2.id,
       location: pairing.location,
       treatment: pairing.treatment,
-      lon: pairing.lon,
-      lat: pairing.lat,
+      y: pairing.y,
+      x: pairing.x,
     })
     .returning('pairings.id')
   return newPairing[0] as Pairing
@@ -252,8 +252,8 @@ export async function updateSighting(sighting: Sighting) {
     date: sighting.date,
     area: sighting.area,
     location: sighting.location,
-    lat: sighting.lat,
-    lon: sighting.lon,
+    x: sighting.x,
+    y: sighting.y,
     observer: sighting.observer,
     notes: sighting.notes,
   })
@@ -276,8 +276,8 @@ export async function addSighting(newSighting: SightingData) {
       date: newSighting.date,
       area: newSighting.area,
       location: newSighting.location,
-      lat: newSighting.lat,
-      lon: newSighting.lon,
+      x: newSighting.x,
+      y: newSighting.y,
       observer: newSighting.observer,
       notes: newSighting.notes,
     })

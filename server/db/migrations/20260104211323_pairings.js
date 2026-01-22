@@ -11,8 +11,8 @@ export function up(knex) {
     table.integer('bird2_id')
     table.string('location')
     table.string('treatment')
-    table.integer('lon')
-    table.integer('lat')
+    table.integer('x')
+    table.integer('y')
   })
 }
 

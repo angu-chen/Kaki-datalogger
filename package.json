@@ -36,6 +36,8 @@
     "express": "^4.17.2",
     "knex": "^2.5.1",
     "leaflet": "^1.9.4",
+    "proj4": "^2.20.2",
+    "proj4leaflet": "^1.0.2",
     "react-leaflet": "^4.2.1",
     "slim-select": "^3.3.0",
     "sqlite3": "^5.1.6",

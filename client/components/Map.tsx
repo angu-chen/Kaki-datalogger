@@ -1,5 +1,6 @@
 import { CircleMarker, MapContainer, Popup, TileLayer } from 'react-leaflet'
 import { KakiDash } from '../../models/kaki'
+import { nztmToLatLng } from './maps/nztm'
 
 const linzAPIKey = import.meta.env.VITE_LINZ_API as string
 
@@ -9,16 +10,18 @@ interface MapProps {
 }
 
 export function Map({ dashSightings, sel }: MapProps) {
-  console.log(dashSightings)
   if (!dashSightings.length) {
     return <div className="h-96 w-full">No sightings available</div>
   }
+
+  const wellington = [1570636.6812821033, 5180040.614730678] //NZTM
   const latestSighting = dashSightings[0]
   return (
     <div>
       <MapContainer
         className="h-96 w-full"
-        center={[latestSighting.lat, latestSighting.lon]}
+        center={nztmToLatLng(latestSighting.x, latestSighting.y)}
+        // center={nztmToLatLng(wellington[0], wellington[1])}
         zoom={9}
         scrollWheelZoom={true}
       >
@@ -29,7 +32,7 @@ export function Map({ dashSightings, sel }: MapProps) {
         />
 
         {dashSightings.map((sighting) => {
-          if (sighting.lat === null || sighting.lon === null) {
+          if (sighting.x === null || sighting.y === null) {
             return null
           }
 
@@ -44,7 +47,7 @@ export function Map({ dashSightings, sel }: MapProps) {
               pathOptions={{ color }}
               key={sighting.id}
               radius={radius}
-              center={[sighting.lat, sighting.lon]}
+              center={nztmToLatLng(sighting.x, sighting.y)}
             >
               <Popup>
                 {`${sighting.band}, Kakī was seen here by ${sighting.observer} on ${sighting.date}`}

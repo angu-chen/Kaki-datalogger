@@ -24,8 +24,8 @@ export default function KakiPairings({ birdId }: Props) {
     'bird2Band',
     'treatment',
     'location',
-    'lat',
-    'lon',
+    'x',
+    'y',
   ]
 
   return (

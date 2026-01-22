@@ -20,8 +20,8 @@ export default function AllSightingsTable() {
     'date',
     'area',
     'location',
-    'lat',
-    'lon',
+    'x',
+    'y',
     'observer',
     'notes',
   ]
