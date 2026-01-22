@@ -1,19 +1,22 @@
 import { CircleMarker, MapContainer, Popup, TileLayer } from 'react-leaflet'
 
 import { nztmToLatLng } from './nztm'
+import { Rowing } from '@mui/icons-material'
 
 const linzAPIKey = import.meta.env.VITE_LINZ_API as string
 
 interface MapProps {
   data: { id: number; x: number; y: number; msg: string }[]
   sel: number
+  setSel: React.Dispatch<React.SetStateAction<number>>
 }
 
-export function Map({ data, sel }: MapProps) {
+export function Map({ data, sel, setSel }: MapProps) {
   if (!data.length) {
     return <div className="h-96 w-full">No map data available</div>
   }
   const firstData = data[0]
+
   return (
     <div>
       <MapContainer
@@ -40,6 +43,9 @@ export function Map({ data, sel }: MapProps) {
 
           return (
             <CircleMarker
+              eventHandlers={{
+                click: () => setSel(point.id),
+              }}
               pathOptions={{ color }}
               key={point.id}
               radius={radius}

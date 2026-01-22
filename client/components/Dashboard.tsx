@@ -38,7 +38,7 @@ export default function DashBoard() {
             </AddBut>
           </div>
           {/* <DashMap sel={sel} dashSightings={kakiQuery.data} /> */}
-          <Map sel={sel} data={mapData} />
+          <Map sel={sel} setSel={setSel} data={mapData} />
         </div>
         <div className="w-1/2 overflow-scroll">
           <KakiTable sel={sel} setSel={setSel} kaki={kakiQuery.data} />

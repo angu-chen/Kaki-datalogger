@@ -38,7 +38,7 @@ export default function AllPairingsTable() {
   return (
     <div className=" flex gap-3">
       <div className="w-1/2">
-        <Map data={mapData} sel={sel} />
+        <Map data={mapData} setSel={setSel} sel={sel} />
       </div>
       <div className="w-1/2 overflow-scroll">
         <table className="text-sm">
