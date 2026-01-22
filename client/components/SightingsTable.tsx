@@ -35,6 +35,7 @@ export default function KakiSightings({ birdId, showMap, setShowMap }: Props) {
   return (
     <div className="flex gap-3">
       <div className={`${showMap ? 'w-1/2 ' : ' w-0 h-0 overflow-hidden'}`}>
+        <p>{sel}</p>
         <Map data={mapData} setSel={setSel} sel={sel} />{' '}
       </div>
       <div className={`${showMap ? 'w-1/2' : 'w-full'}`}>
@@ -51,7 +52,11 @@ export default function KakiSightings({ birdId, showMap, setShowMap }: Props) {
           </thead>
           <tbody>
             {kakiSightings.map((sighting) => (
-              <tr key={sighting.id} className="">
+              <tr
+                key={sighting.id}
+                onClick={() => setSel(sighting.id)}
+                className=""
+              >
                 <th>
                   {' '}
                   <EditBut Form={SightingForm} editData={sighting} />

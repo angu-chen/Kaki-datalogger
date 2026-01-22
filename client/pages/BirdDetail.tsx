@@ -5,6 +5,7 @@ import KakiPairings from '../components/PairingTable'
 import AddBut from '../components/buttons/AddBut'
 import PairingForm from '../components/forms/PairingForm'
 import SightingForm from '../components/forms/SightingForm'
+import MapIcon from '@mui/icons-material/Map'
 import { useState } from 'react'
 
 function BirdDetail() {
@@ -43,10 +44,17 @@ function BirdDetail() {
 
       <div className="w-4/5 p-5 border shadow-2xl rounded-2xl">
         <h1 className="text-4xl font-semibold  mb-5">Sightings</h1>
-        <AddBut Form={SightingForm}>
-          <p>Add Sighting</p>
-        </AddBut>
-        <button onClick={() => setSightingMap(!sightingMap)}>Map</button>
+        <div className="flex gap-3 m-3">
+          <AddBut Form={SightingForm}>
+            <p>Add Sighting</p>
+          </AddBut>
+          <button
+            className="  hover:border px-1 py-1 cursor-pointer shadlow-lg font-semibold"
+            onClick={() => setSightingMap(!sightingMap)}
+          >
+            <MapIcon />
+          </button>
+        </div>
         <div>
           <KakiSightings
             birdId={params.id as string}

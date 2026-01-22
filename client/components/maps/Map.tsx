@@ -7,14 +7,13 @@ import {
 } from 'react-leaflet'
 
 import { nztmToLatLng } from './nztm'
-import { Rowing } from '@mui/icons-material'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const linzAPIKey = import.meta.env.VITE_LINZ_API as string
 
 interface MapProps {
   data: { id: number; x: number; y: number; msg: string }[]
-  sel: number
+  sel: number | null
   setSel: React.Dispatch<React.SetStateAction<number>>
   showMap?: boolean
 }
@@ -36,6 +35,24 @@ export function Map({ data, sel, setSel, showMap = true }: MapProps) {
     return null
   }
 
+  function ReFocus({
+    sel,
+    data,
+  }: {
+    sel: number | null
+    data: MapProps['data']
+  }) {
+    const map = useMap()
+
+    useEffect(() => {
+      const point = data.find((p) => p.id === sel)
+      if (!point) return
+      map.flyTo(nztmToLatLng(point.x, point.y))
+      map.getZoom
+    }, [sel, data, map])
+
+    return null
+  }
   const firstData = data[0]
 
   return (
@@ -47,6 +64,7 @@ export function Map({ data, sel, setSel, showMap = true }: MapProps) {
         scrollWheelZoom={true}
       >
         <ResizeFix showMap={showMap} />
+        <ReFocus sel={sel} data={data} />
 
         <TileLayer
           attribution='&copy; <a href="https://www.linz.govt.nz/">Images sourced from LINZ</a>'
@@ -67,7 +85,9 @@ export function Map({ data, sel, setSel, showMap = true }: MapProps) {
           return (
             <CircleMarker
               eventHandlers={{
-                click: () => setSel(point.id),
+                click: () => {
+                  setSel(point.id)
+                },
               }}
               pathOptions={{ color }}
               key={point.id}

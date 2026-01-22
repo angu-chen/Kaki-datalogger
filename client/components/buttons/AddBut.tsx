@@ -21,7 +21,7 @@ export default function AddBut({ children, Form }: Props) {
         onClick={handleClick}
         className={
           children
-            ? `border bg-green-600 rounded-sm px-3 py-1 hover:bg-green-800 shadow-lg cursor-pointer`
+            ? `border bg-green-600 font-semibold rounded-sm px-3 py-1 hover:bg-green-800 shadow-lg cursor-pointer`
             : ''
         }
       >
