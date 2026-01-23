@@ -44,12 +44,12 @@ export default function SightingsDetail() {
           <p>{sightingData.location}</p>
         </div>
         <div>
-          <h3 className="font-semibold text-sm">Latitude</h3>
-          <p>{sightingData.lat}</p>
+          <h3 className="font-semibold text-sm">Easting</h3>
+          <p>{sightingData.x}</p>
         </div>
         <div>
-          <h3 className="font-semibold text-sm">Longitude</h3>
-          <p>{sightingData.lon}</p>
+          <h3 className="font-semibold text-sm">Northing</h3>
+          <p>{sightingData.y}</p>
         </div>
         <div>
           <h3 className="font-semibold text-sm">Observer</h3>

@@ -13,12 +13,12 @@ const linzAPIKey = import.meta.env.VITE_LINZ_API as string
 
 interface MapProps {
   data: { id: number; x: number; y: number; msg: string }[]
-  sel: number | null
-  setSel: React.Dispatch<React.SetStateAction<number>>
+  sel?: number | null
+  setSel?: React.Dispatch<React.SetStateAction<number>>
   showMap?: boolean
 }
 
-export function Map({ data, sel, setSel, showMap = true }: MapProps) {
+export function Map({ data, sel = null, setSel, showMap = true }: MapProps) {
   if (!data.length) {
     return <div className="h-96 w-full">No map data available</div>
   }
@@ -58,7 +58,7 @@ export function Map({ data, sel, setSel, showMap = true }: MapProps) {
   return (
     <div>
       <MapContainer
-        className="h-96 w-full"
+        className="h-72 w-full"
         center={nztmToLatLng(firstData.x, firstData.y)}
         zoom={9}
         scrollWheelZoom={true}

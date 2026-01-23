@@ -19,8 +19,8 @@ export default function PairingForm({
     bird2Band: '',
     location: '',
     treatment: '',
-    lon: null,
-    lat: null,
+    y: null,
+    x: null,
   })
   useEffect(() => {
     if (edit) {
@@ -32,8 +32,8 @@ export default function PairingForm({
           bird2Band: editData.bird2Band,
           location: editData.location,
           treatment: editData.treatment,
-          lon: editData.lon,
-          lat: editData.lat,
+          y: editData.y,
+          x: editData.x,
         })
       }
     }
@@ -192,33 +192,34 @@ export default function PairingForm({
             required
           />
         </div>
+        <h2> NZTM Coordinates</h2>
         <div className="flex flex-col">
-          <label className="font-semibold" htmlFor="lat">
-            Latitude*
+          <label className="font-semibold" htmlFor="x">
+            Easting*
           </label>
           <input
             className={` border-gray-400 border p-1`}
-            onChange={(e) => handleChange('lat', e)}
+            onChange={(e) => handleChange('x', e)}
             autoComplete="off"
             type="text"
-            value={formData.lat ?? ''}
-            name="lat"
-            id="lat"
+            value={formData.x ?? ''}
+            name="x"
+            id="x"
             required
           />
         </div>
         <div className="flex flex-col">
-          <label className="font-semibold" htmlFor="lon">
-            Longitude*
+          <label className="font-semibold" htmlFor="y">
+            Northing*
           </label>
           <input
             className={` border-gray-400 border p-1`}
-            onChange={(e) => handleChange('lon', e)}
+            onChange={(e) => handleChange('y', e)}
             autoComplete="off"
             type="text"
-            value={formData.lon ?? ''}
-            name="lon"
-            id="lon"
+            value={formData.y ?? ''}
+            name="y"
+            id="y"
             required
           />
         </div>
