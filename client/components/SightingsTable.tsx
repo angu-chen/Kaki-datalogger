@@ -58,7 +58,6 @@ export default function KakiSightings({ birdId, showMap }: Props) {
                 className={`${sel === sighting.id ? 'bg-green-500' : ''}`}
               >
                 <th>
-                  {' '}
                   <EditBut Form={SightingForm} editData={sighting} />
                 </th>
                 {keys.map((key) => {
@@ -66,10 +65,14 @@ export default function KakiSightings({ birdId, showMap }: Props) {
                     return (
                       <th
                         key={`${key}${sighting.id}`}
-                        className="hover:bg-green-300 cursor-pointer"
-                        onClick={() => navigate(`/sightings/${sighting.id}`)}
+                        className="hover:bg-green-300 "
                       >
-                        {sighting[key]}
+                        <button
+                          className="cursor-pointer"
+                          onClick={() => navigate(`/sightings/${sighting.id}`)}
+                        >
+                          {sighting[key]}
+                        </button>
                       </th>
                     )
                   }

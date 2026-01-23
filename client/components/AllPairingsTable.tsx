@@ -68,10 +68,14 @@ export default function AllPairingsTable() {
                     return (
                       <th
                         key={`${key}${pairings.id}`}
-                        className="hover:bg-green-300 cursor-pointer"
-                        onClick={() => navigate(`/pairings/${pairings.id}`)}
+                        className="hover:bg-green-300 "
                       >
-                        {pairings[key]}
+                        <button
+                          className="cursor-pointer"
+                          onClick={() => navigate(`/pairings/${pairings.id}`)}
+                        >
+                          {pairings[key]}
+                        </button>
                       </th>
                     )
                   }
@@ -79,10 +83,14 @@ export default function AllPairingsTable() {
                     return (
                       <th
                         key={`${key}${pairings.id}`}
-                        className="hover:bg-blue-300 cursor-pointer"
-                        onClick={() => navigate(`/${pairings.bird1Id}`)}
+                        className="hover:bg-blue-300 "
                       >
-                        {pairings[key]}
+                        <button
+                          className="cursor-pointer"
+                          onClick={() => navigate(`/${pairings.bird1Id}`)}
+                        >
+                          {pairings[key]}
+                        </button>
                       </th>
                     )
                   }
@@ -90,10 +98,14 @@ export default function AllPairingsTable() {
                     return (
                       <th
                         key={`${key}${pairings.id}`}
-                        className="hover:bg-blue-300 cursor-pointer"
-                        onClick={() => navigate(`/${pairings.bird2Id}`)}
+                        className="hover:bg-blue-300 "
                       >
-                        {pairings[key]}
+                        <button
+                          className="cursor-pointer"
+                          onClick={() => navigate(`/${pairings.bird2Id}`)}
+                        >
+                          {pairings[key]}
+                        </button>
                       </th>
                     )
                   } else
