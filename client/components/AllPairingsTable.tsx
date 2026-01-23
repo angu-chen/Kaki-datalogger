@@ -59,8 +59,7 @@ export default function AllPairingsTable() {
                 onClick={() => setSel(pairings.id)}
                 className={`${sel === pairings.id ? 'bg-green-500' : ''}`}
               >
-                <th className="left-0 sticky bg-gray-100">
-                  {' '}
+                <th>
                   <EditBut Form={PairingForm} editData={pairings} />
                 </th>
                 {keys.map((key) => {
