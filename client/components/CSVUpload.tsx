@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react'
 import { useCSVReader } from 'react-papaparse'
 
-export default function CSVUploaderComponent() {
+interface Props {
+  setData: React.Dispatch<React.SetStateAction<any>>
+}
+export default function CSVUploaderComponent({ setData }: Props) {
   const { CSVReader } = useCSVReader()
 
-  // const handleOnFileLoad = (data) => {
-  //   console.log('---------------------------')
-  //   console.log(data) // The parsed CSV data as an array of objects
-  //   console.log('---------------------------')
-  // }
   const handleOnUploadAccepted = (results: any) => {
     console.log('---------------------------')
     console.log(results) // This contains 'data', 'errors', and 'meta'
     console.log('---------------------------')
+    setData(results.data)
   }
 
   return (
