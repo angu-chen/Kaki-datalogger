@@ -1,0 +1,292 @@
+import db from './connection.ts'
+import {
+  Kaki,
+  Pairing,
+  PairingData,
+  Sighting,
+  SightingData,
+} from '../../models/kaki.ts'
+
+const kakiSelect = [
+  'id as id',
+  'band as band',
+  'status as status',
+  'hatch_yr as hatchYr',
+]
+
+const SightingsSelect = [
+  'date',
+  'kaki.band as band',
+  'bird_id as birdId',
+  'observer',
+  'x',
+  'y',
+  'notes',
+  'sightings.id as id',
+  'location',
+  'area',
+]
+const PairingsSelect = [
+  'pairings.id as id',
+  'pairings.pair_no as pairNo',
+  'pairings.year',
+  'pairings.bird1_id as bird1Id',
+  'pairings.bird2_id as bird2Id',
+  'bird1.band as bird1Band',
+  'bird2.band as bird2Band',
+  'pairings.location',
+  'pairings.treatment',
+  'pairings.y',
+  'pairings.x',
+]
+
+export async function getAllKaki(): Promise<Kaki[]> {
+  const kakiList = await db('kaki').select(
+    'id',
+    'band',
+    'status',
+    'hatch_yr as hatchYr',
+    'parents_pairing_id as parentPairingId',
+  )
+  return kakiList as Kaki[]
+}
+
+export async function getKakiDash() {
+  const query = await db('kaki')
+    .leftJoin(
+      db('sightings')
+        // selecting the latest sightings only and displaying notes
+        .select(
+          'bird_id',
+          'observer',
+          'notes',
+          'sightings.id as sighting_id',
+          'location',
+          'area',
+          'x',
+          'y',
+        )
+        .max('date as latest_sighting')
+        .groupBy('bird_id')
+        .as('latest_sightings'),
+      'kaki.id',
+      'latest_sightings.bird_id',
+    )
+    .select(
+      ...kakiSelect,
+      'latest_sightings.area',
+      'latest_sightings.location',
+      'latest_sightings.observer as observer',
+      'latest_sightings.latest_sighting as date',
+      'latest_sightings.notes',
+      'latest_sightings.x',
+      'latest_sightings.y',
+      'latest_sightings.sighting_id as sightingId',
+    )
+    .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last
+  return query
+}
+
+export async function getKakiDetail(id: number) {
+  const kakidetail = await db('kaki')
+    .where('kaki.id', id)
+    .leftJoin('pairings as parents', 'kaki.parents_pairing_id', 'parents.id')
+
+    .leftJoin('kaki as parent1', 'parents.bird1_id', 'parent1.id')
+    .leftJoin('kaki as parent2', 'parents.bird2_id', 'parent2.id')
+
+    .select(
+      'kaki.id as ID',
+      'kaki.band as Band',
+      'kaki.status as Status',
+      'kaki.hatch_yr as Hatch Year',
+      'parent1.band as parent1',
+      'parent2.band as parent2',
+      'parents.year',
+    )
+    .first()
+
+  return kakidetail
+}
+
+//////////////// Pairings ///////////////////
+
+export async function getKakiPairings(id: number) {
+  const kakiPairings = await db('pairings')
+    .where('pairings.bird1_id', id)
+    .orWhere('pairings.bird2_id', id)
+
+    .leftJoin('kaki as bird1', 'pairings.bird1_id', 'bird1.id')
+    .leftJoin('kaki as bird2', 'pairings.bird2_id', 'bird2.id')
+
+    .select(...PairingsSelect)
+    .orderBy('pairings.year', 'desc')
+
+  return kakiPairings
+}
+
+export async function getAllPairings() {
+  const kakiPairings = await db('pairings')
+    .leftJoin('kaki as bird1', 'pairings.bird1_id', 'bird1.id')
+    .leftJoin('kaki as bird2', 'pairings.bird2_id', 'bird2.id')
+
+    .select(...PairingsSelect)
+    .orderBy('pairings.year', 'desc')
+
+  return kakiPairings as Pairing[]
+}
+
+export async function getPairing(id: number) {
+  const pairing = await db('pairings')
+    .where('pairings.id', id)
+    .leftJoin('kaki as bird1', 'pairings.bird1_id', 'bird1.id')
+    .leftJoin('kaki as bird2', 'pairings.bird2_id', 'bird2.id')
+
+    .select(...PairingsSelect)
+    .first()
+  return pairing as Pairing
+}
+
+export async function delPairing(id: number) {
+  const res = await db('pairings').where('pairings.id', id).del()
+  return res
+}
+
+export async function updatePairing(pairing: Pairing) {
+  const kaki1 = await db('kaki')
+    .where('kaki.band', pairing.bird1Band)
+    .select('id')
+    .first()
+
+  if (!kaki1) {
+    throw new Error(`Kaki band ${pairing.bird1Band} does not exist`)
+  }
+  const kaki2 = await db('kaki')
+    .where('kaki.band', pairing.bird2Band)
+    .select('id')
+    .first()
+
+  if (!kaki2) {
+    throw new Error(`Kaki band ${pairing.bird2Band} does not exist`)
+  }
+  const res = await db('pairings').where('pairings.id', pairing.id).update({
+    pair_no: pairing.pairNo,
+    year: pairing.year,
+    bird1_id: kaki1.id,
+    bird2_id: kaki2.id,
+    location: pairing.location,
+    treatment: pairing.treatment,
+    y: pairing.y,
+    x: pairing.x,
+  })
+  return res
+}
+export async function addPairing(pairing: PairingData) {
+  const bird1 = await db('kaki')
+    .where('kaki.band', pairing.bird1Band)
+    .select('id')
+    .first()
+
+  if (!bird1) {
+    throw new Error('bird 1 band does not exist')
+  }
+  const bird2 = await db('kaki')
+    .where('kaki.band', pairing.bird2Band)
+    .select('id')
+    .first()
+
+  if (!bird2) {
+    throw new Error('bird 2 band does not exist')
+  }
+
+  const newPairing = await db('pairings')
+    .insert({
+      pair_no: pairing.pairNo,
+      year: pairing.year,
+      bird1_id: bird1.id,
+      bird2_id: bird2.id,
+      location: pairing.location,
+      treatment: pairing.treatment,
+      y: pairing.y,
+      x: pairing.x,
+    })
+    .returning('pairings.id')
+  return newPairing[0] as Pairing
+}
+
+////////// Sightings //////////////
+export async function getKakiSighting(id: number) {
+  const sightings = await db('sightings')
+    .where('sightings.bird_id', id)
+    .leftJoin('kaki', 'sightings.bird_id', 'kaki.id')
+    .select(...SightingsSelect)
+    .orderBy('sightings.date', 'desc')
+  return sightings as Sighting[]
+}
+
+export async function getSighting(id: number) {
+  const sighting = await db('sightings')
+    .where('sightings.id', id)
+    .leftJoin('kaki', 'sightings.bird_id', 'kaki.id')
+    .select(...SightingsSelect)
+    .first()
+  return sighting as Sighting
+}
+export async function getAllSightings() {
+  const kakiSightings = await db('sightings')
+    .leftJoin('kaki', 'sightings.bird_id', 'kaki.id')
+    .select(...SightingsSelect)
+  return kakiSightings as Sighting[]
+}
+
+export async function updateSighting(sighting: Sighting) {
+  const kaki = await db('kaki')
+    .where('kaki.band', sighting.band)
+    .select('id')
+    .first()
+
+  if (!kaki) {
+    throw new Error(`Kaki band ${sighting.band} does not exist`)
+  }
+  const res = await db('sightings').where('sightings.id', sighting.id).update({
+    bird_id: kaki.id,
+    date: sighting.date,
+    area: sighting.area,
+    location: sighting.location,
+    x: sighting.x,
+    y: sighting.y,
+    observer: sighting.observer,
+    notes: sighting.notes,
+  })
+  return res
+}
+
+export async function addSighting(newSighting: SightingData) {
+  const kaki = await db('kaki')
+    .where('kaki.band', newSighting.band)
+    .select('id')
+    .first()
+
+  if (!kaki) {
+    throw new Error(`Kaki band ${newSighting.band} does not exist`)
+  }
+
+  const sighting = await db('sightings')
+    .insert({
+      bird_id: kaki.id,
+      date: newSighting.date,
+      area: newSighting.area,
+      location: newSighting.location,
+      x: newSighting.x,
+      y: newSighting.y,
+      observer: newSighting.observer,
+      notes: newSighting.notes,
+    })
+    .returning('sightings.id')
+  return sighting[0] as Sighting
+}
+
+export async function delSighting(id: number) {
+  const res = await db('sightings').where('sightings.id', id).del()
+  return res
+}

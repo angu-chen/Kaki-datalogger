@@ -4,6 +4,8 @@ node_modules
 # Logs
 *.log
 
+#todo list
+Todo.md
 # SQLite DBs
 *.sqlite3
 
@@ -18,3 +20,6 @@ coverage/*
 
 # Build directory
 /promptkit
+
+# bash tools
+*.sh
