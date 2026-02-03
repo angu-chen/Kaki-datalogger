@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import CSVUploaderComponent from '../components/csvUtils/CSVUpload'
 import ToUpperBut from '../components/csvUtils/ToUpperBut'
+import CsvTable from '../components/csvUtils/CsvTable'
 
 export default function ReleasePage() {
   const [csvData, setCsvData] = useState<any | null>(null)
@@ -37,6 +38,12 @@ export default function ReleasePage() {
         />
         <div className="flex flex-col gap-3">
           {csvData && csvData.length > 0 ? (
+            <CsvTable data={csvData} />
+          ) : (
+            <p> No data</p>
+          )}
+
+          {/* {csvData && csvData.length > 0 ? (
             csvData.map((row, index) => (
               <div className="flex gap-3" key={index}>
                 {' '}
@@ -47,7 +54,7 @@ export default function ReleasePage() {
             ))
           ) : (
             <p>No data</p>
-          )}
+          )} */}
         </div>
       </div>
     </div>
