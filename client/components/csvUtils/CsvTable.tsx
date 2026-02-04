@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ToUpperBut from './ToUpperBut'
 
 interface Props {
   data: string[][]
@@ -10,6 +11,20 @@ export default function CsvTable({ data }: Props) {
   return (
     <table>
       <tbody>
+        <tr>
+          {editedData[0].map((d, index) => {
+            return (
+              <th key={index}>
+                <ToUpperBut
+                  key={index}
+                  col={index}
+                  data={editedData}
+                  setData={setEditedData}
+                />
+              </th>
+            )
+          })}
+        </tr>
         {editedData.map((item, index) => {
           // headers
           if (index === 0) {

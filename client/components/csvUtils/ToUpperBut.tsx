@@ -15,7 +15,7 @@ export default function ToUpperBut({
   children,
   classname,
 }: Props) {
-  const [u, setU] = useState<boolean>(false)
+  const [u, setU] = useState<boolean>(true)
   const handleClick = () => {
     if (!data) return
     const editedData = data.map((row) => {
