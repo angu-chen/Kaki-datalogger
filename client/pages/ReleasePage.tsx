@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import CSVUploaderComponent from '../components/csvUtils/CSVUpload'
 import ToUpperBut from '../components/csvUtils/ToUpperBut'
 import CsvTable from '../components/csvUtils/CsvTable'
+import CsvUploadBut from '../components/csvUtils/CsvUploadBut'
 
 export default function ReleasePage() {
   const [csvData, setCsvData] = useState<any | null>(null)
@@ -25,6 +26,7 @@ export default function ReleasePage() {
       <h1>Release page</h1>
       <CSVUploaderComponent setData={setCsvData} />
       <div>
+        <CsvUploadBut />
         <p>CSV Data is:</p>
         <ToUpperBut
           col={0}

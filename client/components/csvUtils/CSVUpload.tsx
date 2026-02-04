@@ -14,6 +14,17 @@ export default function CSVUploaderComponent({ setData }: Props) {
     setData(results.data)
   }
 
+  const handleRemoveButClick = (
+    e: React.MouseEvent,
+    getRemoveFileProps: any,
+  ) => {
+    if (getRemoveFileProps().onClick) {
+      getRemoveFileProps().onClick(e)
+    }
+
+    setData(null)
+  }
+
   return (
     <CSVReader
       onUploadAccepted={handleOnUploadAccepted}
@@ -21,17 +32,33 @@ export default function CSVUploaderComponent({ setData }: Props) {
       skipEmptyLines={true}
     >
       {({ getRootProps, acceptedFile, progress, getRemoveFileProps }: any) => (
-        <>
-          <div className="border px-5 py-2 mb-10 w-3/5">
-            <button type="button" {...getRootProps()}>
-              Browse file
-            </button>
-            <div className="border px-3 h-7 ">
-              <p> {acceptedFile && acceptedFile.name}</p>
+        <div>
+          <div className=" py-2 mb-10 w-3/5 flex flex-col gap-1">
+            <div>
+              <button
+                className="border px-3 py-1 bg-gray-700 hover:opacity-80 cursor-pointer shadow-sm rounded-md text-gray-200"
+                type="button"
+                {...getRootProps()}
+              >
+                Browse file
+              </button>
             </div>
-            <button {...getRemoveFileProps()}>Remove</button>
+            <div className="flex gap-2 items-center">
+              <div className="border w-3/5 px-3 h-7 ">
+                <p> {acceptedFile && acceptedFile.name}</p>
+              </div>
+              <div>
+                <button
+                  className="border px-3 py-1 bg-red-600 hover:opacity-80 cursor-pointer shadow-sm rounded-md text-gray-200 "
+                  {...getRemoveFileProps()}
+                  onClick={(e) => handleRemoveButClick(e, getRemoveFileProps)}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
           </div>
-        </>
+        </div>
       )}
     </CSVReader>
   )
