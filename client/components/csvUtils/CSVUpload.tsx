@@ -27,6 +27,7 @@ export default function CSVUploaderComponent({ setData }: Props) {
 
   return (
     <CSVReader
+      config={{ header: true, dynamicTyping: true, skipEmptyLines: true }}
       onUploadAccepted={handleOnUploadAccepted}
       onError={(err) => console.log(err)}
       skipEmptyLines={true}

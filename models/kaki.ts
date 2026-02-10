@@ -57,3 +57,13 @@ export interface Pairing extends PairingData {
   bird1Id?: number
   bird2Id?: number
 }
+
+export interface releaseData {
+  location: string
+  year: number
+  notes: string
+}
+
+export interface release extends releaseData {
+  id: number
+}
