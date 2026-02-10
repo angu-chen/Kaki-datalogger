@@ -19,8 +19,8 @@ const SightingsSelect = [
   'kaki.band as band',
   'bird_id as birdId',
   'observer',
-  'x',
-  'y',
+  'nztm_easting as nztmEasting',
+  'nztm_northing as nztmNorthing',
   'notes',
   'sightings.id as id',
   'location',
@@ -36,8 +36,8 @@ const PairingsSelect = [
   'bird2.band as bird2Band',
   'pairings.location',
   'pairings.treatment',
-  'pairings.y',
-  'pairings.x',
+  'pairings.nztm_northing as nztmNorthing',
+  'pairings.nztm_easting as nztmEasting',
 ]
 
 export async function getAllKaki(): Promise<Kaki[]> {
@@ -63,8 +63,8 @@ export async function getKakiDash() {
           'sightings.id as sighting_id',
           'location',
           'area',
-          'x',
-          'y',
+          'nztm_easting',
+          'nztm_northing',
         )
         .max('date as latest_sighting')
         .groupBy('bird_id')
@@ -79,8 +79,8 @@ export async function getKakiDash() {
       'latest_sightings.observer as observer',
       'latest_sightings.latest_sighting as date',
       'latest_sightings.notes',
-      'latest_sightings.x',
-      'latest_sightings.y',
+      'latest_sightings.nztm_easting as nztmEasting ',
+      'latest_sightings.nztm_northing as nztmNorthing',
       'latest_sightings.sighting_id as sightingId',
     )
     .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last
@@ -176,8 +176,8 @@ export async function updatePairing(pairing: Pairing) {
     bird2_id: kaki2.id,
     location: pairing.location,
     treatment: pairing.treatment,
-    y: pairing.y,
-    x: pairing.x,
+    nztm_northing: pairing.nztmNorthing,
+    nztm_easting: pairing.nztmEasting,
   })
   return res
 }
@@ -207,8 +207,8 @@ export async function addPairing(pairing: PairingData) {
       bird2_id: bird2.id,
       location: pairing.location,
       treatment: pairing.treatment,
-      y: pairing.y,
-      x: pairing.x,
+      nztm_northing: pairing.nztmNorthing,
+      nztm_easting: pairing.nztmEasting,
     })
     .returning('pairings.id')
   return newPairing[0] as Pairing
@@ -253,8 +253,8 @@ export async function updateSighting(sighting: Sighting) {
     date: sighting.date,
     area: sighting.area,
     location: sighting.location,
-    x: sighting.x,
-    y: sighting.y,
+    nztm_easting: sighting.nztmEasting,
+    nztm_northing: sighting.nztmNorthing,
     observer: sighting.observer,
     notes: sighting.notes,
   })
@@ -277,8 +277,8 @@ export async function addSighting(newSighting: SightingData) {
       date: newSighting.date,
       area: newSighting.area,
       location: newSighting.location,
-      x: newSighting.x,
-      y: newSighting.y,
+      nztm_easting: newSighting.nztmEasting,
+      nztm_northing: newSighting.nztmNorthing,
       observer: newSighting.observer,
       notes: newSighting.notes,
     })

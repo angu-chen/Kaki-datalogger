@@ -3,14 +3,11 @@
  * @returns { Promise<void> }
  */
 export function up(knex) {
-  return knex.schema.createTable('release_info', (table) => {
+  return knex.schema.createTable('release', (table) => {
     table.increments('id')
-    table.integer('bird_id')
-    table.boolean('feeding')
-    table.boolean('seen')
+    table.string('location')
+    table.integer('year')
     table.string('notes')
-    table.date('date')
-    table.integer('release_id')
   })
 }
 
@@ -19,5 +16,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.SchemaBuilder.dropTable('release_info')
+  return knex.schema.dropTable('release')
 }

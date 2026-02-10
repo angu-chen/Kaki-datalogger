@@ -14,8 +14,8 @@ export async function seed(knex) {
       bird2_id: 2,
       location: 'Tiritiri Matangi',
       treatment: 'Standard',
-      x: 1361610.91,
-      y: 5091462.91,
+      nztm_easting: 1361610.91,
+      nztm_northing: 5091462.91,
     },
     {
       id: 3,
@@ -25,8 +25,8 @@ export async function seed(knex) {
       bird2_id: 1,
       location: 'PaknSav',
       treatment: 'Standard',
-      x: 1362619.89,
-      y: 5092278.17,
+      nztm_easting: 1362619.89,
+      nztm_northing: 5092278.17,
     },
     {
       id: 2,
@@ -36,8 +36,8 @@ export async function seed(knex) {
       bird2_id: 4,
       location: 'Motutapu Island',
       treatment: 'Intensive',
-      x: 1363629.11,
-      y: 5093093.27,
+      nztm_easting: 1363629.11,
+      nztm_northing: 5093093.27,
     },
   ])
 }
