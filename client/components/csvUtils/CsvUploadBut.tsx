@@ -9,25 +9,39 @@ interface Props {
   children?: ReactNode
 }
 
+interface ReleaseSites {
+  site: string
+  year: number
+  kakiBands: string[]
+}
+
 export default function CsvUploadBut({ children }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [csvData, setCsvData] = useState<object[] | null>(null)
   const [edit, setEdit] = useState<boolean>(false)
+  const [newRelease, setNewRelease] = useState<ReleaseSites[] | null>(null)
 
   const handleClose = () => {
-    // setCsvData(null)
+    setCsvData(null)
+    setEdit(false)
     setIsOpen(false)
   }
   console.log(csvData)
 
   const handleNextClick = () => {
-    const config = {
-      header: true,
-      dynamicTyping: true,
-    }
-    if (csvData != null) {
-      const result = Papa.parse(csvData, config)
-    }
+    setEdit(true)
+    const sites = csvData?.map((data) => data.site)
+    const uniqueSites = [...new Set(sites)]
+
+    const newSites = uniqueSites.map((location) => {
+      return { site: location, year: csvData[0].year, kakiSub: [] }
+    })
+
+    csvData?.forEach((kaki) => {
+      const index = newSites.findIndex((release) => release.site === kaki.site)
+      newSites[index].kakiSub.push(kaki.band)
+    })
+    setNewRelease(newSites)
   }
 
   return (
@@ -51,7 +65,7 @@ export default function CsvUploadBut({ children }: Props) {
             )}
           </div>
           <button
-            onClick={() => setEdit(true)}
+            onClick={handleNextClick}
             className="border px-3 py-1 bg-gray-700 hover:opacity-80 cursor-pointer shadow-sm rounded-md text-gray-200 my-3"
           >
             Next
