@@ -1,9 +1,11 @@
-import { ReactNode, useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 import Modal from '../Modal'
 import CSVUploaderComponent from './CSVUpload'
 import CsvTable from './CsvTable'
 import Papa from 'papaparse'
+import { release } from 'node:os'
+import e from 'express'
 
 interface Props {
   children?: ReactNode
@@ -41,9 +43,25 @@ export default function CsvUploadBut({ children }: Props) {
       const index = newSites.findIndex((release) => release.site === kaki.site)
       newSites[index].kakiSub.push(kaki.band)
     })
+    console.log(newSites)
     setNewRelease(newSites)
   }
 
+  const handleChange = (
+    index: number,
+    key: string,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (!newRelease) return
+    const newData = e.target.value
+    const updatedData = newRelease.map((site, i) => {
+      if (i === index) {
+        return { ...site, [key]: newData }
+      }
+      return site
+    })
+    setNewRelease(updatedData)
+  }
   return (
     <div>
       <button
@@ -71,7 +89,24 @@ export default function CsvUploadBut({ children }: Props) {
             Next
           </button>
         </div>
-        <div className={`${edit ? 'block' : 'hidden'}`}>hello</div>
+        {/*  New release Kaki Group View */}
+        <div className={`${edit ? 'block' : 'hidden'}`}>
+          <form className="flex, flex-col gap-4 my-5">
+            <label className="font-semibold" htmlFor="site1">
+              Site 1
+            </label>
+            <input
+              className="border-gray-400 border p-1"
+              onChange={(e) => {
+                handleChange(0, 'site', e)
+              }}
+              autoComplete="off"
+              value={newRelease ? newRelease[0].site : ''}
+              name="site1"
+              id="site1"
+            />
+          </form>
+        </div>
       </Modal>
     </div>
   )
