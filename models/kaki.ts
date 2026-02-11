@@ -67,3 +67,9 @@ export interface releaseData {
 export interface release extends releaseData {
   id: number
 }
+
+export interface ReleaseSites {
+  site: string
+  year: number
+  kakiSubBands: string[]
+}

@@ -106,6 +106,13 @@ export default function CsvUploadBut({ children }: Props) {
               id="site1"
             />
           </form>
+          <div>
+            {newRelease ? (
+              newRelease[0].kakiSub.map((band) => <p key={band}>{band}</p>)
+            ) : (
+              <p>nothing to show</p>
+            )}
+          </div>
         </div>
       </Modal>
     </div>
