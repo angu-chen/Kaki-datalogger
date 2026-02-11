@@ -3,18 +3,12 @@ import UploadFileIcon from '@mui/icons-material/UploadFile'
 import Modal from '../Modal'
 import CSVUploaderComponent from './CSVUpload'
 import CsvTable from './CsvTable'
-import Papa from 'papaparse'
-import { release } from 'node:os'
-import e from 'express'
+
+import SiteConfirmation from './SiteConfirmation'
+import { ReleaseSites } from '../../../models/kaki'
 
 interface Props {
   children?: ReactNode
-}
-
-interface ReleaseSites {
-  site: string
-  year: number
-  kakiBands: string[]
 }
 
 export default function CsvUploadBut({ children }: Props) {
@@ -35,13 +29,13 @@ export default function CsvUploadBut({ children }: Props) {
     const sites = csvData?.map((data) => data.site)
     const uniqueSites = [...new Set(sites)]
 
-    const newSites = uniqueSites.map((location) => {
-      return { site: location, year: csvData[0].year, kakiSub: [] }
+    const newSites: ReleaseSites[] = uniqueSites.map((location) => {
+      return { site: location, year: csvData[0].year, kakiSubBands: [] }
     })
 
     csvData?.forEach((kaki) => {
       const index = newSites.findIndex((release) => release.site === kaki.site)
-      newSites[index].kakiSub.push(kaki.band)
+      newSites[index].kakiSubBands.push(kaki.band)
     })
     console.log(newSites)
     setNewRelease(newSites)
@@ -91,7 +85,15 @@ export default function CsvUploadBut({ children }: Props) {
         </div>
         {/*  New release Kaki Group View */}
         <div className={`${edit ? 'block' : 'hidden'}`}>
-          <form className="flex, flex-col gap-4 my-5">
+          {newRelease ? (
+            <SiteConfirmation
+              releaseSites={newRelease}
+              setReleaseSites={setNewRelease}
+            />
+          ) : (
+            <p>ERROR NO DATA</p>
+          )}
+          {/* <form className="flex, flex-col gap-4 my-5">
             <label className="font-semibold" htmlFor="site1">
               Site 1
             </label>
@@ -112,7 +114,7 @@ export default function CsvUploadBut({ children }: Props) {
             ) : (
               <p>nothing to show</p>
             )}
-          </div>
+          </div> */}
         </div>
       </Modal>
     </div>
