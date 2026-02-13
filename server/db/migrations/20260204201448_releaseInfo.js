@@ -19,5 +19,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.SchemaBuilder.dropTable('release_info')
+  return knex.schema.dropTable('release_info')
 }
