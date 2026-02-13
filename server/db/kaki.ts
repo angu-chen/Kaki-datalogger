@@ -109,6 +109,18 @@ export async function getKakiDetail(id: number) {
   return kakidetail
 }
 
+export async function createKaki(band: string, year: number) {
+  const newKaki = await db('kaki')
+    .insert({
+      band: band,
+      hatch_yr: year,
+      parents_pairing_id: null,
+    })
+    .returning('kaki.id')
+  console.log(newKaki[0])
+  return newKaki[0]
+}
+
 //////////////// Pairings ///////////////////
 
 export async function getKakiPairings(id: number) {

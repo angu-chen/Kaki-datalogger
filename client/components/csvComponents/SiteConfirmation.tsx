@@ -1,5 +1,6 @@
 import React from 'react'
 import { ReleaseSites } from '../../../models/kaki'
+import { useAddReleaseMutation } from '../../hooks/useKaki'
 
 interface Props {
   releaseSites: ReleaseSites[] | null
@@ -10,6 +11,9 @@ export default function SiteConfirmation({
   releaseSites,
   setReleaseSites,
 }: Props) {
+  // mutations
+  const addReleases = useAddReleaseMutation()
+
   if (releaseSites === null) return
   const handleChange = (
     index: number,
@@ -25,6 +29,15 @@ export default function SiteConfirmation({
       return site
     })
     setReleaseSites(updatedData)
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    addReleases.mutate(releaseSites, {
+      onSuccess: () => {
+        console.log('success happened')
+      },
+    })
   }
   return (
     <div>
@@ -58,6 +71,12 @@ export default function SiteConfirmation({
           </div>
         )
       })}
+      <button
+        onClick={handleSubmit}
+        className="border rounded-sm px-3 py-1 hover:opacity-80 shadow-lg shadow-bg-gray-500 cursor-pointer"
+      >
+        Submit
+      </button>
     </div>
   )
 }

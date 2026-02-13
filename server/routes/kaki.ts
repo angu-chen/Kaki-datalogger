@@ -3,6 +3,7 @@ import * as db from '../db/kaki.ts'
 import {
   Pairing,
   PairingData,
+  ReleaseSites,
   Sighting,
   SightingData,
 } from '../../models/kaki.ts'
@@ -224,6 +225,24 @@ router.get('/:id/sightings', async (req, res) => {
         : 'Error retrieving sightings of Kaki',
     )
     res.status(500).json({ message: 'error kaki does not exist' })
+  }
+})
+
+router.post('/release', async (req, res) => {
+  const releaseData = req.body as ReleaseSites[]
+  try {
+    const newKakis = releaseData.map((site) => {
+      return site.kakiSubBands.map(async (sub) => {
+        return await db.createKaki(sub, site.year)
+      })
+    })
+    console.log(newKakis)
+    res.json(newKakis)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'Error creating kakis',
+    )
+    res.status(500).json({ message: 'error data corrupted' })
   }
 })
 
