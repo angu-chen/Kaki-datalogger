@@ -3,9 +3,11 @@ import {
   Kaki,
   Pairing,
   PairingData,
+  ReleaseSites,
   Sighting,
   SightingData,
 } from '../../models/kaki.ts'
+import { release } from 'node:os'
 
 const kakiSelect = [
   'id as id',
@@ -117,7 +119,7 @@ export async function createKaki(band: string, year: number) {
       parents_pairing_id: null,
     })
     .returning('kaki.id')
-  console.log(newKaki[0])
+
   return newKaki[0]
 }
 
@@ -301,4 +303,20 @@ export async function addSighting(newSighting: SightingData) {
 export async function delSighting(id: number) {
   const res = await db('sightings').where('sightings.id', id).del()
   return res
+}
+
+// Releases
+export async function addReleaseSite(newSites: ReleaseSites) {
+  const newSiteID = await db('release')
+    .insert({
+      location: newSites.site,
+      year: newSites.year,
+    })
+    .returning('release.id')
+
+  const createdSite = await db('release').where('id', newSiteID[0].id).first()
+
+  console.log('New Site ID is: ', newSiteID)
+  console.log('New Site is: ', createdSite)
+  return createdSite
 }

@@ -236,7 +236,11 @@ router.post('/release', async (req, res) => {
         return await db.createKaki(sub, site.year)
       })
     })
-    console.log(newKakis)
+    //creating sites and getting ids
+    const siteIds = releaseData.map((site) => {
+      return db.addReleaseSite(site)
+    })
+
     res.json(newKakis)
   } catch (error) {
     console.error(
