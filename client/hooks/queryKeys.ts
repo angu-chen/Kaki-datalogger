@@ -26,4 +26,8 @@ export const queryKeys = {
     detail: (id: number | string) =>
       [...queryKeys.pairings.all, 'detail', id] as const,
   },
+
+  releases: {
+    all: ['releases'] as const,
+  },
 }

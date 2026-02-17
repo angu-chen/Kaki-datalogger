@@ -12,6 +12,7 @@ import {
   delSighting,
   getAllKaki,
   getAllPairings,
+  getAllReleaseSites,
   getAllSightings,
   getKakiDash,
   getKakiDetail,
@@ -80,6 +81,8 @@ export function useAddPairingMutation() {
   })
   return mutation
 }
+
+// Releases////////////////////////////////
 export function useAddReleaseMutation() {
   const queryClient = useQueryClient()
   const mutation = useMutation({
@@ -91,6 +94,15 @@ export function useAddReleaseMutation() {
   return mutation
 }
 
+export function useGetAllReleaseSites() {
+  const query = useQuery({
+    queryKey: queryKeys.releases.all,
+    queryFn: () => getAllReleaseSites(),
+  })
+  return { ...query }
+}
+
+/////////////////////////////////////////////////////
 export function useDelSightingMutation() {
   const queryClient = useQueryClient()
   const mutation = useMutation({

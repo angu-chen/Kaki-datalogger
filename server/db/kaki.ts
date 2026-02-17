@@ -322,3 +322,8 @@ export async function addReleaseSite(newSites: ReleaseSites) {
   const createdSite = await db('release').where('id', newSiteID[0].id).first()
   return createdSite
 }
+
+export async function getAllReleaseSites() {
+  const allReleaseSites = await db('release').select()
+  return allReleaseSites
+}
