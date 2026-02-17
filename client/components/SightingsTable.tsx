@@ -24,12 +24,21 @@ export default function KakiSightings({ birdId, showMap }: Props) {
   const mapData = kakiSightings.map((sighting) => {
     return {
       id: sighting.id,
-      x: sighting.x,
-      y: sighting.y,
+      x: sighting.nztmEasting,
+      y: sighting.nztmNorthing,
       msg: `Kakī ${sighting.band} was seen at ${sighting.area} by ${sighting.observer} on ${sighting.date}`,
     }
   })
-  const keys = ['id', 'date', 'area', 'location', 'x', 'y', 'observer', 'notes']
+  const keys = [
+    'id',
+    'date',
+    'area',
+    'location',
+    'nztmEasting',
+    'nztmNorthing',
+    'observer',
+    'notes',
+  ]
 
   return (
     <div className="flex gap-3">

@@ -5,12 +5,14 @@ import {
   useQueryClient,
 } from '@tanstack/react-query'
 import {
+  addRelease,
   createPairing,
   createSighting,
   delPairing,
   delSighting,
   getAllKaki,
   getAllPairings,
+  getAllReleaseSites,
   getAllSightings,
   getKakiDash,
   getKakiDetail,
@@ -80,6 +82,27 @@ export function useAddPairingMutation() {
   return mutation
 }
 
+// Releases////////////////////////////////
+export function useAddReleaseMutation() {
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: addRelease,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.kakis.all })
+    },
+  })
+  return mutation
+}
+
+export function useGetAllReleaseSites() {
+  const query = useQuery({
+    queryKey: queryKeys.releases.all,
+    queryFn: () => getAllReleaseSites(),
+  })
+  return { ...query }
+}
+
+/////////////////////////////////////////////////////
 export function useDelSightingMutation() {
   const queryClient = useQueryClient()
   const mutation = useMutation({

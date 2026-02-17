@@ -17,12 +17,13 @@ export default function DashBoard() {
   if (!kakiQuery.data) {
     return <p> No data</p>
   }
+  console.log(kakiQuery.data)
 
   const mapData = kakiQuery.data.map((kaki) => {
     return {
       id: kaki.id,
-      x: kaki.x,
-      y: kaki.y,
+      x: kaki.nztmEasting,
+      y: kaki.nztmNorthing,
       msg: `Kakī ${kaki.band} was seen at ${kaki.location} by ${kaki.observer}. Notes: ${kaki.notes}`,
     }
   })

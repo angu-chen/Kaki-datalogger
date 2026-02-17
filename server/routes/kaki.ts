@@ -3,6 +3,7 @@ import * as db from '../db/kaki.ts'
 import {
   Pairing,
   PairingData,
+  ReleaseSites,
   Sighting,
   SightingData,
 } from '../../models/kaki.ts'
@@ -20,6 +21,14 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'something went wrong fetching all Kaki' })
   }
 })
+// DEBUG//
+// router.all('*', (req, res, next) => {
+//   console.log('--- ROUTE DEBUG ---')
+//   console.log('Method:', req.method)
+//   console.log('Path within Router:', req.path)
+//   console.log('Full URL:', req.originalUrl)
+//   next() // This passes it to the next matching route
+// })
 
 router.get('/dash', async (req, res) => {
   try {
@@ -179,6 +188,45 @@ router.get('/sightings/:id', async (req, res) => {
       error instanceof Error ? error.message : 'Error retrieving sighting',
     )
     res.status(500).json({ message: 'error sighting does not exist' })
+  }
+})
+
+///////////// Releases ///////////////
+router.post('/release', async (req, res) => {
+  const releaseData = req.body as ReleaseSites[]
+  try {
+    //creating sites and getting ids
+    const newSites = await Promise.all(
+      releaseData.map((site) => db.addReleaseSite(site)),
+    )
+
+    const newKakis = releaseData.map((site) => {
+      // matching
+      const siteId = newSites.find((newSite) => newSite.location === site.site)
+      return site.kakiSubBands.map(async (sub) => {
+        return await db.createKaki(sub, site.year, siteId.id)
+      })
+    })
+
+    res.json(newKakis)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'Error creating kakis',
+    )
+    res.status(500).json({ message: 'error data corrupted' })
+  }
+})
+
+router.get('/release', async (req, res) => {
+  try {
+    const allReleaseSites = await db.getAllReleaseSites()
+    console.log('release site data is ', allReleaseSites)
+    res.json(allReleaseSites)
+  } catch (error) {
+    console.error(
+      error instanceof Error ? error.message : 'Error getting release sites',
+    )
+    res.status(500).json({ message: 'error no data' })
   }
 })
 

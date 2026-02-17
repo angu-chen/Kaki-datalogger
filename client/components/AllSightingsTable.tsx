@@ -17,11 +17,12 @@ export default function AllSightingsTable() {
     return <h1>No Sighting data</h1>
   }
 
+  console.log(allSightings)
   const mapData = allSightings.map((sighting) => {
     return {
       id: sighting.id,
-      x: sighting.x,
-      y: sighting.y,
+      x: sighting.nztmEasting,
+      y: sighting.nztmNorthing,
       msg: `Kakī ${sighting.band} was seen at ${sighting.area} by ${sighting.observer} on ${sighting.date}`,
     }
   })
@@ -31,8 +32,8 @@ export default function AllSightingsTable() {
     'date',
     'area',
     'location',
-    'x',
-    'y',
+    'nztmEasting',
+    'nztmNorthing',
     'observer',
     'notes',
   ]

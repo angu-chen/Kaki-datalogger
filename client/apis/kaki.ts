@@ -3,6 +3,9 @@ import {
   Kaki,
   Pairing,
   PairingData,
+  release,
+  releaseData,
+  ReleaseSites,
   Sighting,
   SightingData,
 } from '../../models/kaki'
@@ -81,4 +84,16 @@ export async function delSighting(id: number) {
 export async function updateSighting(data: Sighting) {
   await request.put(`${rootURL}/kaki/sightings/`).send(data)
   return
+}
+
+export async function addRelease(data: ReleaseSites[]) {
+  const res = await request.post(`${rootURL}/kaki/release`).send(data)
+  console.log('results from adding release: ', res.body)
+  return
+}
+
+export async function getAllReleaseSites() {
+  console.log('api')
+  const res = await request.get(`${rootURL}/kaki/release`)
+  return res.body as release[]
 }

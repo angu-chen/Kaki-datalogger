@@ -22,11 +22,12 @@ export default function KakiPairings({ birdId, showMap }: Props) {
     return <h1>No pairing data</h1>
   }
   // creating map props//
+  console.log(kakiPairings)
   const mapData = kakiPairings.map((pairing) => {
     return {
       id: pairing.id,
-      x: pairing.x,
-      y: pairing.y,
+      x: pairing.nztmEasting,
+      y: pairing.nztmNorthing,
       msg: `Pair no. ${pairing.pairNo} consisting of Kakī ${pairing.bird1Band} and ${pairing.bird2Band}.`,
     }
   })
@@ -37,14 +38,14 @@ export default function KakiPairings({ birdId, showMap }: Props) {
     'bird2Band',
     'treatment',
     'location',
-    'x',
-    'y',
+    'nztmEasting',
+    'nztmNorthing',
   ]
 
   return (
     <div className="flex gap-3">
       <div className={`${showMap ? 'w-1/2 ' : ' w-0 h-0 overflow-hidden'}`}>
-        <Map data={mapData} setSel={setSel} sel={sel} />
+        {/* <Map data={mapData} setSel={setSel} sel={sel} /> */}
       </div>
       <div
         className={`${showMap ? 'w-1/2' : 'w-full'} overflow-scroll text-sm`}

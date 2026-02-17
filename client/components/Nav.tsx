@@ -11,6 +11,9 @@ export default function Nav() {
         <li>
           <a href="/sightings">Sightings</a>
         </li>
+        <li>
+          <a href="/releases">Releases</a>
+        </li>
       </ul>
     </nav>
   )

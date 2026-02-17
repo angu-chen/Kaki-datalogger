@@ -20,8 +20,8 @@ export default function AllPairingsTable() {
   const mapData = allPairings.map((pairing) => {
     return {
       id: pairing.id,
-      x: pairing.x,
-      y: pairing.y,
+      x: pairing.nztmEasting,
+      y: pairing.nztmNorthing,
       msg: `Pair no. ${pairing.pairNo} consisting of Kakī ${pairing.bird1Band} and ${pairing.bird2Band}.`,
     }
   })
@@ -32,8 +32,8 @@ export default function AllPairingsTable() {
     'bird2Band',
     'treatment',
     'location',
-    'x',
-    'y',
+    'nztmEasting',
+    'nztmNorthing',
   ]
   return (
     <div className=" flex gap-3">

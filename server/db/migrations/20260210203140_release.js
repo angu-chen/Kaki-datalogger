@@ -2,14 +2,12 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-export async function up(knex) {
-  return knex.schema.createTable('releases', (table) => {
+export function up(knex) {
+  return knex.schema.createTable('release', (table) => {
     table.increments('id')
-    table.integer('bird_id')
-    table.integer('year')
     table.string('location')
+    table.integer('year')
     table.string('notes')
-    table.string('last_seen')
   })
 }
 
@@ -18,5 +16,5 @@ export async function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.schema.dropTable('releases')
+  return knex.schema.dropTable('release')
 }

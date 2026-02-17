@@ -3,16 +3,14 @@
  * @returns { Promise<void> }
  */
 export function up(knex) {
-  return knex.schema.createTable('sightings', (table) => {
+  return knex.schema.createTable('release_info', (table) => {
     table.increments('id')
     table.integer('bird_id')
+    table.boolean('feeding')
+    table.boolean('seen')
+    table.string('notes')
     table.date('date')
-    table.string('area')
-    table.string('location')
-    table.integer('nztm_easting')
-    table.integer('nztm_northing')
-    table.string('observer')
-    table.text('notes')
+    table.integer('release_id')
   })
 }
 
@@ -21,5 +19,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.schema.dropTable('sightings')
+  return knex.schema.dropTable('release_info')
 }

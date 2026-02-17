@@ -39,6 +39,7 @@
     "proj4": "^2.20.2",
     "proj4leaflet": "^1.0.2",
     "react-leaflet": "^4.2.1",
+    "react-papaparse": "^4.4.0",
     "slim-select": "^3.3.0",
     "sqlite3": "^5.1.6",
     "superagent": "^10.2.1",

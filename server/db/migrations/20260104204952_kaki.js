@@ -8,6 +8,7 @@ export async function up(knex) {
     table.string('band')
     table.string('status')
     table.integer('hatch_yr')
+    table.integer('release_id').defaultTo(null)
     table.integer('parents_pairing_id')
   })
 }

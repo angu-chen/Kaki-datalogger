@@ -7,6 +7,7 @@ import SightingsDetail from './pages/SightingDetail'
 import PairingsDetail from './pages/PairingDetail'
 import { AllPairings } from './pages/AllPairings'
 import { AllSightings } from './pages/AllSightings'
+import ReleasePage from './pages/ReleasePage'
 
 const routes = createRoutesFromElements(
   <Route path="/" element={<Layout />}>
@@ -16,6 +17,7 @@ const routes = createRoutesFromElements(
     <Route path="/sightings/" element={<AllSightings />} />
     <Route path="/pairings/" element={<AllPairings />} />
     <Route path="/pairings/:id" element={<PairingsDetail />} />
+    <Route path="/releases" element={<ReleasePage />} />
   </Route>,
 )
 
