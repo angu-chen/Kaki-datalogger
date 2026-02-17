@@ -231,14 +231,18 @@ router.get('/:id/sightings', async (req, res) => {
 router.post('/release', async (req, res) => {
   const releaseData = req.body as ReleaseSites[]
   try {
-    const newKakis = releaseData.map((site) => {
-      return site.kakiSubBands.map(async (sub) => {
-        return await db.createKaki(sub, site.year)
-      })
-    })
     //creating sites and getting ids
-    const siteIds = releaseData.map((site) => {
-      return db.addReleaseSite(site)
+    const newSites = await Promise.all(
+      releaseData.map((site) => db.addReleaseSite(site)),
+    )
+    console.log(newSites)
+
+    const newKakis = releaseData.map((site) => {
+      // matching
+      const siteId = newSites.find((newSite) => newSite.location === site.site)
+      return site.kakiSubBands.map(async (sub) => {
+        return await db.createKaki(sub, site.year, siteId.id)
+      })
     })
 
     res.json(newKakis)

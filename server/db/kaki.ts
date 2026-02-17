@@ -111,12 +111,17 @@ export async function getKakiDetail(id: number) {
   return kakidetail
 }
 
-export async function createKaki(band: string, year: number) {
+export async function createKaki(
+  band: string,
+  year: number,
+  releaseId: number | null = null,
+) {
   const newKaki = await db('kaki')
     .insert({
       band: band,
       hatch_yr: year,
       parents_pairing_id: null,
+      release_id: releaseId,
     })
     .returning('kaki.id')
 
@@ -315,8 +320,5 @@ export async function addReleaseSite(newSites: ReleaseSites) {
     .returning('release.id')
 
   const createdSite = await db('release').where('id', newSiteID[0].id).first()
-
-  console.log('New Site ID is: ', newSiteID)
-  console.log('New Site is: ', createdSite)
   return createdSite
 }

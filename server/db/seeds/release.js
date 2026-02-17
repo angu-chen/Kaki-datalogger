@@ -2,11 +2,11 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.seed = async function (knex) {
+export async function seed(knex) {
   // Deletes ALL existing entries
   await knex('release').del()
   await knex('release').insert([
-    { id: 1, site: 'mock1', year: 2011 },
-    { id: 2, site: 'mock2', year: 2012 },
+    { id: 1, location: 'mock1', year: 2011 },
+    { id: 2, location: 'mock2', year: 2012 },
   ])
 }
