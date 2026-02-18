@@ -89,6 +89,7 @@ export function useAddReleaseMutation() {
     mutationFn: addRelease,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.kakis.all })
+      queryClient.invalidateQueries({ queryKey: queryKeys.releases.all })
     },
   })
   return mutation
