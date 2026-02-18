@@ -38,12 +38,12 @@ export default function AllSightingsTable() {
     'notes',
   ]
   return (
-    <div className="flex gap-3">
-      <div className="w-1/2">
+    <div className="flex flex-col md:flex-row gap-4 h-[85vh] w-full px-4">
+      <div className="w-full md:w-1/2 h-30 md:h-full">
         <Map data={mapData} setSel={setSel} sel={sel} />
       </div>
-      <div className="w-1/2 overflow-scroll">
-        <table>
+      <div className="overflow-auto rounded-lg">
+        <table className="">
           <thead>
             <tr>
               <th className="top-0 sticky bg-gray-100"> Edit </th>

@@ -22,15 +22,15 @@ export default function PairingsDetail() {
   const mapData = [
     {
       id: pairingData.id,
-      x: pairingData.x,
-      y: pairingData.y,
+      x: pairingData.nztmEasting,
+      y: pairingData.nztmNorthing,
       msg: `Pair no. ${pairingData.pairNo} consisting of Kakī ${pairingData.bird1Band} and ${pairingData.bird2Band}.`,
     },
   ]
 
   return (
     <div className="flex flex-col items-center">
-      <div className="my-5">
+      <div className="my-5 flex gap-4">
         <h1 className="text-4xl font-semibold text-center">
           {pairingData.pairNo}
         </h1>

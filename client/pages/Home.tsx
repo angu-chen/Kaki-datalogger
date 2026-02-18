@@ -2,7 +2,7 @@ import DashBoard from '../components/Dashboard.tsx'
 function App() {
   return (
     <div className="flex flex-col items-center">
-      <div className="w-5/6 my-2  h-1/2">
+      <div className="w-full px-2 md:px-10 h-screen">
         <DashBoard />
       </div>
     </div>

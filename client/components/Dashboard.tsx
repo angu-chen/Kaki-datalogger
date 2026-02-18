@@ -30,8 +30,7 @@ export default function DashBoard() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="text-4xl my-5 font-semibold">Latest Sightings</h1>
-      <div className="flex justify-center items-center gap-3">
+      <div className="flex items-center flex-col md:flex-row justify-center gap-3">
         <div className="w-1/2">
           <div className="text-center mb-3">
             <AddBut Form={SightingForm}>

@@ -9,7 +9,7 @@ export default function ReleasePage() {
 
   return (
     <div className="flex flex-col items-center h-screen">
-      <h1 className="text-4xl my-5 font-semibold">Release page</h1>
+      {/* <h1 className="text-4xl my-5 font-semibold">Release page</h1> */}
       <div>
         <CsvUploadBut />
       </div>

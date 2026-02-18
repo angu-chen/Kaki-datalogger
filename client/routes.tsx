@@ -11,13 +11,37 @@ import ReleasePage from './pages/ReleasePage'
 
 const routes = createRoutesFromElements(
   <Route path="/" element={<Layout />}>
-    <Route index element={<App />} />
-    <Route path="/:id" element={<BirdDetail />} />
-    <Route path="/sightings/:id" element={<SightingsDetail />} />
-    <Route path="/sightings/" element={<AllSightings />} />
-    <Route path="/pairings/" element={<AllPairings />} />
-    <Route path="/pairings/:id" element={<PairingsDetail />} />
-    <Route path="/releases" element={<ReleasePage />} />
+    <Route index element={<App />} handle={{ title: 'Home' }} />
+    <Route
+      path="/:id"
+      element={<BirdDetail />}
+      handle={{ title: 'Bird Detail' }}
+    />
+    <Route
+      path="/sightings/:id"
+      element={<SightingsDetail />}
+      handle={{ title: 'Sighting' }}
+    />
+    <Route
+      path="/sightings/"
+      element={<AllSightings />}
+      handle={{ title: 'All Sightings' }}
+    />
+    <Route
+      path="/pairings/"
+      element={<AllPairings />}
+      handle={{ title: 'All Pairings' }}
+    />
+    <Route
+      path="/pairings/:id"
+      element={<PairingsDetail />}
+      handle={{ title: 'Pairing' }}
+    />
+    <Route
+      path="/releases"
+      element={<ReleasePage />}
+      handle={{ title: 'Releases' }}
+    />
   </Route>,
 )
 

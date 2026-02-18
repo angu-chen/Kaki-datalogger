@@ -21,7 +21,7 @@ function BirdDetail() {
   return (
     <div className="flex flex-col items-center gap-5">
       <div className="my-5">
-        <h1 className="text-4xl font-semibold text-center">{kakiData.Band}</h1>
+        {/* <h1 className="text-4xl font-semibold text-center">{kakiData.Band}</h1> */}
       </div>
       <div className="flex justify-around w-1/2">
         <div>

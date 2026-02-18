@@ -9,7 +9,7 @@ export default function Nav() {
     { name: 'Releases', href: '/releases' },
   ]
   return (
-    <nav className="mx-6 font-semibold text-md" role="navigation">
+    <nav className="mx-6  font-semibold text-md" role="navigation">
       <ul className="flex gap-5">
         {navLinks.map((link) => (
           <li key={link.name}>
