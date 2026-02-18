@@ -85,7 +85,7 @@ export async function getKakiDash() {
       'latest_sightings.nztm_northing as nztmNorthing',
       'latest_sightings.sighting_id as sightingId',
     )
-    .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last
+    .orderBy('latest_sightings.latest_sighting', 'desc', 'last') //sorting by descending order of sighitngs. nulls last
   return query
 }
 
