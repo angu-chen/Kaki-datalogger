@@ -17,7 +17,7 @@ const kakiSelect = [
 ]
 
 const SightingsSelect = [
-  'date',
+  'date(date) as date',
   'kaki.band as band',
   'bird_id as birdId',
   'observer',
@@ -68,8 +68,11 @@ export async function getKakiDash() {
           'nztm_easting',
           'nztm_northing',
         )
-        .max('date as latest_sighting')
-        .groupBy('bird_id')
+        .max('date(date) as latest_sighting')
+        // .groupBy('bird_id')
+        .distinctOn('bird_id')
+        .orderBy('bird_id')
+        .orderBy('date', 'desc')
         .as('latest_sightings'),
       'kaki.id',
       'latest_sightings.bird_id',
