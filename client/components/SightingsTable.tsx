@@ -4,6 +4,7 @@ import SightingForm from './forms/SightingForm'
 import EditBut from './buttons/EditBut'
 import { Map } from './maps/Map'
 import { useState } from 'react'
+import { timeStamp } from 'node:console'
 
 interface Props {
   birdId: string
@@ -95,6 +96,10 @@ export default function KakiSightings({ birdId, showMap }: Props) {
                         {sighting[key]}
                       </th>
                     )
+                  }
+                  if (key === 'date') {
+                    const dateOnly = sighting.date.split('T')[0]
+                    return <th key={`${key}${dateOnly}`}>{dateOnly}</th>
                   } else
                     return <th key={`${key}${sighting.id}`}>{sighting[key]}</th>
                 })}
