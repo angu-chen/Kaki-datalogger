@@ -45,7 +45,7 @@ export default function KakiPairings({ birdId, showMap }: Props) {
   return (
     <div className="flex gap-3">
       <div className={`${showMap ? 'w-1/2 ' : ' w-0 h-0 overflow-hidden'}`}>
-        {/* <Map data={mapData} setSel={setSel} sel={sel} /> */}
+        <Map data={mapData} setSel={setSel} sel={sel} />
       </div>
       <div
         className={`${showMap ? 'w-1/2' : 'w-full'} overflow-scroll text-sm`}

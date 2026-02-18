@@ -19,8 +19,8 @@ export default function PairingForm({
     bird2Band: '',
     location: '',
     treatment: '',
-    y: null,
-    x: null,
+    nztmEasting: null,
+    nztmNorthing: null,
   })
   useEffect(() => {
     if (edit) {
@@ -32,8 +32,8 @@ export default function PairingForm({
           bird2Band: editData.bird2Band,
           location: editData.location,
           treatment: editData.treatment,
-          y: editData.y,
-          x: editData.x,
+          nztmEasting: editData.nztmEasting,
+          nztmNorthing: editData.nztmNorthing,
         })
       }
     }
@@ -194,32 +194,32 @@ export default function PairingForm({
         </div>
         <h2> NZTM Coordinates</h2>
         <div className="flex flex-col">
-          <label className="font-semibold" htmlFor="x">
+          <label className="font-semibold" htmlFor="nztm_easting">
             Easting*
           </label>
           <input
             className={` border-gray-400 border p-1`}
-            onChange={(e) => handleChange('x', e)}
+            onChange={(e) => handleChange('nztmEasting', e)}
             autoComplete="off"
             type="text"
-            value={formData.x ?? ''}
-            name="x"
-            id="x"
+            value={formData.nztmEasting ?? ''}
+            name="nztmEasting"
+            id="nztmEasting"
             required
           />
         </div>
         <div className="flex flex-col">
-          <label className="font-semibold" htmlFor="y">
+          <label className="font-semibold" htmlFor="nztmNorthing">
             Northing*
           </label>
           <input
             className={` border-gray-400 border p-1`}
-            onChange={(e) => handleChange('y', e)}
+            onChange={(e) => handleChange('nztmNorthing', e)}
             autoComplete="off"
             type="text"
-            value={formData.y ?? ''}
-            name="y"
-            id="y"
+            value={formData.nztmNorthing ?? ''}
+            name="nztmNorthing"
+            id="nztmNorthing"
             required
           />
         </div>
