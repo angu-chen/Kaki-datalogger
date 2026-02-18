@@ -22,7 +22,7 @@ export default function KakiPairings({ birdId, showMap }: Props) {
     return <h1>No pairing data</h1>
   }
   // creating map props//
-  console.log(kakiPairings)
+
   const mapData = kakiPairings.map((pairing) => {
     return {
       id: pairing.id,

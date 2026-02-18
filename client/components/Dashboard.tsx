@@ -39,7 +39,6 @@ export default function DashBoard() {
               <p>Add Sighting</p>
             </AddBut>
           </div>
-          {/* <DashMap sel={sel} dashSightings={kakiQuery.data} /> */}
           <Map sel={sel} setSel={setSel} data={mapData} />
         </div>
         <div className="w-1/2 overflow-scroll">

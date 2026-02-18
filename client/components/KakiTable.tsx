@@ -50,19 +50,16 @@ export default function KakiTable({ kaki, setSel, sel }: Props) {
               }
               if (key === 'date') {
                 if (!bird[key]) return <th key={`${bird.id}${key}`}>N/A</th>
+                const dateOnly = bird.date.split('T')[0]
                 return (
                   <th
                     className="cursor-pointer hover:text-amber-300"
                     key={`${bird}${key}`}
                     onClick={() => navigate(`/sightings/${bird.sightingId}`)}
                   >
-                    {`${bird[key]}`}
+                    {`${dateOnly}`}
                   </th>
                 )
-              }
-              if (key === 'date') {
-                const dateOnly = sighting.date.split('T')[0]
-                return <th key={`${key}${dateOnly}`}>{dateOnly}</th>
               } else {
                 if (!bird[key]) return <th key={`${bird.id}${key}`}>N/A</th>
                 return <th key={`${bird.id}${key}`}>{`${bird[key]}`}</th>
