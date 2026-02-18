@@ -5,11 +5,13 @@ import { useAddReleaseMutation } from '../../hooks/useKaki'
 interface Props {
   releaseSites: ReleaseSites[] | null
   setReleaseSites: React.Dispatch<React.SetStateAction<ReleaseSites[]>>
+  onClose: () => void
 }
 
 export default function SiteConfirmation({
   releaseSites,
   setReleaseSites,
+  onClose,
 }: Props) {
   // mutations
   const addReleases = useAddReleaseMutation()
@@ -38,6 +40,7 @@ export default function SiteConfirmation({
         console.log('success happened')
       },
     })
+    onClose()
   }
   return (
     <div>

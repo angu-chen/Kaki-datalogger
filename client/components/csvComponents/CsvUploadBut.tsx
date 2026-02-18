@@ -89,6 +89,7 @@ export default function CsvUploadBut({ children }: Props) {
             <SiteConfirmation
               releaseSites={newRelease}
               setReleaseSites={setNewRelease}
+              onClose={handleClose}
             />
           ) : (
             <p>ERROR NO DATA</p>
