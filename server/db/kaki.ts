@@ -17,7 +17,7 @@ const kakiSelect = [
 ]
 
 const SightingsSelect = [
-  'date(date) as date',
+  'date',
   'kaki.band as band',
   'bird_id as birdId',
   'observer',
