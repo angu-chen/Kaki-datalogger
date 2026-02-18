@@ -67,8 +67,9 @@ export async function getKakiDash() {
           'area',
           'nztm_easting',
           'nztm_northing',
+
+          db.raw('date(date) as latest_sighting'),
         )
-        .max('date(date) as latest_sighting')
         // .groupBy('bird_id')
         .distinctOn('bird_id')
         .orderBy('bird_id')
