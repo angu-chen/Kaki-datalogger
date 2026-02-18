@@ -20,6 +20,7 @@ export default function DashBoard() {
   console.log(kakiQuery.data)
 
   const mapData = kakiQuery.data.map((kaki) => {
+    if (kaki.nztmEasting === 0 || kaki.nztmNorthing === 0) return
     return {
       id: kaki.id,
       x: kaki.nztmEasting,

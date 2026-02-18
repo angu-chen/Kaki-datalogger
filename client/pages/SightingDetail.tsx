@@ -25,8 +25,8 @@ export default function SightingsDetail() {
   const mapData = [
     {
       id: sightingData.id,
-      x: sightingData.x,
-      y: sightingData.y,
+      x: sightingData.nztmEasting,
+      y: sightingData.nztmNorthing,
       msg: `Kakī ${sightingData.band} was seen at ${sightingData.area} by ${sightingData.observer} on ${sightingData.date}`,
     },
   ]

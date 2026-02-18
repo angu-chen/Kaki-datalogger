@@ -46,14 +46,14 @@ export function Map({ data, sel = null, setSel, showMap = true }: MapProps) {
 
     useEffect(() => {
       const point = data.find((p) => p.id === sel)
-      if (!point) return
+      if (!point || !point.x || !point.y) return
       map.flyTo(nztmToLatLng(point.x, point.y))
       map.getZoom
     }, [sel, data, map])
 
     return null
   }
-  const firstData = data[0]
+  const firstData = data.find((point) => point.x != null && point.y != null)
 
   return (
     <div>
@@ -86,6 +86,9 @@ export function Map({ data, sel = null, setSel, showMap = true }: MapProps) {
             <CircleMarker
               eventHandlers={{
                 click: () => {
+                  if (point.x === null || point.y === null) {
+                    return
+                  }
                   setSel(point.id)
                 },
               }}
