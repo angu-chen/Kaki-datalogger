@@ -53,43 +53,98 @@ export async function getAllKaki(): Promise<Kaki[]> {
   return kakiList as Kaki[]
 }
 
+// export async function getKakiDash() {
+
+//   const query = await db('kaki')
+//     .leftJoin(
+//       db('sightings')
+//         // selecting the latest sightings only and displaying notes
+//         .select(
+//           'bird_id',
+//           'observer',
+//           'notes',
+//           'sightings.id as sighting_id',
+//           'location',
+//           'area',
+//           'nztm_easting',
+//           'nztm_northing',
+
+//           db.raw('date(date) as latest_sighting'),
+
+//         )
+//         // .groupBy('bird_id')
+//         .distinctOn('bird_id')
+//         .orderBy('bird_id')
+//         .orderBy('date', 'desc')
+//         .as('latest_sightings'),
+//       'kaki.id',
+//       'latest_sightings.bird_id',
+//     )
+//     .select(
+//       ...kakiSelect,
+//       'latest_sightings.area',
+//       'latest_sightings.location',
+//       'latest_sightings.observer as observer',
+//       'latest_sightings.latest_sighting as date',
+//       'latest_sightings.notes',
+//       'latest_sightings.nztm_easting as nztmEasting ',
+//       'latest_sightings.nztm_northing as nztmNorthing',
+//       'latest_sightings.sighting_id as sightingId',
+//     )
+//     .orderBy('latest_sightings.latest_sighting', 'desc', 'last') //sorting by descending order of sighitngs. nulls last
+//   return query
+// }
 export async function getKakiDash() {
+  const isPostgres =
+    db.client.config.client === 'postgresql' || db.client.config.client === 'pg'
+
+  // 1. Build the base subquery for sightings
+  let latestSightingsSubquery = db('sightings').select(
+    'bird_id',
+    'observer',
+    'notes',
+    'sightings.id as sighting_id',
+    'location',
+    'area',
+    'nztm_easting',
+    'nztm_northing',
+    db.raw('date(date) as latest_sighting'),
+  )
+
+  // 2. Apply Database-Specific logic
+  if (isPostgres) {
+    // High-performance Postgres path
+    latestSightingsSubquery = latestSightingsSubquery
+      .distinctOn('bird_id')
+      .orderBy('bird_id')
+      .orderBy('date', 'desc')
+  } else {
+    // Relaxed SQLite path for development
+    latestSightingsSubquery = latestSightingsSubquery
+      .max('date as latest_sighting') // Update alias to match main select
+      .groupBy('bird_id')
+  }
+
+  // 3. Run the main query using the finished subquery
   const query = await db('kaki')
     .leftJoin(
-      db('sightings')
-        // selecting the latest sightings only and displaying notes
-        .select(
-          'bird_id',
-          'observer',
-          'notes',
-          'sightings.id as sighting_id',
-          'location',
-          'area',
-          'nztm_easting',
-          'nztm_northing',
-
-          db.raw('date(date) as latest_sighting'),
-        )
-        // .groupBy('bird_id')
-        .distinctOn('bird_id')
-        .orderBy('bird_id')
-        .orderBy('date', 'desc')
-        .as('latest_sightings'),
+      latestSightingsSubquery.as('ls'), // Join the subquery we built above
       'kaki.id',
-      'latest_sightings.bird_id',
+      'ls.bird_id',
     )
     .select(
       ...kakiSelect,
-      'latest_sightings.area',
-      'latest_sightings.location',
-      'latest_sightings.observer as observer',
-      'latest_sightings.latest_sighting as date',
-      'latest_sightings.notes',
-      'latest_sightings.nztm_easting as nztmEasting ',
-      'latest_sightings.nztm_northing as nztmNorthing',
-      'latest_sightings.sighting_id as sightingId',
+      'ls.area',
+      'ls.location',
+      'ls.observer',
+      'ls.latest_sighting as date',
+      'ls.notes',
+      'ls.nztm_easting as nztmEasting',
+      'ls.nztm_northing as nztmNorthing',
+      'ls.sighting_id as sightingId',
     )
-    .orderBy('latest_sightings.latest_sighting', 'desc', 'last') //sorting by descending order of sighitngs. nulls last
+    .orderBy('ls.latest_sighting', 'desc', 'last')
+
   return query
 }
 
