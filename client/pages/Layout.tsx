@@ -27,7 +27,7 @@ export default function Layout() {
       <div className="lg:absolute md:-mt-8 lg:left-1/2 lg:mt-8 lg:-translate-x-1/2">
         <h1 className="text-4xl  font-semibold text-center">{pageTitle}</h1>
       </div>
-      <main>
+      <main className="w-full">
         <Outlet />
       </main>
     </div>
