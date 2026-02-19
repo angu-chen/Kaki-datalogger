@@ -20,6 +20,7 @@ export default function DashBoard() {
   console.log(kakiQuery.data)
 
   const mapData = kakiQuery.data.map((kaki) => {
+    if (kaki.nztmEasting === 0 || kaki.nztmNorthing === 0) return
     return {
       id: kaki.id,
       x: kaki.nztmEasting,
@@ -37,7 +38,6 @@ export default function DashBoard() {
               <p>Add Sighting</p>
             </AddBut>
           </div>
-          {/* <DashMap sel={sel} dashSightings={kakiQuery.data} /> */}
           <Map sel={sel} setSel={setSel} data={mapData} />
         </div>
         <div className="w-1/2 overflow-scroll">

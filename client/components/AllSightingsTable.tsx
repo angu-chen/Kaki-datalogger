@@ -95,6 +95,10 @@ export default function AllSightingsTable() {
                         </button>
                       </th>
                     )
+                  }
+                  if (key === 'date') {
+                    const dateOnly = sighting.date.split('T')[0]
+                    return <th key={`${key}${dateOnly}`}>{dateOnly}</th>
                   } else
                     return <th key={`${key}${sighting.id}`}>{sighting[key]}</th>
                 })}

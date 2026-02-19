@@ -67,9 +67,13 @@ export async function getKakiDash() {
           'area',
           'nztm_easting',
           'nztm_northing',
+
+          db.raw('date(date) as latest_sighting'),
         )
-        .max('date as latest_sighting')
-        .groupBy('bird_id')
+        // .groupBy('bird_id')
+        .distinctOn('bird_id')
+        .orderBy('bird_id')
+        .orderBy('date', 'desc')
         .as('latest_sightings'),
       'kaki.id',
       'latest_sightings.bird_id',
@@ -85,7 +89,7 @@ export async function getKakiDash() {
       'latest_sightings.nztm_northing as nztmNorthing',
       'latest_sightings.sighting_id as sightingId',
     )
-    .orderBy('latest_sightings.latest_sighting', 'desc', 'nulls last') //sorting by descending order of sighitngs. nulls last
+    .orderBy('latest_sightings.latest_sighting', 'desc', 'last') //sorting by descending order of sighitngs. nulls last
   return query
 }
 
