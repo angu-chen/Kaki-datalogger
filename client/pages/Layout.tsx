@@ -24,8 +24,8 @@ export default function Layout() {
         </div>
         <Nav />
       </div>
-      <div className="">
-        <h1 className="text-4xl font-semibold text-center">{pageTitle}</h1>
+      <div className="lg:absolute md:-mt-8 lg:left-1/2 lg:mt-8 lg:-translate-x-1/2">
+        <h1 className="text-4xl  font-semibold text-center">{pageTitle}</h1>
       </div>
       <main>
         <Outlet />
