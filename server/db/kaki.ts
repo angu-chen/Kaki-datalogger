@@ -111,21 +111,18 @@ export async function getKakiDash() {
     db.raw('date(date) as latest_sighting'),
   )
 
-  // 2. Apply Database-Specific logic
   if (isPostgres) {
-    // High-performance Postgres path
     latestSightingsSubquery = latestSightingsSubquery
       .distinctOn('bird_id')
       .orderBy('bird_id')
       .orderBy('date', 'desc')
   } else {
-    // Relaxed SQLite path for development
+    // SQLite
     latestSightingsSubquery = latestSightingsSubquery
       .max('date as latest_sighting') // Update alias to match main select
       .groupBy('bird_id')
   }
 
-  // 3. Run the main query using the finished subquery
   const query = await db('kaki')
     .leftJoin(
       latestSightingsSubquery.as('ls'), // Join the subquery we built above
