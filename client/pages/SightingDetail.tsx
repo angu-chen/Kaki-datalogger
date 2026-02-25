@@ -82,7 +82,9 @@ export default function SightingsDetail() {
           </div>
         </div>
         <div className="w-full">
-          <Map data={mapData} />
+          {sightingData.nztmEasting && sightingData.nztmNorthing && (
+            <Map data={mapData} />
+          )}
         </div>
       </div>
     </div>

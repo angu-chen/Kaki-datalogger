@@ -17,8 +17,8 @@ export default function SightingForm({
     date: '',
     area: '',
     location: '',
-    x: null,
-    y: null,
+    nztmEasting: null,
+    nztmNorthing: null,
     observer: '',
     notes: '',
   })
@@ -31,8 +31,8 @@ export default function SightingForm({
           date: editData.date,
           area: editData.area,
           location: editData.location,
-          x: editData.x,
-          y: editData.y,
+          nztmEasting: editData.nztmEasting,
+          nztmNorthing: editData.nztmNorthing,
           observer: editData.observer,
           notes: editData.notes,
         })
@@ -178,29 +178,29 @@ export default function SightingForm({
           />
         </div>
         <div className="flex flex-col">
-          <label className="font-semibold" htmlFor="x">
+          <label className="font-semibold" htmlFor="nztmEasting">
             Easting
           </label>
           <input
             className="border p-1 border-gray-400"
-            onChange={(e) => handleChange('x', e)}
+            onChange={(e) => handleChange('nztmEasting', e)}
             type="number"
-            id="x"
-            name="x"
-            value={formData.x ?? ''}
+            id="nztmEasting"
+            name="nztmEasting"
+            value={formData.nztmEasting ?? ''}
           />
         </div>
         <div className="flex flex-col">
-          <label className="font-semibold" htmlFor="y">
+          <label className="font-semibold" htmlFor="nztmNorthing">
             Northing
           </label>
           <input
             className="border p-1 border-gray-400"
-            onChange={(e) => handleChange('y', e)}
+            onChange={(e) => handleChange('nztmNorthing', e)}
             type="number"
-            id="y"
-            name="y"
-            value={formData.y ?? ''}
+            id="nztmNorthing"
+            name="nztmNorthing"
+            value={formData.nztmNorthing ?? ''}
           />
         </div>
         <div className="flex flex-col">
