@@ -9,7 +9,7 @@ export function AllSightings() {
       <AddBut Form={SightingForm}>
         <p>New Sighting</p>
       </AddBut>
-      <div className="w-4/5 my-2 h-2/3 overflow-hidden">
+      <div className="w-full md:w-5/6 my-2 md:h-2/3 overflow-hidden">
         <AllSightingsTable />
       </div>
     </div>

@@ -38,12 +38,12 @@ export default function AllSightingsTable() {
     'notes',
   ]
   return (
-    <div className="flex flex-col md:flex-row gap-4 h-[85vh] w-full px-4">
-      <div className="w-full md:w-1/2 h-30 md:h-full">
+    <div className="flex flex-col md:flex-row h-full gap-3">
+      <div className="w-full h-1/2  md:h-fit overflow-hidden md:w-1/2">
         <Map data={mapData} setSel={setSel} sel={sel} />
       </div>
-      <div className="overflow-auto rounded-lg">
-        <table className="">
+      <div className="w-full md:w-1/2 overflow-scroll">
+        <table className="text-sm">
           <thead>
             <tr>
               <th className="top-0 sticky bg-gray-100"> Edit </th>
@@ -61,14 +61,14 @@ export default function AllSightingsTable() {
                 onClick={() => setSel(sighting.id)}
                 className={`${sel === sighting.id ? 'bg-green-500' : ' '}`}
               >
-                <th>
+                <td>
                   {' '}
                   <EditBut Form={SightingForm} editData={sighting} />
-                </th>
+                </td>
                 {keys.map((key) => {
                   if (key === 'id') {
                     return (
-                      <th
+                      <td
                         key={`${key}${sighting.id}`}
                         className="hover:bg-green-300 "
                       >
@@ -78,7 +78,7 @@ export default function AllSightingsTable() {
                         >
                           {sighting[key]}
                         </button>
-                      </th>
+                      </td>
                     )
                   }
                   if (key === 'band') {
@@ -98,9 +98,9 @@ export default function AllSightingsTable() {
                   }
                   if (key === 'date') {
                     const dateOnly = sighting.date.split('T')[0]
-                    return <th key={`${key}${dateOnly}`}>{dateOnly}</th>
+                    return <td key={`${key}${dateOnly}`}>{dateOnly}</td>
                   } else
-                    return <th key={`${key}${sighting.id}`}>{sighting[key]}</th>
+                    return <td key={`${key}${sighting.id}`}>{sighting[key]}</td>
                 })}
               </tr>
             ))}
