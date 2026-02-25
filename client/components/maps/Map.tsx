@@ -8,6 +8,7 @@ import {
 
 import { nztmToLatLng } from './nztm'
 import { useEffect, useState } from 'react'
+import { map } from 'leaflet'
 
 const linzAPIKey = import.meta.env.VITE_LINZ_API as string
 
@@ -56,12 +57,17 @@ export function Map({ data, sel = null, setSel, showMap = true }: MapProps) {
   const firstData = data.find((point) => point.x != null && point.y != null)
 
   return (
-    <div>
+    <div className="w-full h-full flex flex-col items-center">
       <MapContainer
-        className="h-72 w-full"
+        // className=" w-full h-1/2"
         center={nztmToLatLng(firstData.x, firstData.y)}
         zoom={9}
+        style={{
+          height: '90%',
+          width: '90%',
+        }}
         scrollWheelZoom={true}
+        dragging={true}
       >
         <ResizeFix showMap={showMap} />
         <ReFocus sel={sel} data={data} />
@@ -102,7 +108,7 @@ export function Map({ data, sel = null, setSel, showMap = true }: MapProps) {
           )
         })}
       </MapContainer>
-      <div className="font-semibold text-[16px] md:text-2xl flex gap-2 md:gap-5">
+      <div className=" text-[8px] md:text-[16px] flex gap-2 md:gap-5">
         <p>Legend :</p>
         <p className="text-red-500">Latest</p>
         <p className="text-green-500">Selected</p>

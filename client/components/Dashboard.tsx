@@ -30,9 +30,9 @@ export default function DashBoard() {
   })
 
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col items-center w-full h-screen">
       <div className="flex md:items-start px-2 items-center flex-col md:flex-row justify-center gap-3 h-full">
-        <div className="relative w-full flex flex-col h-1/2 overflow-hidden md:w-1/2">
+        <div className="relative w-full flex flex-col h-1/2  md:w-1/2 shrink-0">
           <div className="text-center mb-1 md:mb-3">
             <AddBut Form={SightingForm}>
               <p>Add Sighting</p>
