@@ -36,11 +36,11 @@ export default function AllPairingsTable() {
     'nztmNorthing',
   ]
   return (
-    <div className=" flex gap-3">
-      <div className="w-1/2">
+    <div className=" flex flex-col md:flex-row h-full gap-3">
+      <div className="w-full h-1/2 overflow-hidden md:w-1/2">
         <Map data={mapData} setSel={setSel} sel={sel} />
       </div>
-      <div className="w-1/2 overflow-scroll">
+      <div className="w-full md:w-1/2 overflow-scroll">
         <table className="text-sm">
           <thead>
             <tr>

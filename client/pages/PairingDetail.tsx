@@ -83,7 +83,9 @@ export default function PairingsDetail() {
           </div>
         </div>
         <div className=" w-full">
-          <Map data={mapData} />
+          {pairingData.nztmNorthing && pairingData.nztmEasting && (
+            <Map data={mapData} />
+          )}
         </div>
       </div>
     </div>
