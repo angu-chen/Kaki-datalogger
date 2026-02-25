@@ -30,17 +30,17 @@ export default function DashBoard() {
   })
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex items-center flex-col md:flex-row justify-center gap-3">
-        <div className="w-1/2">
-          <div className="text-center mb-3">
+    <div className="flex flex-col items-center h-screen">
+      <div className="flex md:items-start px-2 items-center flex-col md:flex-row justify-center gap-3 h-full">
+        <div className="relative w-full flex flex-col h-1/2 overflow-hidden md:w-1/2">
+          <div className="text-center mb-1 md:mb-3">
             <AddBut Form={SightingForm}>
               <p>Add Sighting</p>
             </AddBut>
           </div>
           <Map sel={sel} setSel={setSel} data={mapData} />
         </div>
-        <div className="w-1/2 overflow-scroll">
+        <div className="w-full  md:w-1/2 h-1/2 overflow-scroll">
           <KakiTable sel={sel} setSel={setSel} kaki={kakiQuery.data} />
         </div>
       </div>

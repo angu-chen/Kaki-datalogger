@@ -102,7 +102,7 @@ export function Map({ data, sel = null, setSel, showMap = true }: MapProps) {
           )
         })}
       </MapContainer>
-      <div className="font-semibold flex gap-5">
+      <div className="font-semibold text-[16px] md:text-2xl flex gap-2 md:gap-5">
         <p>Legend :</p>
         <p className="text-red-500">Latest</p>
         <p className="text-green-500">Selected</p>
