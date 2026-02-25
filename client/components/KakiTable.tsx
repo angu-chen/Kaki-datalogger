@@ -24,7 +24,7 @@ export default function KakiTable({ kaki, setSel, sel }: Props) {
       <tbody>
         <tr>
           {kakiKeys.map((key) => (
-            <th className="top-0 sticky bg-gray-300" key={key}>
+            <th className="top-0 sticky  bg-gray-300" key={key}>
               {key.toUpperCase()}
             </th>
           ))}
@@ -40,7 +40,7 @@ export default function KakiTable({ kaki, setSel, sel }: Props) {
               if (key === 'band') {
                 return (
                   <th
-                    className="cursor-pointer right-0 sticky hover:text-B"
+                    className="cursor-pointer hover:text-B"
                     onClick={() => navigate(`/${bird.id}`)}
                     key={`${bird.id}${key}`}
                   >
@@ -49,20 +49,20 @@ export default function KakiTable({ kaki, setSel, sel }: Props) {
                 )
               }
               if (key === 'date') {
-                if (!bird[key]) return <th key={`${bird.id}${key}`}>N/A</th>
+                if (!bird[key]) return <td key={`${bird.id}${key}`}>N/A</td>
                 const dateOnly = bird.date.split('T')[0]
                 return (
-                  <th
+                  <td
                     className="cursor-pointer hover:text-amber-300"
                     key={`${bird}${key}`}
                     onClick={() => navigate(`/sightings/${bird.sightingId}`)}
                   >
                     {`${dateOnly}`}
-                  </th>
+                  </td>
                 )
               } else {
-                if (!bird[key]) return <th key={`${bird.id}${key}`}>N/A</th>
-                return <th key={`${bird.id}${key}`}>{`${bird[key]}`}</th>
+                if (!bird[key]) return <td key={`${bird.id}${key}`}>N/A</td>
+                return <td key={`${bird.id}${key}`}>{`${bird[key]}`}</td>
               }
             })}
           </tr>
