@@ -42,12 +42,14 @@ export default function KakiSightings({ birdId, showMap }: Props) {
   ]
 
   return (
-    <div className="flex gap-3">
-      <div className={`${showMap ? 'w-1/2 ' : ' w-0 h-0 overflow-hidden'}`}>
+    <div className="flex flex-col h-fit md:flex-row gap-3">
+      <div
+        className={`${showMap ? 'w-full h-50 overflow-clip md:w-1/2 ' : ' w-0 h-0 overflow-hidden'}`}
+      >
         <Map data={mapData} setSel={setSel} sel={sel} />{' '}
       </div>
       <div
-        className={`${showMap ? 'w-1/2' : 'w-full'} overflow-scroll text-sm`}
+        className={`${showMap ? 'w-full h-fit px-2 md:w-1/2' : 'w-full'} overflow-scroll text-sm`}
       >
         <table>
           <thead>

@@ -8,8 +8,8 @@ export default function Layout() {
   const pageTitle = currentMatch?.handle?.title || 'Default Title'
 
   return (
-    <div className="flex w-fit flex-col px-2 gap-1 md:gap-8 md:px-16 lg:px-16 xl:px-16 py-2">
-      <div className="flex md:flex-row justify-between items-center">
+    <div className="flex w-full flex-col px-2 gap-1 md:gap-8 md:px-16 lg:px-16 xl:px-16 py-2">
+      <div className="flex md:flex-row justify-between w-full items-center">
         <div>
           <div className=" w-16 md:w-20 h-16 md:h-20 lg:w-23 lg:h-23 xl:w-26 xl:h-26 rounded-[50%] md: flex justify-center overflow-hidden">
             <img
@@ -22,8 +22,8 @@ export default function Layout() {
             Kakī Data
           </p>
         </div>
-        <div className="lg:absolute md:-mt-8 lg:left-1/2 lg:mt-8 lg:-translate-x-1/2">
-          <h1 className="text-3xl md:text-4xl  font-semibold text-center">
+        <div className=" ">
+          <h1 className="text-2xl md:text-4xl  font-semibold text-center">
             {pageTitle}
           </h1>
         </div>

@@ -19,11 +19,13 @@ function BirdDetail() {
   if (isLoading) return <h1> Looking for Kakī</h1>
 
   return (
-    <div className="flex flex-col items-center gap-5">
-      <div className="my-5">
-        {/* <h1 className="text-4xl font-semibold text-center">{kakiData.Band}</h1> */}
+    <div className="flex flex-col gap-2 items-center md:gap-5">
+      <div className="px-2 md:px-4">
+        <h1 className=" text-2xl md:text-4xl font-semibold text-center">
+          {kakiData.Band}
+        </h1>
       </div>
-      <div className="flex justify-around w-1/2">
+      <div className="flex justify-around w-full md:w-1/2">
         <div>
           <h3 className="font-semibold text-sm">Status</h3>
           <p>{kakiData.Status}</p>
@@ -43,7 +45,7 @@ function BirdDetail() {
         </div>
       </div>
 
-      <div className="w-4/5 p-5 border shadow-2xl rounded-2xl">
+      <div className="w-full p-2 border shadow-2xl rounded-2xl">
         <h1 className="text-4xl font-semibold  mb-5">Sightings</h1>
         <div className="flex gap-3 m-3">
           <AddBut Form={SightingForm}>
@@ -60,7 +62,7 @@ function BirdDetail() {
           <KakiSightings birdId={params.id as string} showMap={sightingMap} />
         </div>
       </div>
-      <div className="w-4/5 p-5 border shadow-2xl rounded-2xl">
+      <div className="w-full p-2 border shadow-2xl rounded-2xl">
         <h1 className="text-4xl font-semibold  mb-5">Pairings</h1>
         <div className="flex gap-3 m-3">
           <AddBut Form={PairingForm}>
