@@ -57,7 +57,7 @@ export function Map({ data, sel = null, setSel, showMap = true }: MapProps) {
   const firstData = data.find((point) => point.x != null && point.y != null)
 
   return (
-    <div className="w-full h-full flex flex-col items-center">
+    <div className="w-full h-full flex flex-col justify-center p-2 rounded-2xl border-2 items-center ">
       <MapContainer
         // className=" w-full h-1/2"
         center={nztmToLatLng(firstData.x, firstData.y)}

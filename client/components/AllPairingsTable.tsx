@@ -37,10 +37,10 @@ export default function AllPairingsTable() {
   ]
   return (
     <div className=" flex flex-col md:flex-row h-full gap-3">
-      <div className="w-full h-1/2 md:h-full overflow-hidden md:w-2/3 shrink-0">
+      <div className="w-full h-1/2 md:h-full overflow-hidden md:w-1/2 ">
         <Map data={mapData} setSel={setSel} sel={sel} />
       </div>
-      <div className="w-full md:w-1/2 overflow-scroll">
+      <div className="w-full md:w-1/2 overflow-scroll h-fit h-max-2/3">
         <table className="text-sm">
           <thead>
             <tr>
