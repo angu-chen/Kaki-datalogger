@@ -15,7 +15,7 @@ export default function Layout() {
             <img
               className="max-w-full max-h-full object-cover"
               alt="kaki-logo"
-              src="/public/kakiLogo.png"
+              src="/kakiLogo.png"
             />
           </div>
           <p className="xl:text-2xl lg:text-[20px] md:text-[16px] text-[12px] font-medium text-center">
