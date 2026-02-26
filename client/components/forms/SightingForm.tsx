@@ -5,7 +5,7 @@ import {
   useGetAllKaki,
   useUpdateSightingMutation,
 } from '../../hooks/useKaki'
-import { SightingFormsProp } from '../../../models/forms'
+import { AREAS, SightingFormsProp } from '../../../models/forms'
 
 export default function SightingForm({
   onClose,
@@ -153,14 +153,23 @@ export default function SightingForm({
             Area *{' '}
           </label>
           <input
+            autoComplete="off"
             className="border p-1 border-gray-400"
             onChange={(e) => handleChange('area', e)}
             type="text"
+            list="area-list"
             id="area"
             name="area"
             value={formData.area}
             required
           />
+          <datalist id="area-list">
+            {AREAS.map((area) => (
+              <option key={area} value={area}>
+                {area}
+              </option>
+            ))}
+          </datalist>
         </div>
         <div className="flex flex-col">
           <label className="font-semibold" htmlFor="location">
