@@ -37,7 +37,7 @@ export default function AllPairingsTable() {
   ]
   return (
     <div className=" flex flex-col md:flex-row h-full gap-3">
-      <div className="w-full h-1/2 md:h-fit overflow-hidden md:w-1/2">
+      <div className="w-full h-1/2 md:h-full overflow-hidden md:w-2/3 shrink-0">
         <Map data={mapData} setSel={setSel} sel={sel} />
       </div>
       <div className="w-full md:w-1/2 overflow-scroll">
