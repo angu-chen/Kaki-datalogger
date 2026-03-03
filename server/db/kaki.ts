@@ -53,47 +53,11 @@ export async function getAllKaki(): Promise<Kaki[]> {
   return kakiList as Kaki[]
 }
 
-// export async function getKakiDash() {
-
-//   const query = await db('kaki')
-//     .leftJoin(
-//       db('sightings')
-//         // selecting the latest sightings only and displaying notes
-//         .select(
-//           'bird_id',
-//           'observer',
-//           'notes',
-//           'sightings.id as sighting_id',
-//           'location',
-//           'area',
-//           'nztm_easting',
-//           'nztm_northing',
-
-//           db.raw('date(date) as latest_sighting'),
-
-//         )
-//         // .groupBy('bird_id')
-//         .distinctOn('bird_id')
-//         .orderBy('bird_id')
-//         .orderBy('date', 'desc')
-//         .as('latest_sightings'),
-//       'kaki.id',
-//       'latest_sightings.bird_id',
-//     )
-//     .select(
-//       ...kakiSelect,
-//       'latest_sightings.area',
-//       'latest_sightings.location',
-//       'latest_sightings.observer as observer',
-//       'latest_sightings.latest_sighting as date',
-//       'latest_sightings.notes',
-//       'latest_sightings.nztm_easting as nztmEasting ',
-//       'latest_sightings.nztm_northing as nztmNorthing',
-//       'latest_sightings.sighting_id as sightingId',
-//     )
-//     .orderBy('latest_sightings.latest_sighting', 'desc', 'last') //sorting by descending order of sighitngs. nulls last
-//   return query
-// }
+export async function delAllKaki(): Promise<boolean> {
+  console.log('Deleting all Kaki......')
+  await db('kaki').select('kaki').del()
+  return true
+}
 export async function getKakiDash() {
   const isPostgres =
     db.client.config.client === 'postgresql' || db.client.config.client === 'pg'
@@ -140,7 +104,8 @@ export async function getKakiDash() {
       'ls.nztm_northing as nztmNorthing',
       'ls.sighting_id as sightingId',
     )
-    .orderBy('ls.latest_sighting', 'desc', 'last')
+    .orderBy('ls.latest_sighting', 'desc')
+  // .orderBy('ls.latest_sighting', 'desc', 'last')
 
   return query
 }
