@@ -275,4 +275,22 @@ router.get('/:id/sightings', async (req, res) => {
   }
 })
 
+// Utils
+//////// clean db seeds for mass upload ////////
+router.delete(`/db/delete-all`, async (req, res) => {
+  console.log('i am called')
+  try {
+    const noOfPairingsDeleted = await db.delAllPairings()
+    const noOfSightingsDeleted = await db.delAllSightings()
+    const noOfKakiDeleted = await db.delAllKaki()
+
+    console.log(`${noOfKakiDeleted} kaki deleted...`)
+    console.log(`${noOfSightingsDeleted} sightings deleted...`)
+    console.log(`${noOfPairingsDeleted} pairings deleted...`)
+    res.send(200)
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : 'Error cleansing db')
+    res.status(500).json({ message: 'error cleansing db failed' })
+  }
+})
 export default router

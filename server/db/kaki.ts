@@ -54,9 +54,8 @@ export async function getAllKaki(): Promise<Kaki[]> {
 }
 
 export async function delAllKaki(): Promise<boolean> {
-  console.log('Deleting all Kaki......')
-  await db('kaki').select('kaki').del()
-  return true
+  // returns no. of rows deleted
+  return await db('kaki').select('kaki').del()
 }
 export async function getKakiDash() {
   const isPostgres =
@@ -150,6 +149,11 @@ export async function createKaki(
 }
 
 //////////////// Pairings ///////////////////
+
+export async function delAllPairings() {
+  const delRows = await db('pairings').del()
+  return delRows
+}
 
 export async function getKakiPairings(id: number) {
   const kakiPairings = await db('pairings')
@@ -255,6 +259,12 @@ export async function addPairing(pairing: PairingData) {
 }
 
 ////////// Sightings //////////////
+
+export async function delAllSightings() {
+  const delRows = await db('sightings').del()
+  return delRows
+}
+
 export async function getKakiSighting(id: number) {
   const sightings = await db('sightings')
     .where('sightings.bird_id', id)
