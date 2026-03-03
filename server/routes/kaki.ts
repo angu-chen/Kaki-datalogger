@@ -278,7 +278,6 @@ router.get('/:id/sightings', async (req, res) => {
 // Utils
 //////// clean db seeds for mass upload ////////
 router.delete(`/db/delete-all`, async (req, res) => {
-  console.log('i am called')
   try {
     const noOfPairingsDeleted = await db.delAllPairings()
     const noOfSightingsDeleted = await db.delAllSightings()
