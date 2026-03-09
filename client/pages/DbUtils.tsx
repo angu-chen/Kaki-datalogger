@@ -11,6 +11,7 @@ function DbUtils() {
   }
   return (
     <div>
+      <h1>BE VERY CAREFUL WITH THE DEL BUT</h1>
       <button
         className="border bg-red-500 rounded-sm px-3 py-1 hover:bg-red-800 shadow-lg cursor-pointer"
         onClick={(e) => handleCleanDbButtonClick(e)}
