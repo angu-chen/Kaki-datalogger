@@ -8,6 +8,7 @@ import PairingsDetail from './pages/PairingDetail'
 import { AllPairings } from './pages/AllPairings'
 import { AllSightings } from './pages/AllSightings'
 import ReleasePage from './pages/ReleasePage'
+import DbUtils from './pages/DbUtils'
 
 const routes = createRoutesFromElements(
   <Route path="/" element={<Layout />}>
@@ -41,6 +42,12 @@ const routes = createRoutesFromElements(
       path="/releases"
       element={<ReleasePage />}
       handle={{ title: 'Releases' }}
+    />
+
+    <Route
+      path="/clean-db"
+      element={<DbUtils />}
+      handle={{ title: 'DB UTILS' }}
     />
   </Route>,
 )

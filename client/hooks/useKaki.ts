@@ -1,11 +1,13 @@
 import {
   MutationFunction,
+  QueryClient,
   useMutation,
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query'
 import {
   addRelease,
+  cleanseDb,
   createPairing,
   createSighting,
   delPairing,
@@ -65,6 +67,19 @@ export function useAddSightingMutation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.kakis.sightings() })
       queryClient.invalidateQueries({ queryKey: queryKeys.sightings.all })
+    },
+  })
+  return mutation
+}
+
+export function useCleanseDb() {
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: cleanseDb,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.kakis.all })
+      queryClient.invalidateQueries({ queryKey: queryKeys.sightings.all })
+      queryClient.invalidateQueries({ queryKey: queryKeys.pairings.all })
     },
   })
   return mutation

@@ -98,6 +98,7 @@ export async function getAllReleaseSites() {
 }
 
 export async function cleanseDb() {
-  await request.del(`${rootURL}/db/delete-all`)
+  console.log('i AM CALLED API')
+  await request.del(`${rootURL}/kaki/db/delete-all`)
   return
 }
